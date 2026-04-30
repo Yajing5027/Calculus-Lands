@@ -1,25 +1,13 @@
 /**
- * ════════════════════════════════════════════════════════
- *  Calculus Lands: The Infinite Trek   main.js
- *  
- *  FIXES APPLIED:
- *  #1 — Visual scale: Limitus 1.5× Sigma, Owlculus 2.5× Sigma
- *  #2 — Professor avatar from assets/animations/Dr.H.png
- *  #3 — Battle zoom CRITICAL FIX: focus on hero+enemy center
- *  #4 — Level select screen, 5 preset levels
- *  #5 — KaTeX math rendering
- *  #6 — HUD: Hero left, Enemy right
- *  #7 — Fixed names: Sigma, Limitus, Owlculus
- * ════════════════════════════════════════════════════════
+ * This file runs the whole game: it loads art and question data, moves Sigma
+ * through each land, starts battles, checks answers, and shows story letters.
  */
 
 'use strict';
 
-/* ══════════════════════════════════════════════
-   ASSET PATHS
-══════════════════════════════════════════════ */
+/* Image paths for Sigma, the enemies, and Dr. H. */
 const BASE = 'assets/animations/';
-const PROF_AVATAR = 'assets/animations/Dr.H.png';  // FIX #2
+const PROF_AVATAR = 'assets/animations/Dr.H.png';
 
 const PATHS = {
   hero: {
@@ -98,11 +86,7 @@ const PATHS = {
   },
 };
 
-/* ══════════════════════════════════════════════
-   FIX #1 — VISUAL SCALE CONSTANTS
-   These source sprites have very different native sizes, so ratios are
-   based on final rendered height rather than multiplying raw sprite scale.
-══════════════════════════════════════════════ */
+/* Basic world numbers: how large the map is, how fast Sigma moves, and how large each sprite should appear. */
 const WORLD_W      = 3400;
 const HERO_START_X = 80;
 const HERO_SPEED   = 1.8;
@@ -121,12 +105,10 @@ const BATTLE_ZOOM_SCALE = 1.65;
 const BATTLE_GAP_MINION = 150;
 const BATTLE_GAP_BOSS = 235;
 
-// Enemy world positions (FIX #1 — spacing to avoid overlap)
+// Where each enemy waits along the side-scrolling world.
 const ENEMY_POS = { enemy1: 900, enemy2: 1800, boss: 2700 };
 
-/* ══════════════════════════════════════════════
-   FIX #4 — LEVEL DEFINITIONS (5 maps)
-══════════════════════════════════════════════ */
+/* The five lands and the JSON files that supply their questions. */
 const MAP_COUNT = 5;
 const mapPath = id => `data/map${id}`;
 const LAND_NAMES = [
@@ -181,9 +163,7 @@ const FINAL_LETTER_HTML = `
   <p>— Owlculus<br>Guardian of the Five Lands</p>
 `;
 
-/* ══════════════════════════════════════════════
-   IMAGE CACHE
-══════════════════════════════════════════════ */
+/* Loads images once and reuses them so animation frames stay smooth. */
 const imgCache = {};
 
 function loadImg(src) {
@@ -206,9 +186,7 @@ async function preloadGroup(group) {
   return Promise.all(Object.values(group).flat().map(loadImg));
 }
 
-/* ══════════════════════════════════════════════
-   SPRITE ANIMATOR
-══════════════════════════════════════════════ */
+/* Draws frame-by-frame character animations on canvas. */
 class Animator {
   constructor(canvas, scale = 2, options = {}) {
     this.canvas = canvas;
@@ -284,9 +262,7 @@ class Animator {
   }
 }
 
-/* ══════════════════════════════════════════════
-   DOM REFERENCES
-══════════════════════════════════════════════ */
+/* Short names for the HTML elements the game updates while running. */
 const $ = id => document.getElementById(id);
 
 const screenStart  = $('screen-start');
@@ -308,6 +284,7 @@ const hudHeroName    = $('hud-hero-name');
 const hudHeroHearts  = $('hud-hero-hearts');
 const hudEnemyName   = $('hud-enemy-name');
 const hudEnemyHearts = $('hud-enemy-hearts');
+const hintToggle     = $('hint-toggle');
 
 const movePanel  = $('move-panel');
 const moveList   = $('move-list');
@@ -319,9 +296,7 @@ const dlgAvatarR = $('dlg-avatar-r');
 
 const bgLayers = document.querySelectorAll('.bg-layer');
 
-/* ══════════════════════════════════════════════
-   GAME STATE
-══════════════════════════════════════════════ */
+/* Current game progress: level, position, health, battle state, and used questions. */
 let currentLevel = null;
 let heroX      = HERO_START_X;
 let heroHP     = HERO_MAX_HP;
@@ -331,15 +306,14 @@ let gameOver   = false;
 let defeated   = new Set();
 let enemyData  = {};
 let usedQuestionKeys = new Set();
+let hintColorsEnabled = false;
 
 const heroAnim = new Animator(heroCanvas, SCALE_SIGMA);
 const enemyAnims = {};
 
 let lastTs = 0;
 
-/* ══════════════════════════════════════════════
-   UTILITIES
-══════════════════════════════════════════════ */
+/* Small helper functions used in many parts of the game. */
 const wait = ms => new Promise(r => setTimeout(r, ms));
 
 function shuffle(arr) {
@@ -374,7 +348,14 @@ function buildQuestionPool(questions) {
   return shuffle(available);
 }
 
-// FIX #5 — KaTeX rendering
+function applyHintColorSetting() {
+  document.body.classList.toggle('hint-colors-off', !hintColorsEnabled);
+  if (!hintToggle) return;
+  hintToggle.textContent = `Hint: ${hintColorsEnabled ? 'On' : 'Off'}`;
+  hintToggle.setAttribute('aria-checked', String(hintColorsEnabled));
+}
+
+// Turns formulas in the dialogue and answer buttons into readable math.
 function renderMath(el) {
   const attempt = () => {
     if (window.renderMathInElement && window.__katexLoaded) {
@@ -401,9 +382,7 @@ function withClass(el, cls, ms) {
   });
 }
 
-/* ══════════════════════════════════════════════
-   HUD / HEARTS
-══════════════════════════════════════════════ */
+/* Draws the heart icons for Sigma and the enemy. */
 function renderHearts(container, cur, max) {
   container.innerHTML = '';
   for (let i = 0; i < max; i++) {
@@ -416,9 +395,7 @@ function renderHearts(container, cur, max) {
 const refreshHeroHearts  = ()        => renderHearts(hudHeroHearts,  heroHP, HERO_MAX_HP);
 const refreshEnemyHearts = (hp, max) => renderHearts(hudEnemyHearts, hp,    max);
 
-/* ══════════════════════════════════════════════
-   DAMAGE POPUP
-══════════════════════════════════════════════ */
+/* Shows floating damage or miss text after an attack. */
 function spawnDmg(anchorEl, label, type) {
   const d = document.createElement('div');
   d.className = 'dmg-popup ' + type;
@@ -429,10 +406,7 @@ function spawnDmg(anchorEl, label, type) {
   d.addEventListener('animationend', () => d.remove(), { once: true });
 }
 
-/* ══════════════════════════════════════════════
-   FIX #3 — BATTLE ZOOM CRITICAL FIX
-   Focus exactly on hero + enemy center
-══════════════════════════════════════════════ */
+/* Moves the camera during walking and zooms in during battle. */
 function clamp(n, min, max) {
   return Math.min(max, Math.max(min, n));
 }
@@ -477,16 +451,12 @@ function clearBattleZoom() {
   applyCamera(heroX);
 }
 
-/* ══════════════════════════════════════════════
-   HERO POSITION
-══════════════════════════════════════════════ */
+/* Places Sigma at the correct horizontal position. */
 function placeHero(x) {
   heroEl.style.left = x + 'px';
 }
 
-/* ══════════════════════════════════════════════
-   LOAD ENEMY JSON
-══════════════════════════════════════════════ */
+/* Reads question data for an enemy from its JSON file. */
 async function loadEnemyJSON(id, file) {
   const cacheKey = file;
   if (enemyData[cacheKey]) return enemyData[cacheKey];
@@ -502,9 +472,7 @@ async function loadEnemyJSON(id, file) {
   }
 }
 
-/* ══════════════════════════════════════════════
-   SETUP ENEMY SLOT
-══════════════════════════════════════════════ */
+/* Prepares an enemy's canvas, position, and idle animation. */
 function setupEnemySlot(id, worldX, frames, scale, options = {}) {
   const slot   = $(id);
   const canvas = slot.querySelector('.enemy-canvas');
@@ -517,9 +485,7 @@ function setupEnemySlot(id, worldX, frames, scale, options = {}) {
   return anim;
 }
 
-/* ══════════════════════════════════════════════
-   DIALOGUE HELPERS
-══════════════════════════════════════════════ */
+/* Builds the question, formula, and professor text shown at the bottom of the screen. */
 function escapeHTML(value) {
   const div = document.createElement('div');
   div.textContent = value == null ? '' : String(value);
@@ -603,9 +569,7 @@ function waitClick() {
   });
 }
 
-/* ══════════════════════════════════════════════
-   BATTLE STATE MACHINE
-══════════════════════════════════════════════ */
+/* Runs one full fight: pick questions, show choices, apply damage, and end the battle. */
 async function runBattle(cfg) {
   inBattle = true;
   walking  = false;
@@ -630,20 +594,20 @@ async function runBattle(cfg) {
   heroX = targetHeroX;
   placeHero(heroX);
 
-  // HUD (FIX #7 — display fixed names)
+  // Show the enemy name and both health bars before the fight starts.
   hudEnemyName.textContent = cfg.name;
   hudEl.classList.remove('hidden');
   refreshEnemyHearts(enemyHP, enemyMax);
   refreshHeroHearts();
 
-  // FIX #3 — Battle zoom with exact centering
+  // Bring the camera closer so the fight feels focused.
   applyBattleZoom(heroX, cfg.worldX);
   await wait(700);
 
   let qPool = buildQuestionPool(data.questions);
   let qIdx  = 0;
 
-  /* ── Battle loop ── */
+  /* Repeat questions and attacks until someone runs out of hearts. */
   while (enemyHP > 0 && heroHP > 0) {
     if (qIdx >= qPool.length) {
       qPool = buildQuestionPool(data.questions);
@@ -657,18 +621,19 @@ async function runBattle(cfg) {
     const q = qPool[qIdx++];
     usedQuestionKeys.add(questionKey(q));
 
-    /* 1 — Show question */
+    /* Show the question and randomize the answer positions. */
     const enemyAvatar = fs.idle[0];
+    const moveChoices = shuffle(q.moves);
     showDlg({ right: enemyAvatar, question: q.question, formula: q.formula || null });
-    buildMoveButtons(q.moves);
+    buildMoveButtons(moveChoices);
     movePanel.classList.add('open');
 
-    /* 2 — Wait for choice */
-    const chosen = await awaitMoveChoice(q.moves);
+    /* Wait until the player chooses one move. */
+    const chosen = await awaitMoveChoice(moveChoices);
     movePanel.classList.remove('open');
     await wait(200);
 
-    /* 3 — Execute */
+    /* Apply the result of the chosen move. */
     const fx = chosen.effect;
 
     if (fx === 'crit') {
@@ -697,7 +662,7 @@ async function runBattle(cfg) {
       spawnDmg(heroEl, 'MISS', 'miss');
       await withClass(heroEl, 'anim-jump', 460);
 
-    } else /* fail */ {
+    } else {
       await playSingleAnim(eAnim, fs.attack, 10);
       eAnim.play(fs.idle, 6, true);
       await withClass(heroEl, 'anim-hurt', 460);
@@ -708,7 +673,7 @@ async function runBattle(cfg) {
 
     if (enemyHP <= 0 || heroHP <= 0) break;
 
-    /* 4 — Professor comment (FIX #2) */
+    /* Let Dr. H explain why the choice worked or failed. */
     showDlg({
       left: PROF_AVATAR,
       html: professorHTML(chosen.professor),
@@ -716,7 +681,7 @@ async function runBattle(cfg) {
     await waitClick();
   }
 
-  /* ── Battle end ── */
+  /* Close the fight and decide whether the player won or lost. */
   movePanel.classList.remove('open');
 
   if (heroHP <= 0) {
@@ -734,7 +699,7 @@ async function runBattle(cfg) {
     return;
   }
 
-  /* Victory */
+  /* Play the enemy defeat animation and return Sigma to walking. */
   if (fs.die && fs.die.length) {
     await playSingleAnim(eAnim, fs.die, 8);
   }
@@ -751,13 +716,13 @@ async function runBattle(cfg) {
   heroAnim.play(PATHS.hero.idle, 6, true);
   await wait(150);
 
-  // Victory jumps ×3
+  // Give Sigma a short victory celebration.
   for (let i = 0; i < 3; i++) {
     await withClass(heroEl, 'anim-vjump', 540);
     await wait(60);
   }
 
-  // Fade enemy
+  // Remove the defeated enemy from the map.
   eSlot.style.transition = 'opacity .6s';
   eSlot.style.opacity    = '0';
   await wait(650);
@@ -768,7 +733,7 @@ async function runBattle(cfg) {
   walking  = true;
   heroAnim.play(PATHS.hero.run, 12, true);
 
-  // Check level complete
+  // If every enemy in the land is gone, show the win flow.
   const allDefeated = currentLevel.enemies.every(e => defeated.has(e.id));
   if (allDefeated) {
     walking = false;
@@ -935,9 +900,7 @@ function formatMoveLabel(name) {
   return substituted;
 }
 
-/* ══════════════════════════════════════════════
-   FIX #4 — LEVEL SELECT SCREEN
-══════════════════════════════════════════════ */
+/* Builds the clickable map where the player chooses a land. */
 function buildLevelSelect() {
   const map = $('level-map');
   map.innerHTML = `
@@ -978,19 +941,19 @@ async function startLevel(lvl) {
   inBattle = false;
   gameOver = false;
 
-  // Hide level select, show game
+  // Leave the map screen and enter the side-scrolling game.
   screenLevels.classList.add('hidden');
   screenGame.classList.remove('hidden');
 
-  // Reset world
+  // Put Sigma and the camera back at the start of the land.
   placeHero(heroX);
   applyCamera(heroX);
   refreshHeroHearts();
 
-  // Load enemy data
+  // Load all question files for this land before walking begins.
   await Promise.all(lvl.enemies.map(e => loadEnemyJSON(e.id, e.json)));
 
-  // Setup enemy slots
+  // Place each enemy sprite in the world.
   lvl.enemies.forEach(e => {
     const slot = $(e.id);
     slot.style.display = 'flex';
@@ -1004,7 +967,7 @@ async function startLevel(lvl) {
   heroAnim.play(PATHS.hero.run, 12, true);
 }
 
-// FIX #4 — Go to level select (from win/lose)
+// Return from a win or loss screen to the land selection map.
 window.goToLevels = function() {
   screenWin.classList.add('hidden');
   screenLose.classList.add('hidden');
@@ -1012,9 +975,15 @@ window.goToLevels = function() {
   screenLevels.classList.remove('hidden');
 };
 
-/* ══════════════════════════════════════════════
-   MAIN GAME LOOP
-══════════════════════════════════════════════ */
+if (hintToggle) {
+  hintToggle.addEventListener('click', () => {
+    hintColorsEnabled = !hintColorsEnabled;
+    applyHintColorSetting();
+  });
+  applyHintColorSetting();
+}
+
+/* Keeps animation, walking, camera movement, and battle triggers running every frame. */
 function gameLoop(ts) {
   const dt = Math.min(ts - lastTs, 50);
   lastTs = ts;
@@ -1039,11 +1008,9 @@ function gameLoop(ts) {
   requestAnimationFrame(gameLoop);
 }
 
-/* ══════════════════════════════════════════════
-   BOOT
-══════════════════════════════════════════════ */
+/* Starts the game after the player presses Begin. */
 async function init() {
-  // Preload all frames
+  // Load character frames before the first screen transition.
   await Promise.all([
     preloadGroup(PATHS.hero),
     preloadGroup(PATHS.limitus),

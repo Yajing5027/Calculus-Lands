@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calculus Lands: The Infinite Trek</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- KaTeX CDN -->
+  <!-- Math renderer used for formulas in questions and answers. -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
@@ -13,9 +13,7 @@
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════
-     START SCREEN
-═══════════════════════════════════════════ -->
+<!-- Opening title screen shown before the player enters the map. -->
 <div id="screen-start" class="screen">
   <div class="title-deco-bg">∑ ∫ ∞ ∂ ∏ lim</div>
   <div class="start-box">
@@ -27,9 +25,7 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     LEVEL SELECT SCREEN
-═══════════════════════════════════════════ -->
+<!-- Map screen where the player chooses one of the five lands. -->
 <div id="screen-levels" class="screen hidden">
   <div class="levels-header">
     <h2 class="levels-title">Choose Your Land</h2>
@@ -49,12 +45,10 @@
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════
-     GAME SCREEN
-═══════════════════════════════════════════ -->
+<!-- Main play screen: background, characters, choices, and dialogue. -->
 <div id="screen-game" class="screen hidden">
 
-  <!-- HUD bar (FIX #6 — hero left, enemy right) -->
+  <!-- Health display for Sigma and the current enemy. -->
   <div id="hud" class="hidden">
     <div id="hud-hero">
       <span id="hud-hero-name">Sigma</span>
@@ -66,11 +60,15 @@
     </div>
   </div>
 
-  <!-- Viewport -->
+  <button id="hint-toggle" class="hint-toggle" type="button" role="switch" aria-checked="true" title="Toggle answer color hints">
+    Hint: On
+  </button>
+
+  <!-- The visible part of the scrolling land. -->
   <div id="viewport">
     <div id="world">
 
-      <!-- BG layers -->
+      <!-- Parallax background layers that move at different speeds. -->
       <div class="bg-layer" id="bg0"  style="--depth:0.02"></div>
       <div class="bg-layer" id="bg1"  style="--depth:0.05"></div>
       <div class="bg-layer" id="bg2"  style="--depth:0.08"></div>
@@ -86,12 +84,12 @@
 
       <div id="ground"></div>
 
-      <!-- Hero: Sigma -->
+      <!-- The player character. -->
       <div id="hero">
         <canvas id="hero-canvas" width="128" height="128"></canvas>
       </div>
 
-      <!-- Enemies -->
+      <!-- Enemy positions for the two minions and the boss. -->
       <div id="enemy1" class="enemy-slot">
         <canvas class="enemy-canvas" width="180" height="180"></canvas>
         <div class="enemy-shadow"></div>
@@ -108,13 +106,13 @@
     </div>
   </div>
 
-  <!-- Move panel (left side) -->
+  <!-- Battle choices shown when a question appears. -->
   <div id="move-panel">
     <div id="move-panel-header">⚔ Choose Move</div>
     <div id="move-list"></div>
   </div>
 
-  <!-- Dialogue box (FIX #2 — professor avatar support) -->
+  <!-- Dialogue area for questions, formulas, and Dr. H's feedback. -->
   <div id="dialogue" class="hidden">
     <img id="dlg-avatar-l" class="dlg-avatar hidden" src="" alt="">
     <div id="dlg-body">
@@ -126,9 +124,7 @@
 
 </div>
 
-<!-- ═══════════════════════════════════════════
-     WIN / LOSE SCREENS
-═══════════════════════════════════════════ -->
+<!-- End screens and the final letter shown after the last land. -->
 <div id="final-letter-overlay" class="letter-overlay hidden" role="dialog" aria-modal="true" aria-label="Letter from Owlculus">
   <div id="final-letter-paper" class="letter-paper final-letter-paper"></div>
   <div class="letter-hint">Click anywhere to continue</div>
