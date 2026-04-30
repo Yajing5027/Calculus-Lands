@@ -22,9 +22,9 @@
           "professor": "ln n vs n^ε. You pinned the logarithmic weakness under a p-series shield. Clean."
         },
         {
-          "name": "Ratio Test",
+          "name": "Integral Test",
           "effect": "normal",
-          "professor": "Integration by parts lands the blow. Slower, but still a kill."
+          "professor": "Integration by parts lands the blow. Slower than comparison, but still a valid convergence proof."
         },
         {
           "name": "Limit Comparison Test",
@@ -32,31 +32,31 @@
           "professor": "You need a sharp inequality, not a fuzzy limit. This blade glances off."
         },
         {
-          "name": "Ratio Test",
+          "name": "Root Test",
           "effect": "fail",
-          "professor": "Ratio lim=1. You'll swing at air forever. Switch weapons."
+          "professor": "Root Test also tends to 1 here. It gives no verdict, so switch weapons."
         }
       ]
     },
     {
       "id": "Q22",
-      "question": "What is the fastest way to confirm convergence of this series?",
+      "question": "What is the fastest way to determine convergence of this series?",
       "formula": "\\sum_{n=1}^{\\infty} \\frac{n!}{100^n}",
       "moves": [
         {
           "name": "Ratio Test",
           "effect": "crit",
-          "professor": "Factorial vs exponential. Ratio Test is a hot knife. One strike, dead."
+          "professor": "Factorial eventually overwhelms 100^n. The ratio grows past 1 and the series diverges."
         },
         {
           "name": "Root Test",
           "effect": "normal",
-          "professor": "Root Test also works, but with factorials it's clumsier. You got the job done."
+          "professor": "Root Test can also expose the factorial growth, but Ratio Test is cleaner here."
         },
         {
           "name": "Geometric Series Test",
           "effect": "fail",
-          "professor": "You can't tame a growing factorial with a simple geometric bound. You just got thrown."
+          "professor": "This is not a geometric series; the factorial keeps changing the ratio."
         },
         {
           "name": "Alternating Series Test",
@@ -81,9 +81,9 @@
           "professor": "Absolute series is p=1/2 divergent. You mistook the shield for armor."
         },
         {
-          "name": "Alternating Series Test",
+          "name": "Absolute Series Check",
           "effect": "fail",
-          "professor": "AST confirms convergence. Overlooking the alternating lifeline is fatal."
+          "professor": "Checking absolute values shows a divergent p-series, so the convergence is conditional rather than absolute."
         },
         {
           "name": "Ratio Test",
@@ -103,14 +103,14 @@
           "professor": "Ratio Test devours factorial battles. It never blinks. Perfect form."
         },
         {
-          "name": "Ratio Test",
+          "name": "Root Test",
           "effect": "normal",
           "professor": "Root Test with Stirling's shadow works, but Ratio is nimbler. Effective, not elegant."
         },
         {
           "name": "nth-Term Test",
-          "effect": "fail",
-          "professor": "Terms tend to zero. nth Term Test yields nothing. You charged a phantom."
+          "effect": "normal",
+          "professor": "The terms do not tend to zero because 3/e > 1 in the growth rate. This also proves divergence."
         },
         {
           "name": "Direct Comparison Test",
@@ -135,9 +135,9 @@
           "professor": "It wears a mask. (ln n)^2 makes it a different creature. p-series misses."
         },
         {
-          "name": "Integral Test",
+          "name": "Limit Comparison Test",
           "effect": "dodge",
-          "professor": "You could compare, but the integral path is a straight thrust. Why circle around?"
+          "professor": "A comparison can be arranged, but the integral path is the straight thrust here."
         },
         {
           "name": "Ratio Test",
@@ -179,22 +179,22 @@
       "formula": "\\sum_{n=0}^{\\infty} \\frac{(-1)^n (x+\\pi)^{2n}}{(2n)!}",
       "moves": [
         {
-          "name": "Center Identification",
+          "name": "Center at -pi",
           "effect": "crit",
           "professor": "(x+π) reveals the center -π. Eagle-eye precision."
         },
         {
-          "name": "Center Identification",
+          "name": "Center at pi",
           "effect": "fail",
           "professor": "Sign error. (x+π) means center at -π, not π. You bit the decoy."
         },
         {
-          "name": "Center Identification",
+          "name": "Center at 0",
           "effect": "fail",
           "professor": "0 is the default, not the truth. Look closer at that (x+π)."
         },
         {
-          "name": "Center Identification",
+          "name": "Center at -2pi",
           "effect": "fail",
           "professor": "No. That's twice the distance from the truth."
         }
@@ -243,9 +243,9 @@
           "professor": "Limit comparison with 1/n shows divergence. Absolute armor does not hold."
         },
         {
-          "name": "Alternating Series Test",
+          "name": "Absolute Series Check",
           "effect": "fail",
-          "professor": "Alternating sign saves it. Dismissing AST is a tactical blunder."
+          "professor": "Absolute values behave like 1/n and diverge. The alternating sign is what saves the original series."
         },
         {
           "name": "Ratio Test",
@@ -319,7 +319,7 @@
           "professor": "Ratio Test reduces factorial fortress to 1/4. One crushing blow."
         },
         {
-          "name": "Ratio Test",
+          "name": "Root Test",
           "effect": "dodge",
           "professor": "Root Test stumbles on (n!)^2. Ratio is the assassin's choice here."
         },
@@ -329,7 +329,7 @@
           "professor": "You'd need a geometric bound, but factorials outrun any constant. Shield broken."
         },
         {
-          "name": "Ratio Test",
+          "name": "Direct Comparison Test",
           "effect": "fail",
           "professor": "No simple rational comparison works. Your mirror cracked."
         }
@@ -337,23 +337,23 @@
     },
     {
       "id": "Q33",
-      "question": "At x = 4, the series is:",
+      "question": "At x = 13, the series is:",
       "formula": "\\sum_{n=1}^{\\infty} \\frac{(-1)^n (x-4)^n}{n 9^n}",
       "moves": [
         {
           "name": "Alternating Series Test",
           "effect": "crit",
-          "professor": "x=4 gives alternating harmonic. Conditional convergence precisely identified."
+          "professor": "x=13 gives the alternating harmonic series. Conditional convergence precisely identified."
         },
         {
-          "name": "Alternating Series Test",
+          "name": "Center Substitution",
           "effect": "fail",
-          "professor": "Center 4 yields alternating harmonic. It's saved by the alternating sign. You misjudged."
+          "professor": "Plugging in the center x=4 gives the zero series, but the question asks for the right endpoint x=13."
         },
         {
           "name": "Direct Comparison Test",
           "effect": "fail",
-          "professor": "Harmonic series diverges absolutely. You overestimated the armor."
+          "professor": "The absolute series is harmonic and diverges, but the alternating series still converges conditionally."
         },
         {
           "name": "Ratio Test",
@@ -373,7 +373,7 @@
           "professor": "Ratio lim=1/e < 1. Exponential denominator is no match. Instant kill."
         },
         {
-          "name": "Ratio Test",
+          "name": "Integral Test",
           "effect": "normal",
           "professor": "Integration by parts works, but Ratio is faster. Still, you got the kill."
         },
@@ -427,7 +427,7 @@
           "professor": "arctan n < π/2, compare to π/(2n^2). Convergent p-series domination. Brilliant."
         },
         {
-          "name": "Direct Comparison Test",
+          "name": "p-Series Comparison",
           "effect": "normal",
           "professor": "Compare to 1/n^2, works but the constant is messier. Still a kill."
         },
@@ -459,9 +459,9 @@
           "professor": "Derivatives exist, but the chain rule is a grind. Substitution is faster. Don't tire yourself."
         },
         {
-          "name": "Ratio Test",
+          "name": "Term-by-Term Integration",
           "effect": "fail",
-          "professor": "Integration won't produce e^{x^2/2}. Wrong operation."
+          "professor": "Integration will not produce e^{x^2/2}. Start from the known exponential series and substitute."
         },
         {
           "name": "Binomial Series",
@@ -486,7 +486,7 @@
           "professor": "sin n is not alternating in a regular pattern. AST doesn't apply. Misstep."
         },
         {
-          "name": "Direct Comparison Test",
+          "name": "Absolute Value Bound",
           "effect": "dodge",
           "professor": "You could compare to 1/n^2, but bounding by inequality is more direct. Suboptimal path."
         },
@@ -513,7 +513,7 @@
           "professor": "Ratio Test can work but tangles you in (1+1/n)^n limits. Root Test is cleaner. Choose efficiency."
         },
         {
-          "name": "Ratio Test",
+          "name": "Geometric Ratio Guess",
           "effect": "fail",
           "professor": "Not a constant ratio. That's an illusion."
         },

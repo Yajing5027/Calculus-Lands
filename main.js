@@ -160,6 +160,27 @@ const LEVEL_MAP_LAYOUT = [
   { id: 5, x: 87, y: 64, size: 'sm', tilt: -5, terrain: 'gate' },
 ];
 
+const FINAL_LETTER_HTML = `
+  <p><strong>Dear Adventurer Sigma,</strong></p>
+  <p>The exploration of the five lands has come to an end. I am Owlculus, the guardian you faced at the end of every map. You might have thought I was your final obstacle, but the truth is simpler — and stranger. I was never your enemy. I was your final examiner, placed here by an old friend of mine. That friend's name is Dr. H.</p>
+  <p>Dr. H and I share the same belief: mathematics is not a cage — it is a lantern. And every trick I played on you in those lands was designed by the two of us to make your intuition sharper and your mind more honest.</p>
+  <p>Now, as you stand at the summit, I want you to see what you have truly conquered.</p>
+  <hr>
+  <p><strong>The Land of Silicon Depths</strong> (Applications of Integration) was your first trial. You started from small areas and used integrals to build infinite slices and shells. You turned infinite additions into exact volumes and areas. This land trained your intuition to translate the real world into the language of integrals. You learned that every solid shape is just a stack of infinitely thin pieces, waiting to be summed.</p>
+  <p>But soon, you found that some integrals are impossible to solve directly. Not because you lacked skill, but because the functions could not be expressed simply. So, you entered <strong>the Land of the Substitution Labyrinth</strong> (Integration Techniques). You learned to use substitution, integration by parts, and partial fractions to turn stubborn integrals into shapes you could handle. You were asking: "Can I change the coordinate system to see the hidden structure of these infinite accumulations?" In the labyrinth, the shortest path was never the most obvious one — and your intuition had to learn to sniff it out.</p>
+  <p>However, coordinates can hide the truth. In <strong>the Land of the Parametric Veil</strong> (Parametric and Polar Coordinates), you discovered that curves can wear masks. A shape you thought you knew could be disguised by a parameter t or an angle θ. The substitution thinking you learned in the Labyrinth became the tool to tear away this veil. Using polar coordinates or parameterization to find arc length is just changing your perspective to make the integral possible again. You learned to see through the disguise.</p>
+  <p>Next, you faced the biggest anti-intuition bomb: infinite sequences and series. In <strong>the Land of the Infinite Chasm</strong> (Sequences, Series, and Convergence Tests), you stood at the edge and stared into the abyss. Terms going to zero no longer meant safety. The harmonic series was your first betrayal. You were surprised to see that the Integral Test uses the improper integral skills you practiced in the Silicon Depths and the Labyrinth. The Comparison Test asks you to recognize at a glance if a series looks like a p‑series or a geometric series. This "pattern recognition" is exactly what you trained for in the earlier lands. The chasm taught you that "very small" is not the same as "safe."</p>
+  <p>Finally, at <strong>the Land of the Alternating Spire</strong> (Alternating Series, Power Series, and Taylor Series), your power from the Infinite Chasm decided if you could handle the two-phase battles. You learned that every alternating enemy wears double armor: strip the absolute value first, then check the alternating form. Absolute convergence is victory on solid ground; conditional convergence is balance on a tightrope. Taylor series brought everything full circle: using polynomials to approximate functions is the same "infinite approximation" philosophy as using slices to approximate volume in the Silicon Depths.</p>
+  <p>Every theme tells the same story: infinite approximation, and how to know if that process is safe.</p>
+  <p>The shell method in the Land of Silicon Depths is an approximation. The algebraic changes in the Land of the Substitution Labyrinth make approximation possible. The Land of the Parametric Veil is a different way to look at the path of approximation. The Land of the Infinite Chasm and the Land of the Alternating Spire create safety rules for the most dangerous form of approximation: the sum of infinite terms.</p>
+  <p>You have traveled a long way, from the solid ground of shapes to the ethereal clouds of infinite series. You have learned that in the world of Calculus, "infinity" is not a destination, but a way of seeing the truth.</p>
+  <p>My old friend Dr. H and I have always been fond of a saying by Malcolm Gladwell: <em>"If you are getting bored with it, you probably haven't done enough work on it. Boredom is an intermediate stage. It's the plateau you get on after you've scraped the surface. Everything is interesting if you dig deep enough."</em></p>
+  <p>You came to each land and dug deeper. You moved past the surface, past memorization, past first intuitions. And you found that beneath every formula, every test, every series, there is a structure worth uncovering.</p>
+  <p>You have sharpened your sword and cleared your vision. You are no longer just a traveler; you are becoming a master of the infinite.</p>
+  <p>Farewell for now, adventurer. May the lantern of mathematics light your path.</p>
+  <p>— Owlculus<br>Guardian of the Five Lands</p>
+`;
+
 /* ══════════════════════════════════════════════
    IMAGE CACHE
 ══════════════════════════════════════════════ */
@@ -189,11 +210,12 @@ async function preloadGroup(group) {
    SPRITE ANIMATOR
 ══════════════════════════════════════════════ */
 class Animator {
-  constructor(canvas, scale = 2) {
+  constructor(canvas, scale = 2, options = {}) {
     this.canvas = canvas;
     this.ctx    = canvas.getContext('2d');
     this.ctx.imageSmoothingEnabled = false;
     this.scale  = scale;
+    this.flipX  = Boolean(options.flipX);
     this._frames   = [];
     this._frameIdx = 0;
     this._timer    = 0;
@@ -252,7 +274,13 @@ class Animator {
     this.canvas.height = h * this.scale;
     this.ctx.imageSmoothingEnabled = false;
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.save();
+    if (this.flipX) {
+      this.ctx.translate(this.canvas.width, 0);
+      this.ctx.scale(-1, 1);
+    }
     this.ctx.drawImage(img, 0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.restore();
   }
 }
 
@@ -268,6 +296,8 @@ const screenWin    = $('screen-win');
 const screenLose   = $('screen-lose');
 const btnStart     = $('btn-start');
 const letterOverlay = $('letter-overlay');
+const finalLetterOverlay = $('final-letter-overlay');
+const finalLetterPaper = $('final-letter-paper');
 
 const world       = $('world');
 const heroEl      = $('hero');
@@ -300,6 +330,7 @@ let inBattle   = false;
 let gameOver   = false;
 let defeated   = new Set();
 let enemyData  = {};
+let usedQuestionKeys = new Set();
 
 const heroAnim = new Animator(heroCanvas, SCALE_SIGMA);
 const enemyAnims = {};
@@ -318,6 +349,29 @@ function shuffle(arr) {
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
+}
+
+function questionKey(q) {
+  if (!q || typeof q !== 'object') return String(q || '').trim();
+  return [
+    q.question || q.text || q.prompt || '',
+    q.formula || '',
+  ].map(part => String(part).trim()).join('::');
+}
+
+function uniqueQuestions(questions) {
+  const seen = new Set();
+  return (questions || []).filter(q => {
+    const key = questionKey(q);
+    if (!key || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function buildQuestionPool(questions) {
+  const available = uniqueQuestions(questions).filter(q => !usedQuestionKeys.has(questionKey(q)));
+  return shuffle(available);
 }
 
 // FIX #5 — KaTeX rendering
@@ -451,13 +505,13 @@ async function loadEnemyJSON(id, file) {
 /* ══════════════════════════════════════════════
    SETUP ENEMY SLOT
 ══════════════════════════════════════════════ */
-function setupEnemySlot(id, worldX, frames, scale) {
+function setupEnemySlot(id, worldX, frames, scale, options = {}) {
   const slot   = $(id);
   const canvas = slot.querySelector('.enemy-canvas');
   slot.style.left = worldX + 'px';
   slot.style.transform = 'translateX(-50%)';
 
-  const anim = new Animator(canvas, scale);
+  const anim = new Animator(canvas, scale, options);
   enemyAnims[id] = anim;
   anim.play(frames, 6, true);
   return anim;
@@ -533,26 +587,7 @@ function professorHTML(value) {
 }
 
 function formatProfessorText(value) {
-  let text = escapeHTML(value || '');
-  const math = [];
-  const stash = expr => {
-    const token = `@@MATH${math.length}@@`;
-    math.push(mathInline(expr));
-    return token;
-  };
-
-  text = text
-    .replace(/([∫∑][^.!?,;]+)/g, match => stash(match))
-    .replace(/(\|?[A-Za-z]+(?:\([^)]*\))?\|?\s*(?:≤|≥|&lt;|&gt;|=)\s*[-+]?[\w{}()[\]^\/.+\-π∞|\\ ]+)/g, match => stash(match))
-    .replace(/\b(lim|Limit|limit)\s*=?\s*[-+]?[\w{}()[\]^\/.+\-π∞\\ ]+(?:\s*(?:≤|≥|&lt;|&gt;|=)\s*[-+]?[\w{}()[\]^\/.+\-π∞\\ ]+)?/g, match => stash(match))
-    .replace(/\b(p|r|u|x)\s*=\s*[-+]?[\w{}()[\]^\/.+\-π∞\\ ]+/g, match => stash(match))
-    .replace(/\b\d+\/(?:\d+|[A-Za-z](?:\^\{?[-+]?\d+(?:\/\d+)?\}?)?)(?![A-Za-z])/g, match => stash(match))
-    .replace(/\b(?:[A-Za-z]+|\d+)\^\{?[-+]?\d+(?:\/\d+)?\}?/g, match => stash(match))
-    .replace(/\((-?∞|-?\d+(?:\/\d+)?),\s*(-?∞|-?\d+(?:\/\d+)?)\)/g, match => stash(match))
-    .replace(/\[(-?∞|-?\d+(?:\/\d+)?),\s*(-?∞|-?\d+(?:\/\d+)?)\]/g, match => stash(match))
-    .replace(/√\d+(?:\s*π)?(?:\/\d+)?/g, match => stash(match));
-
-  return text.replace(/@@MATH(\d+)@@/g, (_, idx) => math[Number(idx)] || '');
+  return escapeHTML(value || '');
 }
 
 function hideDlg() { dialogueEl.classList.add('hidden'); }
@@ -605,13 +640,22 @@ async function runBattle(cfg) {
   applyBattleZoom(heroX, cfg.worldX);
   await wait(700);
 
-  let qPool = shuffle([...data.questions]);
+  let qPool = buildQuestionPool(data.questions);
   let qIdx  = 0;
 
   /* ── Battle loop ── */
   while (enemyHP > 0 && heroHP > 0) {
-    if (qIdx >= qPool.length) { qPool = shuffle([...data.questions]); qIdx = 0; }
+    if (qIdx >= qPool.length) {
+      qPool = buildQuestionPool(data.questions);
+      qIdx = 0;
+    }
+    if (!qPool.length) {
+      console.warn('Question pool exhausted for', cfg.json);
+      qPool = shuffle(uniqueQuestions(data.questions));
+      qIdx = 0;
+    }
     const q = qPool[qIdx++];
+    usedQuestionKeys.add(questionKey(q));
 
     /* 1 — Show question */
     const enemyAvatar = fs.idle[0];
@@ -730,6 +774,9 @@ async function runBattle(cfg) {
     walking = false;
     heroAnim.play(PATHS.hero.idle, 6, true);
     await wait(800);
+    if (currentLevel && currentLevel.id === MAP_COUNT) {
+      await showFinalLetter();
+    }
     screenWin.classList.remove('hidden');
     gameOver = true;
   }
@@ -788,6 +835,30 @@ function showIntroLetter() {
       }, 300);
     };
     setTimeout(() => letterOverlay.addEventListener('click', closeLetter), 300);
+  });
+}
+
+function showFinalLetter() {
+  return new Promise(resolve => {
+    if (!finalLetterOverlay || !finalLetterPaper) {
+      resolve();
+      return;
+    }
+
+    finalLetterPaper.innerHTML = FINAL_LETTER_HTML;
+    finalLetterPaper.scrollTop = 0;
+    finalLetterOverlay.classList.remove('hidden', 'dismiss');
+
+    const closeLetter = () => {
+      finalLetterOverlay.removeEventListener('click', closeLetter);
+      finalLetterOverlay.classList.add('dismiss');
+      setTimeout(() => {
+        finalLetterOverlay.classList.add('hidden');
+        finalLetterOverlay.classList.remove('dismiss');
+        resolve();
+      }, 300);
+    };
+    setTimeout(() => finalLetterOverlay.addEventListener('click', closeLetter), 300);
   });
 }
 
@@ -900,6 +971,7 @@ async function startLevel(lvl) {
   currentLevel = lvl;
   defeated.clear();
   enemyData = {};
+  usedQuestionKeys.clear();
   heroX  = HERO_START_X;
   heroHP = HERO_MAX_HP;
   walking  = false;
@@ -923,7 +995,7 @@ async function startLevel(lvl) {
     const slot = $(e.id);
     slot.style.display = 'flex';
     slot.style.opacity  = '1';
-    setupEnemySlot(e.id, e.worldX, e.frames.idle, e.scale);
+    setupEnemySlot(e.id, e.worldX, e.frames.idle, e.scale, { flipX: e.id === 'boss' });
   });
 
   heroAnim.play(PATHS.hero.idle, 6, true);

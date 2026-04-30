@@ -22,7 +22,7 @@
           "professor": "Two-step takedown. AST gives the nod, but strip the signs and the series explodes—bigger than harmonic. Conditional convergence. Clean combo."
         },
         {
-          "name": "Alternating Series Test",
+          "name": "Absolute Series Check",
           "effect": "fail",
           "professor": "You let the alternating shield fool you. Underneath, the terms tower over harmonic. Overconfidence left your flank wide open."
         },
@@ -30,6 +30,11 @@
           "name": "Ratio Test",
           "effect": "dodge",
           "professor": "Ratio lim=1. Blade skids off harmlessly. Good call not forcing it, but don't linger."
+        },
+        {
+          "name": "Direct Comparison Test",
+          "effect": "normal",
+          "professor": "Useful for proving the absolute series diverges, but AST is needed for the full classification."
         }
       ]
     },
@@ -49,9 +54,14 @@
           "professor": "Limit blasts to infinity. Heavy, but still lands the same blow. A slower sure-kill."
         },
         {
-          "name": "Direct Comparison Test",
+          "name": "Harmonic Comparison",
           "effect": "dodge",
-          "professor": "Smaller than harmonic doesn't prove convergence. You feinted in the wrong direction. Narrow miss."
+          "professor": "A loose harmonic comparison can point the wrong way here. Use the larger p=1/2 benchmark instead."
+        },
+        {
+          "name": "Integral Test",
+          "effect": "normal",
+          "professor": "Valid route to divergence, though comparison is faster."
         }
       ]
     },
@@ -71,9 +81,14 @@
           "professor": "∫ ln x / x^{3/2} converges. Longer march, but the result stands. Solid backup."
         },
         {
-          "name": "Direct Comparison Test",
+          "name": "p-Series Comparison",
           "effect": "fail",
           "professor": "ln n makes it bigger, not smaller. You sized up the wrong enemy—and got punished."
+        },
+        {
+          "name": "Limit Comparison Test",
+          "effect": "normal",
+          "professor": "Can be made to work with a stronger p-series reference, but direct comparison is cleaner."
         }
       ]
     },
@@ -88,9 +103,19 @@
           "professor": "Two-phase strike. Without signs, it's a ln n/n beast—divergent. AST tames it. Conditional convergence."
         },
         {
-          "name": "Alternating Series Test",
+          "name": "Absolute Series Check",
           "effect": "fail",
           "professor": "You killed the unarmored form but forgot it had a second phase. Alternating saves it. Don't sheathe early."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "Ratio limit is 1. It cannot classify this alternating logarithmic series."
+        },
+        {
+          "name": "Integral Test",
+          "effect": "normal",
+          "professor": "Good for proving the unsigned series diverges, but AST finishes the classification."
         }
       ]
     },
@@ -108,6 +133,16 @@
           "name": "Limit Comparison Test",
           "effect": "normal",
           "professor": "One clean swing with a heavier blade. Works."
+        },
+        {
+          "name": "Integral Test",
+          "effect": "normal",
+          "professor": "Works, but comparison handles the logarithm with less ceremony."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "Ratio limit is 1. No conclusion."
         }
       ]
     },
@@ -130,6 +165,11 @@
           "name": "p-Series Test",
           "effect": "dodge",
           "professor": "Shifting the index doesn't touch convergence. Don't psych yourself out—trust the rules."
+        },
+        {
+          "name": "Limit Comparison Test",
+          "effect": "normal",
+          "professor": "Another valid route once the logarithm is controlled."
         }
       ]
     },
@@ -149,9 +189,14 @@
           "professor": "Ratio lim=1. Weapon bounces. You know when to drop it."
         },
         {
-          "name": "Alternating Series Test",
+          "name": "Absolute Series Check",
           "effect": "fail",
           "professor": "You looked only at the absolute—forgot the alternating shield. Unforced error."
+        },
+        {
+          "name": "p-Series Test",
+          "effect": "normal",
+          "professor": "The absolute series is p=1/2 and diverges, confirming conditional convergence."
         }
       ]
     },
@@ -169,6 +214,16 @@
           "name": "Ratio Test",
           "effect": "dodge",
           "professor": "Limit 1—dull blade. Good impulse to switch away."
+        },
+        {
+          "name": "Absolute Series Check",
+          "effect": "normal",
+          "professor": "Shows the unsigned series behaves like 1/sqrt(n), so the convergence is conditional."
+        },
+        {
+          "name": "Root Test",
+          "effect": "dodge",
+          "professor": "Root Test tends to 1 and gives no decisive verdict."
         }
       ]
     },
@@ -188,9 +243,14 @@
           "professor": "Also works. A different blade, same kill."
         },
         {
-          "name": "Ratio Test",
+          "name": "Alternating Series Test",
           "effect": "normal",
           "professor": "AST would smell convergence, but Root Test reveals it's absolute. Deeper recon."
+        },
+        {
+          "name": "Direct Comparison Test",
+          "effect": "normal",
+          "professor": "Possible after bounding powers of ln n, but Root Test reveals the structure instantly."
         }
       ]
     },
@@ -205,7 +265,7 @@
           "professor": "Ratio Test feasts on factorials. Limit 1/2. Converges. Perfect matchup."
         },
         {
-          "name": "Ratio Test",
+          "name": "Root Test",
           "effect": "dodge",
           "professor": "Trying to Root Test here is like bringing a catapult to a duel—technically works, but Ratio's the specialist."
         },
@@ -213,6 +273,11 @@
           "name": "Direct Comparison Test",
           "effect": "fail",
           "professor": "Denominator grows too slowly for that comparison. Misjudged the scale."
+        },
+        {
+          "name": "Alternating Series Test",
+          "effect": "fail",
+          "professor": "There is no alternating sign. This factorial ratio needs Ratio Test."
         }
       ]
     },
@@ -227,9 +292,19 @@
           "professor": "Factorial outruns the exponential. Ratio slams to zero. Converges. Quick and decisive."
         },
         {
-          "name": "Ratio Test",
+          "name": "Root Test",
           "effect": "normal",
           "professor": "Works, but Ratio dances through factorials smoother."
+        },
+        {
+          "name": "Known Series Recognition",
+          "effect": "normal",
+          "professor": "This is the exponential series at e, so it converges. Ratio is still the universal tool."
+        },
+        {
+          "name": "nth-Term Test",
+          "effect": "fail",
+          "professor": "Terms tend to zero, so this test cannot prove convergence."
         }
       ]
     },
@@ -246,7 +321,17 @@
         {
           "name": "Alternating Series Test",
           "effect": "normal",
-          "professor": "AST would give conditional, but Ratio secures absolute—total victory."
+          "professor": "AST proves convergence, but Ratio Test proves the stronger result: absolute convergence."
+        },
+        {
+          "name": "Root Test",
+          "effect": "normal",
+          "professor": "Also proves absolute convergence by sending the factorial denominator to victory."
+        },
+        {
+          "name": "nth-Term Test",
+          "effect": "fail",
+          "professor": "Terms going to zero is not enough to prove convergence."
         }
       ]
     },
@@ -264,6 +349,16 @@
           "name": "Endpoint Check",
           "effect": "fail",
           "professor": "You claimed the interior but forgot the borders. Endpoints can still draw blood."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "normal",
+          "professor": "Finds the radius first, but endpoints still decide the final interval."
+        },
+        {
+          "name": "Geometric Series Test",
+          "effect": "fail",
+          "professor": "The squared denominator is not geometric."
         }
       ]
     },
@@ -281,6 +376,16 @@
           "name": "Root Test",
           "effect": "normal",
           "professor": "Also yields 1/2. Different weapon, same number."
+        },
+        {
+          "name": "Geometric Series Recognition",
+          "effect": "normal",
+          "professor": "The dominant factor is (-2x)^{n-1}, so the radius is 1/2."
+        },
+        {
+          "name": "Endpoint Check",
+          "effect": "fail",
+          "professor": "Endpoint behavior comes after the radius, not before it."
         }
       ]
     },
@@ -298,6 +403,16 @@
           "name": "Geometric Series Test",
           "effect": "fail",
           "professor": "Not geometric. Wrong playbook."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "normal",
+          "professor": "Also shows convergence for every x because of n!."
+        },
+        {
+          "name": "Endpoint Check",
+          "effect": "fail",
+          "professor": "Infinite radius leaves no finite endpoints to test."
         }
       ]
     },
@@ -320,6 +435,11 @@
           "name": "nth-Term Test",
           "effect": "fail",
           "professor": "Terms do tend to zero, so nth-Term Test shrugs. You got no intel."
+        },
+        {
+          "name": "Limit Comparison Test",
+          "effect": "normal",
+          "professor": "Comparing absolute values to a geometric series also confirms absolute convergence."
         }
       ]
     },
@@ -337,6 +457,16 @@
           "name": "Ratio Test",
           "effect": "dodge",
           "professor": "Tells you it converges, but won't whisper the sum. Right track, wrong goal."
+        },
+        {
+          "name": "Taylor Series Substitution",
+          "effect": "normal",
+          "professor": "Recognize sin x and substitute x=pi/3. Same exact sum."
+        },
+        {
+          "name": "Endpoint Check",
+          "effect": "fail",
+          "professor": "This is not an interval question. Endpoint checking misses the target."
         }
       ]
     },
@@ -354,6 +484,16 @@
           "name": "Term-by-Term Integration",
           "effect": "fail",
           "professor": "Way too heavy. You tried to tunnel through a hill when a path was right there."
+        },
+        {
+          "name": "Known Series Recognition",
+          "effect": "normal",
+          "professor": "Spotting 1/(1-r) with r=x/4 opens the same door."
+        },
+        {
+          "name": "Taylor Series Formula",
+          "effect": "dodge",
+          "professor": "It works, but it is far slower than rewriting as a geometric series."
         }
       ]
     },
@@ -368,9 +508,19 @@
           "professor": "Ratio lim = 1/2 < 1. Fastest draw. Converges."
         },
         {
-          "name": "Ratio Test",
+          "name": "Root Test",
           "effect": "normal",
           "professor": "Also quick. Ratio just flows a heartbeat faster here."
+        },
+        {
+          "name": "Direct Comparison Test",
+          "effect": "normal",
+          "professor": "Can be done using exponential domination, but Ratio Test is cleaner."
+        },
+        {
+          "name": "p-Series Test",
+          "effect": "fail",
+          "professor": "The denominator is exponential, not a pure p-series."
         }
       ]
     },
@@ -388,6 +538,16 @@
           "name": "Endpoint Check",
           "effect": "fail",
           "professor": "You mapped the interior but ignored the edge. Lost half the territory."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "normal",
+          "professor": "Finds the radius 1, then endpoint checks finish the interval."
+        },
+        {
+          "name": "Geometric Series Test",
+          "effect": "fail",
+          "professor": "The 1/(n+1) factor means this is not geometric."
         }
       ]
     }

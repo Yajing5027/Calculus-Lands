@@ -272,6 +272,26 @@ html, body {
   margin-top: 16px;
 }
 
+.letter-paper strong {
+  font-weight: 700;
+}
+
+.letter-paper em {
+  font-style: italic;
+}
+
+.letter-paper hr {
+  border: 0;
+  border-top: 1px solid rgba(92, 55, 19, .28);
+  margin: 22px 0;
+}
+
+.final-letter-paper {
+  width: min(980px, 94vw);
+  max-height: min(82vh, 780px);
+  font-size: clamp(14px, 1.35vw, 17px);
+}
+
 .letter-hint {
   position: fixed;
   bottom: 22px;
