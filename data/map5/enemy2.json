@@ -1,0 +1,555 @@
+{
+  "enemy": {
+    "name": "Limitus",
+    "maxHP": 4,
+    "image": "assets/limitus.png",
+    "attackImage": "assets/limitus_attack.png",
+    "hurtImage": "assets/limitus_hurt.png"
+  },
+  "professor": {
+    "name": "Dr. H",
+    "image": "assets/professor.png"
+  },
+  "questions": [
+    {
+      "id": "Q21",
+      "question": "Which test dispatches this series with the fewest moves?",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{\\ln n}{n^2}",
+      "moves": [
+        {
+          "name": "Direct Comparison Test",
+          "effect": "crit",
+          "professor": "ln n vs n^ε. You pinned the logarithmic weakness under a p-series shield. Clean."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "normal",
+          "professor": "Integration by parts lands the blow. Slower, but still a kill."
+        },
+        {
+          "name": "Limit Comparison Test",
+          "effect": "dodge",
+          "professor": "You need a sharp inequality, not a fuzzy limit. This blade glances off."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "fail",
+          "professor": "Ratio lim=1. You'll swing at air forever. Switch weapons."
+        }
+      ]
+    },
+    {
+      "id": "Q22",
+      "question": "What is the fastest way to confirm convergence of this series?",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{n!}{100^n}",
+      "moves": [
+        {
+          "name": "Ratio Test",
+          "effect": "crit",
+          "professor": "Factorial vs exponential. Ratio Test is a hot knife. One strike, dead."
+        },
+        {
+          "name": "Root Test",
+          "effect": "normal",
+          "professor": "Root Test also works, but with factorials it's clumsier. You got the job done."
+        },
+        {
+          "name": "Geometric Series Test",
+          "effect": "fail",
+          "professor": "You can't tame a growing factorial with a simple geometric bound. You just got thrown."
+        },
+        {
+          "name": "Alternating Series Test",
+          "effect": "fail",
+          "professor": "No alternating sign. You're fighting a phantom."
+        }
+      ]
+    },
+    {
+      "id": "Q23",
+      "question": "This alternating series is best described as:",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{(-1)^n}{\\sqrt{n+1}}",
+      "moves": [
+        {
+          "name": "Alternating Series Test",
+          "effect": "crit",
+          "professor": "AST saves it, but absolute value is a divergent p-series. Sharp diagnosis."
+        },
+        {
+          "name": "Direct Comparison Test",
+          "effect": "fail",
+          "professor": "Absolute series is p=1/2 divergent. You mistook the shield for armor."
+        },
+        {
+          "name": "Alternating Series Test",
+          "effect": "fail",
+          "professor": "AST confirms convergence. Overlooking the alternating lifeline is fatal."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "Ratio Test stalls. Why groove in uncertainty when AST delivers a clean verdict?"
+        }
+      ]
+    },
+    {
+      "id": "Q24",
+      "question": "Select the test that brings immediate surrender.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{3^n n!}{n^n}",
+      "moves": [
+        {
+          "name": "Ratio Test",
+          "effect": "crit",
+          "professor": "Ratio Test devours factorial battles. It never blinks. Perfect form."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "normal",
+          "professor": "Root Test with Stirling's shadow works, but Ratio is nimbler. Effective, not elegant."
+        },
+        {
+          "name": "nth-Term Test",
+          "effect": "fail",
+          "professor": "Terms tend to zero. nth Term Test yields nothing. You charged a phantom."
+        },
+        {
+          "name": "Direct Comparison Test",
+          "effect": "fail",
+          "professor": "p-series? This is a shapeshifter, not a p-beast. Complete misfire."
+        }
+      ]
+    },
+    {
+      "id": "Q25",
+      "question": "How do you quickly determine convergence here?",
+      "formula": "\\sum_{n=2}^{\\infty} \\frac{1}{n(\\ln n)^2}",
+      "moves": [
+        {
+          "name": "Integral Test",
+          "effect": "crit",
+          "professor": "u = ln x, and it falls instantly. Integral Test was forged for this. Kill confirmed."
+        },
+        {
+          "name": "Direct Comparison Test",
+          "effect": "fail",
+          "professor": "It wears a mask. (ln n)^2 makes it a different creature. p-series misses."
+        },
+        {
+          "name": "Integral Test",
+          "effect": "dodge",
+          "professor": "You could compare, but the integral path is a straight thrust. Why circle around?"
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "fail",
+          "professor": "Ratio lim=1. Inconclusive. You'll waste turns."
+        }
+      ]
+    },
+    {
+      "id": "Q26",
+      "question": "Which tactic opens the power series for this function centered at 0?",
+      "formula": "f(x)=\\frac{1}{(1+x)^2}",
+      "moves": [
+        {
+          "name": "Term-by-Term Differentiation",
+          "effect": "crit",
+          "professor": "Derivative of 1/(1+x) yields the series. Surgical strike."
+        },
+        {
+          "name": "Taylor Coefficient Method",
+          "effect": "dodge",
+          "professor": "Calculating f^{(n)}(0) works, but that's a grindstone. The geometric blade is sharper."
+        },
+        {
+          "name": "Binomial Series",
+          "effect": "normal",
+          "professor": "Binomial with k=-2 also works. A second path to victory."
+        },
+        {
+          "name": "Series Substitution",
+          "effect": "fail",
+          "professor": "Substitution won't reshape the square. That maneuver is a dud."
+        }
+      ]
+    },
+    {
+      "id": "Q27",
+      "question": "Where is this power series centered?",
+      "formula": "\\sum_{n=0}^{\\infty} \\frac{(-1)^n (x+\\pi)^{2n}}{(2n)!}",
+      "moves": [
+        {
+          "name": "Center Identification",
+          "effect": "crit",
+          "professor": "(x+π) reveals the center -π. Eagle-eye precision."
+        },
+        {
+          "name": "Center Identification",
+          "effect": "fail",
+          "professor": "Sign error. (x+π) means center at -π, not π. You bit the decoy."
+        },
+        {
+          "name": "Center Identification",
+          "effect": "fail",
+          "professor": "0 is the default, not the truth. Look closer at that (x+π)."
+        },
+        {
+          "name": "Center Identification",
+          "effect": "fail",
+          "professor": "No. That's twice the distance from the truth."
+        }
+      ]
+    },
+    {
+      "id": "Q28",
+      "question": "What is the most efficient test for this series?",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{2^n+3^n}{5^n}",
+      "moves": [
+        {
+          "name": "Geometric Series Test",
+          "effect": "crit",
+          "professor": "Sum of two geometric series. Divide and conquer. No wasted effort."
+        },
+        {
+          "name": "Direct Comparison Test",
+          "effect": "normal",
+          "professor": "Compare to (3/5)^n—works, but splitting is a cleaner decapitation."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "Ratio Test lim=3/5, but it's a heavier swing than needed. Overkill."
+        },
+        {
+          "name": "Term-by-Term Integration",
+          "effect": "fail",
+          "professor": "Exponential terms don't integrate nicely. Wrong weapon for this war."
+        }
+      ]
+    },
+    {
+      "id": "Q29",
+      "question": "Determine the convergence status.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{(-1)^n n^2}{n^3+1}",
+      "moves": [
+        {
+          "name": "Alternating Series Test",
+          "effect": "crit",
+          "professor": "AST holds, but absolute series behaves like harmonic. Conditional win. Flawless read."
+        },
+        {
+          "name": "Limit Comparison Test",
+          "effect": "fail",
+          "professor": "Limit comparison with 1/n shows divergence. Absolute armor does not hold."
+        },
+        {
+          "name": "Alternating Series Test",
+          "effect": "fail",
+          "professor": "Alternating sign saves it. Dismissing AST is a tactical blunder."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "Ratio Test stalls. Why hesitate when AST cleaves through?"
+        }
+      ]
+    },
+    {
+      "id": "Q30",
+      "question": "What is the radius of convergence?",
+      "formula": "\\sum_{n=0}^{\\infty} \\frac{x^{2n}}{(2n)!}",
+      "moves": [
+        {
+          "name": "Ratio Test",
+          "effect": "crit",
+          "professor": "Ratio Test yields limit 0 for any x. This series embraces the whole real line. Visionary."
+        },
+        {
+          "name": "Geometric Series Test",
+          "effect": "fail",
+          "professor": "That's the radius of the geometric series, not this beast. You guessed wrong."
+        },
+        {
+          "name": "Endpoint Check",
+          "effect": "fail",
+          "professor": "Only at x=0? The (2n)! denominator gives infinite reach. Misjudged."
+        },
+        {
+          "name": "Radius Test",
+          "effect": "fail",
+          "professor": "No connection to 2. Random number."
+        }
+      ]
+    },
+    {
+      "id": "Q31",
+      "question": "Identify the power series representation method.",
+      "formula": "f(x)=\\ln(1+x)",
+      "moves": [
+        {
+          "name": "Term-by-Term Integration",
+          "effect": "crit",
+          "professor": "Derivative is 1/(1+x). Integrate termwise. The classic flanking maneuver."
+        },
+        {
+          "name": "Taylor Series Formula",
+          "effect": "normal",
+          "professor": "Computing derivatives gives it, but integration is the nimble path. Still, you succeed."
+        },
+        {
+          "name": "Series Substitution",
+          "effect": "fail",
+          "professor": "ln(1+x) is not an exponential. You're on the wrong battlefield."
+        },
+        {
+          "name": "Binomial Series",
+          "effect": "dodge",
+          "professor": "Binomial could expand (1+x)^{-1} then integrate? Too convoluted. Stay sharp."
+        }
+      ]
+    },
+    {
+      "id": "Q32",
+      "question": "What is the best test here?",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{(n!)^2}{(2n)!}",
+      "moves": [
+        {
+          "name": "Ratio Test",
+          "effect": "crit",
+          "professor": "Ratio Test reduces factorial fortress to 1/4. One crushing blow."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "Root Test stumbles on (n!)^2. Ratio is the assassin's choice here."
+        },
+        {
+          "name": "Geometric Series Test",
+          "effect": "fail",
+          "professor": "You'd need a geometric bound, but factorials outrun any constant. Shield broken."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "fail",
+          "professor": "No simple rational comparison works. Your mirror cracked."
+        }
+      ]
+    },
+    {
+      "id": "Q33",
+      "question": "At x = 4, the series is:",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{(-1)^n (x-4)^n}{n 9^n}",
+      "moves": [
+        {
+          "name": "Alternating Series Test",
+          "effect": "crit",
+          "professor": "x=4 gives alternating harmonic. Conditional convergence precisely identified."
+        },
+        {
+          "name": "Alternating Series Test",
+          "effect": "fail",
+          "professor": "Center 4 yields alternating harmonic. It's saved by the alternating sign. You misjudged."
+        },
+        {
+          "name": "Direct Comparison Test",
+          "effect": "fail",
+          "professor": "Harmonic series diverges absolutely. You overestimated the armor."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "At the endpoint, Ratio Test is inconclusive. AST is the weapon to draw."
+        }
+      ]
+    },
+    {
+      "id": "Q34",
+      "question": "Which test delivers a one-shot verdict?",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{n}{e^n}",
+      "moves": [
+        {
+          "name": "Ratio Test",
+          "effect": "crit",
+          "professor": "Ratio lim=1/e < 1. Exponential denominator is no match. Instant kill."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "normal",
+          "professor": "Integration by parts works, but Ratio is faster. Still, you got the kill."
+        },
+        {
+          "name": "Root Test",
+          "effect": "dodge",
+          "professor": "Root Test also yields 1/e, but it's heavier. Why lift a warhammer for a knife fight?"
+        },
+        {
+          "name": "nth-Term Test",
+          "effect": "fail",
+          "professor": "Limit is 0—nth Term Test says nothing. You stared at the enemy and did nothing."
+        }
+      ]
+    },
+    {
+      "id": "Q35",
+      "question": "Find the interval of convergence's right endpoint behavior.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{(x-3)^{n-1}}{3^{n-1}}",
+      "moves": [
+        {
+          "name": "Geometric Series Test",
+          "effect": "crit",
+          "professor": "Geometric series with r=1 at x=6. Divergent. Clean endpoint read."
+        },
+        {
+          "name": "Alternating Series Test",
+          "effect": "fail",
+          "professor": "It's not alternating. Geometric r=1 diverges. You missed the series type."
+        },
+        {
+          "name": "Direct Comparison Test",
+          "effect": "fail",
+          "professor": "No absolute convergence at the endpoint. Overconfidence."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "Ratio gives 1 at endpoint. You need the series type, not a limit."
+        }
+      ]
+    },
+    {
+      "id": "Q36",
+      "question": "What test slays this beast without hesitation?",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{\\arctan n}{n^2+1}",
+      "moves": [
+        {
+          "name": "Direct Comparison Test",
+          "effect": "crit",
+          "professor": "arctan n < π/2, compare to π/(2n^2). Convergent p-series domination. Brilliant."
+        },
+        {
+          "name": "Direct Comparison Test",
+          "effect": "normal",
+          "professor": "Compare to 1/n^2, works but the constant is messier. Still a kill."
+        },
+        {
+          "name": "Integral Test",
+          "effect": "fail",
+          "professor": "Integrating arctan x/(x^2+1) is a substitution trap. You'll get tangled."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "Ratio lim=1. Inconclusive. Your weapon bounces off."
+        }
+      ]
+    },
+    {
+      "id": "Q37",
+      "question": "Choose the opening move for the Maclaurin series.",
+      "formula": "f(x)=e^{x^2/2}",
+      "moves": [
+        {
+          "name": "Known Series Substitution",
+          "effect": "crit",
+          "professor": "Know the e^x series by heart, then swap. Lightning-fast expansion."
+        },
+        {
+          "name": "Taylor Coefficient Method",
+          "effect": "dodge",
+          "professor": "Derivatives exist, but the chain rule is a grind. Substitution is faster. Don't tire yourself."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "fail",
+          "professor": "Integration won't produce e^{x^2/2}. Wrong operation."
+        },
+        {
+          "name": "Binomial Series",
+          "effect": "fail",
+          "professor": "Binomial series is for (1+x)^k. This is exponential. Mismatched arsenal."
+        }
+      ]
+    },
+    {
+      "id": "Q38",
+      "question": "Which test proves absolute convergence?",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{\\sin n}{n^2}",
+      "moves": [
+        {
+          "name": "Direct Comparison Test",
+          "effect": "crit",
+          "professor": "|sin n| ≤ 1, compare to 1/n^2. Absolute dominance. Unshakable."
+        },
+        {
+          "name": "Alternating Series Test",
+          "effect": "fail",
+          "professor": "sin n is not alternating in a regular pattern. AST doesn't apply. Misstep."
+        },
+        {
+          "name": "Direct Comparison Test",
+          "effect": "dodge",
+          "professor": "You could compare to 1/n^2, but bounding by inequality is more direct. Suboptimal path."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "fail",
+          "professor": "Ratio lim=1. Inconclusive. You'll exhaust yourself swinging."
+        }
+      ]
+    },
+    {
+      "id": "Q39",
+      "question": "Select the fastest convergence verdict.",
+      "formula": "\\sum_{n=1}^{\\infty} \\left(1+\\frac{1}{n}\\right)^n x^n",
+      "moves": [
+        {
+          "name": "Root Test",
+          "effect": "crit",
+          "professor": "nth power structure screams Root Test. Limit e. Radius 1/e. Executed."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "Ratio Test can work but tangles you in (1+1/n)^n limits. Root Test is cleaner. Choose efficiency."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "fail",
+          "professor": "Not a constant ratio. That's an illusion."
+        },
+        {
+          "name": "Term-by-Term Integration",
+          "effect": "fail",
+          "professor": "You can't integrate (1+1/n)^n x^n easily. Wrong battlefield."
+        }
+      ]
+    },
+    {
+      "id": "Q40",
+      "question": "What is the nature of this series at x = -1/2?",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{n}{n+1} (-2x)^{n-1}",
+      "moves": [
+        {
+          "name": "Endpoint Check",
+          "effect": "crit",
+          "professor": "Plug x=-1/2 gives terms ~1, nth Term Test fails. Divergent. Sharp eye."
+        },
+        {
+          "name": "nth-Term Test",
+          "effect": "fail",
+          "professor": "Terms don't go to zero. Conditional convergence is impossible. Critical mistake."
+        },
+        {
+          "name": "Absolute Series Check",
+          "effect": "fail",
+          "professor": "No. The series isn't even convergent. Your defenses are down."
+        },
+        {
+          "name": "Alternating Series Test",
+          "effect": "dodge",
+          "professor": "AST needs terms tending to zero. They don't. Wrong weapon for a dead target."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,555 @@
+{
+  "enemy": {
+    "name": "Owlculus",
+    "maxHP": 8,
+    "image": "assets/owlculus.png",
+    "attackImage": "assets/owlculus_attack.png",
+    "hurtImage": "assets/owlculus_hurt.png"
+  },
+  "professor": {
+    "name": "Dr. H",
+    "image": "assets/professor.png"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "question": "Which method delivers the quickest kill?",
+      "formula": "\\int x e^{x^2} \\, dx",
+      "moves": [
+        {
+          "name": "u-Substitution (u = x^2)",
+          "effect": "crit",
+          "professor": "The derivative of the exponent is right there. One clean substitution ends the fight before it starts."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "IBP against a non-linear exponent will trap you in a loop. That's a swing at thin air."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "There's no radical here. You're bringing a siege weapon to a dagger fight."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "Not a rational function. That blade shatters on impact."
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "question": "Choose the sharpest opening move for this integral.",
+      "formula": "\\int \\frac{1}{x^2 - 6x + 13} \\, dx",
+      "moves": [
+        {
+          "name": "Complete the square, then use arctan formula",
+          "effect": "crit",
+          "professor": "(x-3)^2 + 4 reveals an arctan hiding in plain sight. A single precise strike."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "Irreducible quadratic over reals. Your decomposition weapon can't even scratch this armor."
+        },
+        {
+          "name": "u-Substitution (u = x^2 - 6x + 13)",
+          "effect": "fail",
+          "professor": "du = 2x-6, but where's the x in the numerator? You stumble on the draw."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "No product in sight. IBP is a ghost swing here."
+        }
+      ]
+    },
+    {
+      "id": "Q3",
+      "question": "What is the most efficient tactical decision here?",
+      "formula": "\\int \\frac{x^2 + 1}{x^3 + x} \\, dx",
+      "moves": [
+        {
+          "name": "Cancel common factor, then integrate",
+          "effect": "crit",
+          "professor": "Factor out x: the enemy weakens to (x^2+1)/[x(x^2+1)] = 1/x. One clean stroke."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "You'd set up decomposition, but the common factor means you're just doing pointless work. A wasted attack."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No radical, no quadratic form. Wrong weapon entirely."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "Not a product of different function types. IBP has no hold here."
+        }
+      ]
+    },
+    {
+      "id": "Q4",
+      "question": "What is the critical blow for this notorious integral?",
+      "formula": "\\int \\sec^3 x \\, dx",
+      "moves": [
+        {
+          "name": "Integration by Parts (u = sec x, dv = sec^2 x dx)",
+          "effect": "crit",
+          "professor": "The classic loop. IBP brings the integral back, then you isolate it. Surgical execution."
+        },
+        {
+          "name": "Substitution u = tan x",
+          "effect": "fail",
+          "professor": "You'll end up with a messier mix of roots and exponentials. This path leads straight into a trap."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No radical inside a trig function. You've lost sight of the battlefield."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "Not a rational function. That weapon can't even scratch this boss."
+        }
+      ]
+    },
+    {
+      "id": "Q5",
+      "question": "Select the most lethal first move.",
+      "formula": "\\int \\tan^3 x \\, dx",
+      "moves": [
+        {
+          "name": "Rewrite tan^3 as tan x(sec^2 x - 1), then split",
+          "effect": "crit",
+          "professor": "One trig identity splits the enemy into two easy pieces. Swift and decisive."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "IBP with tan^3 alone leads nowhere. You'll waste precious time."
+        },
+        {
+          "name": "u-Substitution (u = tan x) without rewriting",
+          "effect": "fail",
+          "professor": "You're missing du = sec^2 x dx; the pieces don't fit. A clumsy swing."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No root of a quadratic. Wrong weapon, wrong fight."
+        }
+      ]
+    },
+    {
+      "id": "Q6",
+      "question": "Which method clears the battlefield fastest?",
+      "formula": "\\int x \\sqrt{4 - x} \\, dx",
+      "moves": [
+        {
+          "name": "Substitution u = 4 - x",
+          "effect": "crit",
+          "professor": "The radical becomes sqrt(u) and x becomes 4-u. Simple polynomial fight. Quick victory."
+        },
+        {
+          "name": "Trigonometric Substitution (x = 4 sin^2 θ)",
+          "effect": "normal",
+          "professor": "This also gets the job done, but you'll slog through extra trig. Not the cleanest path, but still a win."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "IBP with a radical? You'll sink into a swamp of fractional powers."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "A root in the numerator blocks any rational decomposition."
+        }
+      ]
+    },
+    {
+      "id": "Q7",
+      "question": "Identify the correct weapon for this foe.",
+      "formula": "\\int \\frac{1}{x \\sqrt{4x^2 + 9}} \\, dx",
+      "moves": [
+        {
+          "name": "Trigonometric Substitution (2x = 3 tan θ)",
+          "effect": "crit",
+          "professor": "The form sqrt(u^2 + a^2) calls for tangent substitution. The whole thing collapses neatly."
+        },
+        {
+          "name": "u-Substitution (u = 4x^2 + 9)",
+          "effect": "fail",
+          "professor": "An extra x stays in the fight. You can't finish with that loose end."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "IBP doesn't know what to do with a radical in the denominator. Wasted energy."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "The square root blocks all rational attempts. This wall won't crack."
+        }
+      ]
+    },
+    {
+      "id": "Q8",
+      "question": "What is the sharpest strategy against this even-powered enemy?",
+      "formula": "\\int \\sin^2 x \\cos^2 x \\, dx",
+      "moves": [
+        {
+          "name": "Use power-reduction formulas (half-angle identities)",
+          "effect": "crit",
+          "professor": "Both powers even? Lower the exponents until the enemy is just linear trig. Clean win."
+        },
+        {
+          "name": "Separate a cosine for u-substitution",
+          "effect": "fail",
+          "professor": "Both powers are even; you can't peel one off and leave an odd. Your blade glances off."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "Pure trig powers trap IBP in an endless loop with no exit."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No radical here. You've misread the entire skirmish."
+        }
+      ]
+    },
+    {
+      "id": "Q9",
+      "question": "Choose the decisive strike for this radical foe.",
+      "formula": "\\int \\frac{1}{x^2 \\sqrt{4 - x^2}} \\, dx",
+      "moves": [
+        {
+          "name": "Trigonometric Substitution (x = 2 sin θ)",
+          "effect": "crit",
+          "professor": "sqrt(a^2 - x^2) demands a sine substitution. The fight turns into a clean csc^2 encounter."
+        },
+        {
+          "name": "u-Substitution (u = 4 - x^2)",
+          "effect": "fail",
+          "professor": "You'll be left with an x that won't vanish. Ambush."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "The radical and x^2 combination defies IBP. You'll just exhaust yourself."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "The root blocks rational decomposition completely."
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "question": "What finishes this odd-powered trig foe quickly?",
+      "formula": "\\int \\sin^5 x \\, dx",
+      "moves": [
+        {
+          "name": "Separate one sin, convert the rest to cosines, u = cos x",
+          "effect": "crit",
+          "professor": "Odd power of sine? Peel one off and the remains become a polynomial in cos x. Swift kill."
+        },
+        {
+          "name": "Use power-reduction formulas repeatedly",
+          "effect": "normal",
+          "professor": "You can grind it down with half-angles. It'll work, but you'll sweat through many steps."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "Pure sine power traps IBP. You'll chase your own tail."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No radical. You've brought the wrong playbook."
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "question": "Identify the most efficient execution.",
+      "formula": "\\int \\frac{2x + 3}{x^2 + 3x - 10} \\, dx",
+      "moves": [
+        {
+          "name": "u-Substitution (u = x^2 + 3x - 10)",
+          "effect": "crit",
+          "professor": "The numerator is exactly the derivative of the denominator. One log and done."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "normal",
+          "professor": "You can factor and decompose, but why take the long siege when the gate is open? Still works."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "Rational function not in product form. IBP cannot find a grip."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No radical means no trig sub. Misfire."
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "question": "Which tactic breaks the cycle?",
+      "formula": "\\int e^x \\sin x \\, dx",
+      "moves": [
+        {
+          "name": "Integration by Parts twice, then solve for the integral",
+          "effect": "crit",
+          "professor": "The classic boomerang. IBP brings back the original, and you isolate it. Perfectly executed."
+        },
+        {
+          "name": "Use Euler's formula to convert to complex exponentials",
+          "effect": "normal",
+          "professor": "An elegant flanking maneuver. Not the standard blade, but it lands the kill."
+        },
+        {
+          "name": "u-Substitution (u = sin x)",
+          "effect": "fail",
+          "professor": "e^x doesn't align with that substitution. You'll stumble into a deeper mess."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No square root of a quadratic. Wrong war."
+        }
+      ]
+    },
+    {
+      "id": "Q13",
+      "question": "What is the best approach against this even power?",
+      "formula": "\\int \\cos^4 x \\, dx",
+      "moves": [
+        {
+          "name": "Use power-reduction formulas (half-angle identities) twice",
+          "effect": "crit",
+          "professor": "Lower that even power step by step until only linear trig remains. Flawless."
+        },
+        {
+          "name": "Separate one cosine, convert the rest via sin^2",
+          "effect": "fail",
+          "professor": "All powers are even; you can't steal one cos without leaving a fractional mess. Trap."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "Pure cos^4 triggers an infinite IBP loop with no resolution."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No radical. You're in the wrong battle."
+        }
+      ]
+    },
+    {
+      "id": "Q14",
+      "question": "Choose the right substitution to dismantle this.",
+      "formula": "\\int \\frac{1}{(1 + x^2)^{3/2}} \\, dx",
+      "moves": [
+        {
+          "name": "Trigonometric Substitution (x = tan θ)",
+          "effect": "crit",
+          "professor": "1+x^2 under a 3/2 power is a tan sub beacon. The radical becomes sec^3, and the fight simplifies."
+        },
+        {
+          "name": "u-Substitution (u = 1 + x^2)",
+          "effect": "fail",
+          "professor": "You'll have an extra x and no way to handle the power elegantly. Stuck."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "The rational-like form resists IBP. Your weapon bounces off."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "Not a polynomial denominator. That blade shatters."
+        }
+      ]
+    },
+    {
+      "id": "Q15",
+      "question": "Which opening gambit wins this cleanly?",
+      "formula": "\\int \\frac{x^3}{x^2 + 1} \\, dx",
+      "moves": [
+        {
+          "name": "Polynomial long division, then integrate",
+          "effect": "crit",
+          "professor": "Improper fraction? Divide and get x - x/(x^2+1). Two simple integrals. Done."
+        },
+        {
+          "name": "Trigonometric Substitution (x = tan θ)",
+          "effect": "normal",
+          "professor": "This works, turning it into tan^3, but you'll fight extra trig identities. Not optimal, but victorious."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "Improper degree means partial fractions cannot be applied directly. You'll crash at the first step."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "Not a product of different types. IBP has no hold."
+        }
+      ]
+    },
+    {
+      "id": "Q16",
+      "question": "What is the most direct route to victory?",
+      "formula": "\\int \\arcsin x \\, dx",
+      "moves": [
+        {
+          "name": "Integration by Parts (u = arcsin x, dv = dx)",
+          "effect": "crit",
+          "professor": "A lone inverse trig function: u is the function, dv=dx. IBP turns it into an algebraic fight."
+        },
+        {
+          "name": "Substitution x = sin θ",
+          "effect": "normal",
+          "professor": "You get ∫ θ cos θ dθ, which still needs IBP. A detour, but you'll reach the target."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No radical of a quadratic. You've misidentified the enemy."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "Not a rational function. This weapon is useless."
+        }
+      ]
+    },
+    {
+      "id": "Q17",
+      "question": "Pick the tactic that ends this cleanly.",
+      "formula": "\\int \\sin(3x) \\cos(2x) \\, dx",
+      "moves": [
+        {
+          "name": "Use product-to-sum identity",
+          "effect": "crit",
+          "professor": "Different frequencies in sine and cosine? Product-to-sum splits it into easy integrals. One strike."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "IBP will cycle the products endlessly. You'll exhaust yourself."
+        },
+        {
+          "name": "u-Substitution (u = sin(3x) or cos(2x))",
+          "effect": "fail",
+          "professor": "Derivatives don't match. A clumsy swing that leaves you exposed."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No radical. Wrong battlefield."
+        }
+      ]
+    },
+    {
+      "id": "Q18",
+      "question": "Which opening blow is most lethal?",
+      "formula": "\\int x^2 \\cos(x^3) \\, dx",
+      "moves": [
+        {
+          "name": "u-Substitution (u = x^3)",
+          "effect": "crit",
+          "professor": "x^2 dx is exactly one-third du. One substitution, one clean sine. Perfect."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "The cosine of x^3 defies IBP. You'll get nowhere fast."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No square root. Wrong weapon."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "Not a rational function. This blade snaps."
+        }
+      ]
+    },
+    {
+      "id": "Q19",
+      "question": "Which method dispatches this foe most efficiently?",
+      "formula": "\\int \\frac{1}{x^2 - 4} \\, dx",
+      "moves": [
+        {
+          "name": "Partial Fractions",
+          "effect": "crit",
+          "professor": "Denominator factors into (x-2)(x+2). Decompose and get two logs. Quick and decisive."
+        },
+        {
+          "name": "Trigonometric Substitution (x = 2 sec θ)",
+          "effect": "normal",
+          "professor": "That route works, but you'll wade through trig to get the same log result. A longer path."
+        },
+        {
+          "name": "u-Substitution (u = x^2 - 4)",
+          "effect": "fail",
+          "professor": "du = 2x dx, but no x in the numerator. You're swinging at shadows."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "No product to separate. IBP dead on arrival."
+        }
+      ]
+    },
+    {
+      "id": "Q20",
+      "question": "Find the surest path through this mixed foe.",
+      "formula": "\\int \\frac{x}{x^2 + 2x + 2} \\, dx",
+      "moves": [
+        {
+          "name": "Complete the square, then split into two integrals",
+          "effect": "crit",
+          "professor": "(x+1)^2+1 appears. Split into something over the quadratic plus a constant over the quadratic; one yields ln, the other arctan."
+        },
+        {
+          "name": "Trigonometric Substitution (x+1 = tan θ)",
+          "effect": "normal",
+          "professor": "Also works, but forces you through extra trig. You get the kill, but it's slower."
+        },
+        {
+          "name": "u-Substitution (u = x^2 + 2x + 2)",
+          "effect": "fail",
+          "professor": "The numerator x doesn't match du = 2x+2. Can't close the strike."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "Irreducible denominator. Decomposition is impossible here."
+        }
+      ]
+    }
+  ]
+}

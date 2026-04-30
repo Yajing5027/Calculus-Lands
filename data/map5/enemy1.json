@@ -1,0 +1,395 @@
+{
+  "enemy": {
+    "name": "Limitus",
+    "maxHP": 4,
+    "image": "assets/limitus.png",
+    "attackImage": "assets/limitus_attack.png",
+    "hurtImage": "assets/limitus_hurt.png"
+  },
+  "professor": {
+    "name": "Dr. H",
+    "image": "assets/professor.png"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "question": "Determine whether the series converges conditionally, absolutely, or diverges.",
+      "formula": "\\sum_{n=1}^{\\infty}\\frac{(-1)^{n+1}}{\\ln(n+1)}",
+      "moves": [
+        {
+          "name": "Alternating Series Test",
+          "effect": "crit",
+          "professor": "Two-step takedown. AST gives the nod, but strip the signs and the series explodes—bigger than harmonic. Conditional convergence. Clean combo."
+        },
+        {
+          "name": "Alternating Series Test",
+          "effect": "fail",
+          "professor": "You let the alternating shield fool you. Underneath, the terms tower over harmonic. Overconfidence left your flank wide open."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "Ratio lim=1. Blade skids off harmlessly. Good call not forcing it, but don't linger."
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "question": "Determine convergence.",
+      "formula": "\\sum_{n=2}^{\\infty}\\frac{\\ln n}{\\sqrt{n}}",
+      "moves": [
+        {
+          "name": "Direct Comparison Test",
+          "effect": "crit",
+          "professor": "Once ln n flexes past 1, every term towers over the p=1/2 series. That one diverges, so this monster crushes. Diverges."
+        },
+        {
+          "name": "Limit Comparison Test",
+          "effect": "normal",
+          "professor": "Limit blasts to infinity. Heavy, but still lands the same blow. A slower sure-kill."
+        },
+        {
+          "name": "Direct Comparison Test",
+          "effect": "dodge",
+          "professor": "Smaller than harmonic doesn't prove convergence. You feinted in the wrong direction. Narrow miss."
+        }
+      ]
+    },
+    {
+      "id": "Q3",
+      "question": "Determine convergence.",
+      "formula": "\\sum_{n=2}^{\\infty}\\frac{\\ln n}{n\\sqrt{n}}",
+      "moves": [
+        {
+          "name": "Direct Comparison Test",
+          "effect": "crit",
+          "professor": "You picked a p=5/4 blade. The ln n melts under that power. Converges. Surgical."
+        },
+        {
+          "name": "Integral Test",
+          "effect": "normal",
+          "professor": "∫ ln x / x^{3/2} converges. Longer march, but the result stands. Solid backup."
+        },
+        {
+          "name": "Direct Comparison Test",
+          "effect": "fail",
+          "professor": "ln n makes it bigger, not smaller. You sized up the wrong enemy—and got punished."
+        }
+      ]
+    },
+    {
+      "id": "Q4",
+      "question": "Determine convergence type.",
+      "formula": "\\sum_{n=2}^{\\infty}\\frac{(-1)^n\\ln n}{n}",
+      "moves": [
+        {
+          "name": "Alternating Series Test",
+          "effect": "crit",
+          "professor": "Two-phase strike. Without signs, it's a ln n/n beast—divergent. AST tames it. Conditional convergence."
+        },
+        {
+          "name": "Alternating Series Test",
+          "effect": "fail",
+          "professor": "You killed the unarmored form but forgot it had a second phase. Alternating saves it. Don't sheathe early."
+        }
+      ]
+    },
+    {
+      "id": "Q5",
+      "question": "Determine convergence.",
+      "formula": "\\sum_{n=2}^{\\infty}\\frac{\\ln(10n)}{n^2}",
+      "moves": [
+        {
+          "name": "Direct Comparison Test",
+          "effect": "crit",
+          "professor": "Divide and conquer. Both pieces are pinned under p>1 series. Converges. Efficient."
+        },
+        {
+          "name": "Limit Comparison Test",
+          "effect": "normal",
+          "professor": "One clean swing with a heavier blade. Works."
+        }
+      ]
+    },
+    {
+      "id": "Q6",
+      "question": "Determine convergence.",
+      "formula": "\\sum_{n=1}^{\\infty}\\frac{\\ln(n+1)}{(n+1)^3}",
+      "moves": [
+        {
+          "name": "Direct Comparison Test",
+          "effect": "crit",
+          "professor": "Bounded by a p=2 series. Converges. Sharp read."
+        },
+        {
+          "name": "Integral Test",
+          "effect": "normal",
+          "professor": "Heavy but valid. Works just fine."
+        },
+        {
+          "name": "p-Series Test",
+          "effect": "dodge",
+          "professor": "Shifting the index doesn't touch convergence. Don't psych yourself out—trust the rules."
+        }
+      ]
+    },
+    {
+      "id": "Q7",
+      "question": "Classify convergence.",
+      "formula": "\\sum_{n=1}^{\\infty}\\frac{(-1)^n}{\\sqrt{n}}",
+      "moves": [
+        {
+          "name": "Alternating Series Test",
+          "effect": "crit",
+          "professor": "Classic conditional. AST holds, absolute crumbles. Textbook two-step."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "Ratio lim=1. Weapon bounces. You know when to drop it."
+        },
+        {
+          "name": "Alternating Series Test",
+          "effect": "fail",
+          "professor": "You looked only at the absolute—forgot the alternating shield. Unforced error."
+        }
+      ]
+    },
+    {
+      "id": "Q8",
+      "question": "Classify convergence.",
+      "formula": "\\sum_{n=1}^{\\infty}\\frac{(-1)^{n+2}\\sqrt{n}}{n+2}",
+      "moves": [
+        {
+          "name": "Alternating Series Test",
+          "effect": "crit",
+          "professor": "Same rhythm as before. AST green, absolute red. Conditional convergence. Solid."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "Limit 1—dull blade. Good impulse to switch away."
+        }
+      ]
+    },
+    {
+      "id": "Q9",
+      "question": "Determine convergence.",
+      "formula": "\\sum_{n=2}^{\\infty}\\frac{(-1)^n}{(\\ln n)^n}",
+      "moves": [
+        {
+          "name": "Root Test",
+          "effect": "crit",
+          "professor": "Root Test rips that exponent wide open. Absolute convergence. Clean dismantle."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "normal",
+          "professor": "Also works. A different blade, same kill."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "normal",
+          "professor": "AST would smell convergence, but Root Test reveals it's absolute. Deeper recon."
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "question": "Determine convergence.",
+      "formula": "\\sum_{n=1}^{\\infty}\\frac{n!}{1\\cdot3\\cdot5\\cdots(2n+1)}",
+      "moves": [
+        {
+          "name": "Ratio Test",
+          "effect": "crit",
+          "professor": "Ratio Test feasts on factorials. Limit 1/2. Converges. Perfect matchup."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "Trying to Root Test here is like bringing a catapult to a duel—technically works, but Ratio's the specialist."
+        },
+        {
+          "name": "Direct Comparison Test",
+          "effect": "fail",
+          "professor": "Denominator grows too slowly for that comparison. Misjudged the scale."
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "question": "Determine convergence.",
+      "formula": "\\sum_{n=0}^{\\infty}\\frac{e^n}{n!}",
+      "moves": [
+        {
+          "name": "Ratio Test",
+          "effect": "crit",
+          "professor": "Factorial outruns the exponential. Ratio slams to zero. Converges. Quick and decisive."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "normal",
+          "professor": "Works, but Ratio dances through factorials smoother."
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "question": "Determine convergence.",
+      "formula": "\\sum_{n=0}^{\\infty}\\frac{(-1)^n 2^n}{n!}",
+      "moves": [
+        {
+          "name": "Ratio Test",
+          "effect": "crit",
+          "professor": "Ratio Test doesn't even flinch at the alternating sign. Absolute convergence. Full clear."
+        },
+        {
+          "name": "Alternating Series Test",
+          "effect": "normal",
+          "professor": "AST would give conditional, but Ratio secures absolute—total victory."
+        }
+      ]
+    },
+    {
+      "id": "Q13",
+      "question": "Find the interval of convergence.",
+      "formula": "\\sum_{n=1}^{\\infty}\\frac{(-1)^n (x-2)^n}{(n+1)^2}",
+      "moves": [
+        {
+          "name": "Direct Comparison Test",
+          "effect": "crit",
+          "professor": "p=2 at both ends. [1,3]. Endpoints secured. Territory complete."
+        },
+        {
+          "name": "Endpoint Check",
+          "effect": "fail",
+          "professor": "You claimed the interior but forgot the borders. Endpoints can still draw blood."
+        }
+      ]
+    },
+    {
+      "id": "Q14",
+      "question": "Determine the radius of convergence.",
+      "formula": "\\sum_{n=1}^{\\infty}\\frac{n}{n+1}(-2x)^{n-1}",
+      "moves": [
+        {
+          "name": "Radius Test",
+          "effect": "crit",
+          "professor": "The n/(n+1) factor doesn't touch the radius. Radius 1/2. Clean cut."
+        },
+        {
+          "name": "Root Test",
+          "effect": "normal",
+          "professor": "Also yields 1/2. Different weapon, same number."
+        }
+      ]
+    },
+    {
+      "id": "Q15",
+      "question": "Find the radius of convergence.",
+      "formula": "\\sum_{n=0}^{\\infty}\\frac{x^{5n}}{n!}",
+      "moves": [
+        {
+          "name": "Radius Test",
+          "effect": "crit",
+          "professor": "Factorial in the denominator swallows any power of x. Infinite radius. Done."
+        },
+        {
+          "name": "Geometric Series Test",
+          "effect": "fail",
+          "professor": "Not geometric. Wrong playbook."
+        }
+      ]
+    },
+    {
+      "id": "Q16",
+      "question": "Determine convergence.",
+      "formula": "\\sum_{n=1}^{\\infty}\\frac{\\cos n}{3^n}",
+      "moves": [
+        {
+          "name": "Direct Comparison Test",
+          "effect": "crit",
+          "professor": "|cos n| ≤ 1, so it's trapped under a geometric series. Absolute convergence. Simple cage."
+        },
+        {
+          "name": "Alternating Series Test",
+          "effect": "dodge",
+          "professor": "cos n doesn't alternate neatly. Wrong tool for the job."
+        },
+        {
+          "name": "nth-Term Test",
+          "effect": "fail",
+          "professor": "Terms do tend to zero, so nth-Term Test shrugs. You got no intel."
+        }
+      ]
+    },
+    {
+      "id": "Q17",
+      "question": "Find the sum using known series.",
+      "formula": "\\sum_{n=0}^{\\infty}\\frac{(-1)^n\\pi^{2n+1}}{3^{2n+1}(2n+1)!}",
+      "moves": [
+        {
+          "name": "Known Series Recognition",
+          "effect": "crit",
+          "professor": "That's the sin series singing. Sum is √3/2. Instant recognition."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "dodge",
+          "professor": "Tells you it converges, but won't whisper the sum. Right track, wrong goal."
+        }
+      ]
+    },
+    {
+      "id": "Q18",
+      "question": "Find the series representation and its interval.",
+      "formula": "f(x)=\\frac{1}{4-x}",
+      "moves": [
+        {
+          "name": "Geometric Series Test",
+          "effect": "crit",
+          "professor": "Factor 1/4, see 1/(1 - x/4). Geometric from there. (-4,4). Quick and polished."
+        },
+        {
+          "name": "Term-by-Term Integration",
+          "effect": "fail",
+          "professor": "Way too heavy. You tried to tunnel through a hill when a path was right there."
+        }
+      ]
+    },
+    {
+      "id": "Q19",
+      "question": "Which test is most efficient?",
+      "formula": "\\sum_{n=1}^{\\infty}\\frac{n^2}{2^n}",
+      "moves": [
+        {
+          "name": "Ratio Test",
+          "effect": "crit",
+          "professor": "Ratio lim = 1/2 < 1. Fastest draw. Converges."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "normal",
+          "professor": "Also quick. Ratio just flows a heartbeat faster here."
+        }
+      ]
+    },
+    {
+      "id": "Q20",
+      "question": "Determine the interval of convergence.",
+      "formula": "\\sum_{n=1}^{\\infty}\\frac{(-1)^{n+1}(x-1)^{n+1}}{n+1}",
+      "moves": [
+        {
+          "name": "Alternating Series Test",
+          "effect": "crit",
+          "professor": "Centered at 1, radius 1. Endpoint x=2 yields alternating harmonic, x=0 diverges. (0,2]. Clean sweep."
+        },
+        {
+          "name": "Endpoint Check",
+          "effect": "fail",
+          "professor": "You mapped the interior but ignored the edge. Lost half the territory."
+        }
+      ]
+    }
+  ]
+}

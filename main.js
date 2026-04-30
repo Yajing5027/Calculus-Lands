@@ -1,19 +1,27 @@
 /**
  * ════════════════════════════════════════════════════════
- *  Calculus Lands — 级数讨伐   main.js
- *  Canvas sprite animation · Parallax · Turn-based battle
+ *  Calculus Lands: The Infinite Trek   main.js
+ *  
+ *  FIXES APPLIED:
+ *  #1 — Visual scale: Limitus 1.5× Sigma, Owlculus 2.5× Sigma
+ *  #2 — Professor avatar from assets/animations/Dr.H.png
+ *  #3 — Battle zoom CRITICAL FIX: focus on hero+enemy center
+ *  #4 — Level select screen, 5 preset levels
+ *  #5 — KaTeX math rendering
+ *  #6 — HUD: Hero left, Enemy right
+ *  #7 — Fixed names: Sigma, Limitus, Owlculus
  * ════════════════════════════════════════════════════════
  */
 
 'use strict';
 
-/* ─────────────────────────────────────────
-   ASSET PATHS  (relative to index.html)
-───────────────────────────────────────── */
+/* ══════════════════════════════════════════════
+   ASSET PATHS
+══════════════════════════════════════════════ */
 const BASE = 'assets/animations/';
+const PROF_AVATAR = 'assets/animations/Dr.H.png';  // FIX #2
 
 const PATHS = {
-  // ── Hero: Red Reaper ──
   hero: {
     idle: [
       BASE + 'characters/protagonist_redreaper/protagonist_redreaper_idle/frames/frame_000.png',
@@ -43,9 +51,7 @@ const PATHS = {
       BASE + 'characters/protagonist_redreaper/protagonist_redreaper_attack/frames/frame_007.png',
     ],
   },
-
-  // ── Enemy 1 & 2: Red Warrior (minion) ──
-  minion: {
+  limitus: {
     idle: [
       BASE + 'characters/enemies/minion/red_warrior/idle_01.png',
       BASE + 'characters/enemies/minion/red_warrior/idle_02.png',
@@ -58,20 +64,15 @@ const PATHS = {
       BASE + 'characters/enemies/minion/red_warrior/attack_02_long.png',
     ],
     hurt: [
-      BASE + 'characters/enemies/minion/red_warrior/idle_01.png', // fallback to idle flash
+      BASE + 'characters/enemies/minion/red_warrior/idle_01.png',
     ],
     die: [
       BASE + 'characters/enemies/minion/red_warrior/death_01.png',
     ],
   },
-
-  // ── Boss: Owl Boss ──
-  owl: {
+  owlculus: {
     idle: [
       BASE + 'characters/enemies/owl_boss/owl_boss_idle_front_01.png',
-    ],
-    idle_back: [
-      BASE + 'characters/enemies/owl_boss/owl_boss_idle_back_01.png',
     ],
     move: [
       BASE + 'characters/enemies/owl_boss/owl_boss_move_01.png',
@@ -97,24 +98,71 @@ const PATHS = {
   },
 };
 
-/* ─────────────────────────────────────────
-   GAME CONSTANTS
-───────────────────────────────────────── */
-const WORLD_W      = 3400;   // px — total scrollable world width
+/* ══════════════════════════════════════════════
+   FIX #1 — VISUAL SCALE CONSTANTS
+   These source sprites have very different native sizes, so ratios are
+   based on final rendered height rather than multiplying raw sprite scale.
+══════════════════════════════════════════════ */
+const WORLD_W      = 3400;
 const HERO_START_X = 80;
-const HERO_SPEED   = 1.8;    // px / frame while walking
+const HERO_SPEED   = 1.8;
 const HERO_MAX_HP  = 5;
-const HERO_SCALE   = 2.5;    // canvas pixel scale
-const ENEMY_SCALE  = 2.8;
-const BOSS_SCALE   = 3.2;
-const TRIGGER_DIST = 70;     // px from hero to enemy to start battle
+const TRIGGER_DIST = 75;
 
-// Where each enemy stands in world coordinates
-const ENEMY_POS = { enemy1: 820, enemy2: 1680, boss: 2520 };
+const SCALE_SIGMA = 2.5;
+const HERO_SOURCE_H = 36;
+const LIMITUS_SOURCE_H = 15;
+const OWLCULUS_SOURCE_H = 256;
+const HERO_VISUAL_H = HERO_SOURCE_H * SCALE_SIGMA;
+const SCALE_LIMITUS = (HERO_VISUAL_H * 1.5) / LIMITUS_SOURCE_H;
+const SCALE_OWLCULUS = (HERO_VISUAL_H * 2.5) / OWLCULUS_SOURCE_H;
 
-/* ─────────────────────────────────────────
+const BATTLE_ZOOM_SCALE = 1.65;
+const BATTLE_GAP_MINION = 150;
+const BATTLE_GAP_BOSS = 235;
+
+// Enemy world positions (FIX #1 — spacing to avoid overlap)
+const ENEMY_POS = { enemy1: 900, enemy2: 1800, boss: 2700 };
+
+/* ══════════════════════════════════════════════
+   FIX #4 — LEVEL DEFINITIONS (5 maps)
+══════════════════════════════════════════════ */
+const MAP_COUNT = 5;
+const mapPath = id => `data/map${id}`;
+const LAND_NAMES = [
+  'Silicon Depths',
+  'Substitution Labyrinth',
+  'Parametric Veil',
+  'Infinite Chasm',
+  'Alternating Spire',
+];
+
+const LEVEL_DEFS = Array.from({ length: MAP_COUNT }, (_, i) => {
+  const id = i + 1;
+  const base = mapPath(id);
+  return {
+    id,
+    name: LAND_NAMES[i],
+    desc: '',
+    enemies: [
+      { id: 'enemy1', json: `${base}/enemy1.json`, worldX: ENEMY_POS.enemy1, name: 'Limitus', frames: PATHS.limitus, scale: SCALE_LIMITUS },
+      { id: 'enemy2', json: `${base}/enemy2.json`, worldX: ENEMY_POS.enemy2, name: 'Limitus', frames: PATHS.limitus, scale: SCALE_LIMITUS },
+      { id: 'boss',   json: `${base}/boss.json`,   worldX: ENEMY_POS.boss,   name: 'Owlculus', frames: PATHS.owlculus, scale: SCALE_OWLCULUS },
+    ],
+  };
+});
+
+const LEVEL_MAP_LAYOUT = [
+  { id: 1, x: 13, y: 68, size: 'sm', tilt: -8, terrain: 'ruins' },
+  { id: 2, x: 30, y: 39, size: 'md', tilt: 5, terrain: 'grove' },
+  { id: 3, x: 52, y: 62, size: 'lg', tilt: -3, terrain: 'rift' },
+  { id: 4, x: 71, y: 34, size: 'md', tilt: 8, terrain: 'tower' },
+  { id: 5, x: 87, y: 64, size: 'sm', tilt: -5, terrain: 'gate' },
+];
+
+/* ══════════════════════════════════════════════
    IMAGE CACHE
-───────────────────────────────────────── */
+══════════════════════════════════════════════ */
 const imgCache = {};
 
 function loadImg(src) {
@@ -124,7 +172,6 @@ function loadImg(src) {
     img.onload  = () => { imgCache[src] = img; resolve(img); };
     img.onerror = () => {
       console.warn('[IMG MISSING]', src);
-      // Resolve with a tiny 1×1 transparent placeholder
       const ph = document.createElement('canvas');
       ph.width = ph.height = 1;
       imgCache[src] = ph;
@@ -138,31 +185,24 @@ async function preloadGroup(group) {
   return Promise.all(Object.values(group).flat().map(loadImg));
 }
 
-/* ─────────────────────────────────────────
+/* ══════════════════════════════════════════════
    SPRITE ANIMATOR
-   Draws frame sequences onto a <canvas>
-───────────────────────────────────────── */
+══════════════════════════════════════════════ */
 class Animator {
-  /**
-   * @param {HTMLCanvasElement} canvas
-   * @param {number} scale  — pixel scaling factor
-   */
   constructor(canvas, scale = 2) {
     this.canvas = canvas;
     this.ctx    = canvas.getContext('2d');
     this.ctx.imageSmoothingEnabled = false;
     this.scale  = scale;
-
     this._frames   = [];
     this._frameIdx = 0;
     this._timer    = 0;
-    this._fps      = 8;      // frames per second
+    this._fps      = 8;
     this._loop     = true;
     this._onDone   = null;
     this._paused   = false;
   }
 
-  /** Play a frame array. Returns Promise resolved when done (or immediately if loop). */
   play(frames, fps = 8, loop = true) {
     return new Promise(resolve => {
       this._frames   = frames;
@@ -176,10 +216,9 @@ class Animator {
     });
   }
 
-  pause() { this._paused = true; }
-  resume(){ this._paused = false; }
+  pause()  { this._paused = true; }
+  resume() { this._paused = false; }
 
-  /** Called each game tick with delta-time in ms */
   tick(dt) {
     if (this._paused || this._frames.length === 0) return;
     this._timer += dt;
@@ -217,25 +256,28 @@ class Animator {
   }
 }
 
-/* ─────────────────────────────────────────
+/* ══════════════════════════════════════════════
    DOM REFERENCES
-───────────────────────────────────────── */
+══════════════════════════════════════════════ */
 const $ = id => document.getElementById(id);
 
-const screenStart = $('screen-start');
-const screenGame  = $('screen-game');
-const screenWin   = $('screen-win');
-const screenLose  = $('screen-lose');
-const btnStart    = $('btn-start');
+const screenStart  = $('screen-start');
+const screenLevels = $('screen-levels');
+const screenGame   = $('screen-game');
+const screenWin    = $('screen-win');
+const screenLose   = $('screen-lose');
+const btnStart     = $('btn-start');
+const letterOverlay = $('letter-overlay');
 
 const world       = $('world');
 const heroEl      = $('hero');
 const heroCanvas  = $('hero-canvas');
 
 const hudEl          = $('hud');
+const hudHeroName    = $('hud-hero-name');
+const hudHeroHearts  = $('hud-hero-hearts');
 const hudEnemyName   = $('hud-enemy-name');
 const hudEnemyHearts = $('hud-enemy-hearts');
-const hudHeroHearts  = $('hud-hero-hearts');
 
 const movePanel  = $('move-panel');
 const moveList   = $('move-list');
@@ -244,32 +286,29 @@ const dialogueEl = $('dialogue');
 const dlgText    = $('dlg-text');
 const dlgAvatarL = $('dlg-avatar-l');
 const dlgAvatarR = $('dlg-avatar-r');
-const dlgHint    = $('dlg-hint');
 
 const bgLayers = document.querySelectorAll('.bg-layer');
 
-/* ─────────────────────────────────────────
+/* ══════════════════════════════════════════════
    GAME STATE
-───────────────────────────────────────── */
+══════════════════════════════════════════════ */
+let currentLevel = null;
 let heroX      = HERO_START_X;
 let heroHP     = HERO_MAX_HP;
-let walking    = false;   // set true after start
+let walking    = false;
 let inBattle   = false;
 let gameOver   = false;
 let defeated   = new Set();
-let enemyData  = {};      // loaded JSON per id
+let enemyData  = {};
 
-// Hero animator
-const heroAnim = new Animator(heroCanvas, HERO_SCALE);
-
-// Per-enemy animators (created in setup)
+const heroAnim = new Animator(heroCanvas, SCALE_SIGMA);
 const enemyAnims = {};
 
 let lastTs = 0;
 
-/* ─────────────────────────────────────────
+/* ══════════════════════════════════════════════
    UTILITIES
-───────────────────────────────────────── */
+══════════════════════════════════════════════ */
 const wait = ms => new Promise(r => setTimeout(r, ms));
 
 function shuffle(arr) {
@@ -281,9 +320,10 @@ function shuffle(arr) {
   return a;
 }
 
+// FIX #5 — KaTeX rendering
 function renderMath(el) {
-  const run = () => {
-    if (window.renderMathInElement && window.__katexReady) {
+  const attempt = () => {
+    if (window.renderMathInElement && window.__katexLoaded) {
       try {
         renderMathInElement(el, {
           delimiters: [
@@ -294,13 +334,12 @@ function renderMath(el) {
         });
       } catch(_) {}
     } else {
-      setTimeout(run, 200);
+      setTimeout(attempt, 250);
     }
   };
-  run();
+  attempt();
 }
 
-/* Temporarily add a CSS class for a set duration */
 function withClass(el, cls, ms) {
   return new Promise(resolve => {
     el.classList.add(cls);
@@ -308,9 +347,9 @@ function withClass(el, cls, ms) {
   });
 }
 
-/* ─────────────────────────────────────────
-   HEARTS / HUD
-───────────────────────────────────────── */
+/* ══════════════════════════════════════════════
+   HUD / HEARTS
+══════════════════════════════════════════════ */
 function renderHearts(container, cur, max) {
   container.innerHTML = '';
   for (let i = 0; i < max; i++) {
@@ -320,12 +359,12 @@ function renderHearts(container, cur, max) {
     container.appendChild(s);
   }
 }
-const refreshHeroHearts  = ()         => renderHearts(hudHeroHearts,  heroHP, HERO_MAX_HP);
-const refreshEnemyHearts = (hp, max)  => renderHearts(hudEnemyHearts, hp,    max);
+const refreshHeroHearts  = ()        => renderHearts(hudHeroHearts,  heroHP, HERO_MAX_HP);
+const refreshEnemyHearts = (hp, max) => renderHearts(hudEnemyHearts, hp,    max);
 
-/* ─────────────────────────────────────────
+/* ══════════════════════════════════════════════
    DAMAGE POPUP
-───────────────────────────────────────── */
+══════════════════════════════════════════════ */
 function spawnDmg(anchorEl, label, type) {
   const d = document.createElement('div');
   d.className = 'dmg-popup ' + type;
@@ -336,18 +375,25 @@ function spawnDmg(anchorEl, label, type) {
   d.addEventListener('animationend', () => d.remove(), { once: true });
 }
 
-/* ─────────────────────────────────────────
-   CAMERA / PARALLAX
-───────────────────────────────────────── */
-function computeTx(cx) {
-  const vw  = window.innerWidth;
-  const raw = -(cx - vw / 2);
-  return Math.min(0, Math.max(-(WORLD_W - vw), raw));
+/* ══════════════════════════════════════════════
+   FIX #3 — BATTLE ZOOM CRITICAL FIX
+   Focus exactly on hero + enemy center
+══════════════════════════════════════════════ */
+function clamp(n, min, max) {
+  return Math.min(max, Math.max(min, n));
+}
+
+function computeTx(cx, scale = 1) {
+  const vw = window.innerWidth;
+  const scaledWorldW = WORLD_W * scale;
+  const raw = (vw / 2) - (cx * scale);
+  return clamp(raw, Math.min(0, vw - scaledWorldW), 0);
 }
 
 function applyCamera(x) {
-  const tx = computeTx(x);
-  world.style.transform = `translateX(${tx}px)`;
+  const tx = computeTx(x, 1);
+  world.style.transformOrigin = '0 0';
+  world.style.transform = `translate3d(${tx}px, 0, 0) scale(1)`;
   bgLayers.forEach(layer => {
     const depth = parseFloat(layer.style.getPropertyValue('--depth')) || 0.1;
     layer.style.backgroundPositionX = (tx * depth) + 'px';
@@ -355,21 +401,19 @@ function applyCamera(x) {
 }
 
 function applyBattleZoom(heroWorldX, enemyWorldX) {
-  const vw   = window.innerWidth;
-  const vh   = window.innerHeight - 52 - 140; // viewport minus hud + dialogue
-  const cx   = (heroWorldX + enemyWorldX) / 2;
-  const tx   = computeTx(cx);
-  const s    = 1.9;
-  const ox   = cx + tx;
-  const oy   = vh * 0.55;
+  const centerX = (heroWorldX + enemyWorldX) / 2;
+  const vh = Math.max(1, window.innerHeight - 52 - 140);
+  const scale = BATTLE_ZOOM_SCALE;
+  const tx = computeTx(centerX, scale);
+  const ty = vh - (vh * scale);
 
   world.classList.add('zoom');
-  world.style.transformOrigin = `${ox}px ${oy}px`;
-  world.style.transform = `translateX(${tx}px) scale(${s})`;
+  world.style.transformOrigin = '0 0';
+  world.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`;
 
   bgLayers.forEach(layer => {
     const depth = parseFloat(layer.style.getPropertyValue('--depth')) || 0.1;
-    layer.style.backgroundPositionX = (tx * depth) + 'px';
+    layer.style.backgroundPositionX = ((tx / scale) * depth) + 'px';
   });
 }
 
@@ -379,23 +423,24 @@ function clearBattleZoom() {
   applyCamera(heroX);
 }
 
-/* ─────────────────────────────────────────
+/* ══════════════════════════════════════════════
    HERO POSITION
-───────────────────────────────────────── */
+══════════════════════════════════════════════ */
 function placeHero(x) {
   heroEl.style.left = x + 'px';
 }
 
-/* ─────────────────────────────────────────
-   LOAD & SETUP ENEMIES
-───────────────────────────────────────── */
+/* ══════════════════════════════════════════════
+   LOAD ENEMY JSON
+══════════════════════════════════════════════ */
 async function loadEnemyJSON(id, file) {
-  if (enemyData[id]) return enemyData[id];
+  const cacheKey = file;
+  if (enemyData[cacheKey]) return enemyData[cacheKey];
   try {
     const r = await fetch(file);
     if (!r.ok) throw new Error('HTTP ' + r.status);
     const d = await r.json();
-    enemyData[id] = d;
+    enemyData[cacheKey] = d;
     return d;
   } catch(e) {
     console.error('Could not load', file, e);
@@ -403,22 +448,41 @@ async function loadEnemyJSON(id, file) {
   }
 }
 
-/** Build animators and position enemies in the world */
+/* ══════════════════════════════════════════════
+   SETUP ENEMY SLOT
+══════════════════════════════════════════════ */
 function setupEnemySlot(id, worldX, frames, scale) {
   const slot   = $(id);
   const canvas = slot.querySelector('.enemy-canvas');
-  slot.style.left = (worldX - canvas.width / 2) + 'px';
+  slot.style.left = worldX + 'px';
+  slot.style.transform = 'translateX(-50%)';
 
   const anim = new Animator(canvas, scale);
   enemyAnims[id] = anim;
-  anim.play(frames, 6, true);   // idle loop
+  anim.play(frames, 6, true);
   return anim;
 }
 
-/* ─────────────────────────────────────────
+/* ══════════════════════════════════════════════
    DIALOGUE HELPERS
-───────────────────────────────────────── */
-function showDlg({ left = null, right = null, html }) {
+══════════════════════════════════════════════ */
+function escapeHTML(value) {
+  const div = document.createElement('div');
+  div.textContent = value == null ? '' : String(value);
+  return div.innerHTML;
+}
+
+function normalizeDialogueParts(question, formula) {
+  if (question && typeof question === 'object') {
+    return {
+      question: question.question || question.text || question.prompt || '',
+      formula: question.formula || formula || '',
+    };
+  }
+  return { question: question || '', formula: formula || '' };
+}
+
+function showDlg({ left = null, right = null, html = null, question = null, formula = null }) {
   dialogueEl.classList.remove('hidden');
 
   if (left) {
@@ -437,13 +501,62 @@ function showDlg({ left = null, right = null, html }) {
     dlgAvatarR.classList.add('hidden');
   }
 
-  dlgText.innerHTML = html;
+  if (html !== null) {
+    dlgText.innerHTML = html;
+  } else {
+    const parts = normalizeDialogueParts(question, formula);
+    dlgText.innerHTML = '';
+    if (parts.question) {
+      const qEl = document.createElement('div');
+      qEl.className = 'dlg-question';
+      qEl.textContent = parts.question;
+      dlgText.appendChild(qEl);
+    }
+    if (parts.formula) {
+      const fEl = document.createElement('div');
+      fEl.className = 'dlg-formula';
+      fEl.textContent = `$$${parts.formula}$$`;
+      dlgText.appendChild(fEl);
+    }
+  }
   renderMath(dlgText);
+}
+
+function professorHTML(value) {
+  if (value && typeof value === 'object') {
+    const parts = normalizeDialogueParts(value.text || value.answer || value.professor || '', value.formula || '');
+    const lines = [`<strong>Dr. H:</strong> ${formatProfessorText(parts.question)}`];
+    if (parts.formula) lines.push(`<div class="dlg-formula">$$${escapeHTML(parts.formula)}$$</div>`);
+    return lines.join('');
+  }
+  return `<strong>Dr. H:</strong> ${formatProfessorText(value || '')}`;
+}
+
+function formatProfessorText(value) {
+  let text = escapeHTML(value || '');
+  const math = [];
+  const stash = expr => {
+    const token = `@@MATH${math.length}@@`;
+    math.push(mathInline(expr));
+    return token;
+  };
+
+  text = text
+    .replace(/([∫∑][^.!?,;]+)/g, match => stash(match))
+    .replace(/(\|?[A-Za-z]+(?:\([^)]*\))?\|?\s*(?:≤|≥|&lt;|&gt;|=)\s*[-+]?[\w{}()[\]^\/.+\-π∞|\\ ]+)/g, match => stash(match))
+    .replace(/\b(lim|Limit|limit)\s*=?\s*[-+]?[\w{}()[\]^\/.+\-π∞\\ ]+(?:\s*(?:≤|≥|&lt;|&gt;|=)\s*[-+]?[\w{}()[\]^\/.+\-π∞\\ ]+)?/g, match => stash(match))
+    .replace(/\b(p|r|u|x)\s*=\s*[-+]?[\w{}()[\]^\/.+\-π∞\\ ]+/g, match => stash(match))
+    .replace(/\b\d+\/(?:\d+|[A-Za-z](?:\^\{?[-+]?\d+(?:\/\d+)?\}?)?)(?![A-Za-z])/g, match => stash(match))
+    .replace(/\b(?:[A-Za-z]+|\d+)\^\{?[-+]?\d+(?:\/\d+)?\}?/g, match => stash(match))
+    .replace(/\((-?∞|-?\d+(?:\/\d+)?),\s*(-?∞|-?\d+(?:\/\d+)?)\)/g, match => stash(match))
+    .replace(/\[(-?∞|-?\d+(?:\/\d+)?),\s*(-?∞|-?\d+(?:\/\d+)?)\]/g, match => stash(match))
+    .replace(/√\d+(?:\s*π)?(?:\/\d+)?/g, match => stash(match));
+
+  return text.replace(/@@MATH(\d+)@@/g, (_, idx) => math[Number(idx)] || '');
 }
 
 function hideDlg() { dialogueEl.classList.add('hidden'); }
 
-/** Returns a Promise that resolves on next document click (ignoring panel clicks) */
 function waitClick() {
   return new Promise(resolve => {
     const handler = e => {
@@ -451,45 +564,16 @@ function waitClick() {
       document.removeEventListener('click', handler, true);
       resolve();
     };
-    setTimeout(() => document.addEventListener('click', handler, true), 380);
+    setTimeout(() => document.addEventListener('click', handler, true), 400);
   });
 }
 
-/* ─────────────────────────────────────────
+/* ══════════════════════════════════════════════
    BATTLE STATE MACHINE
-───────────────────────────────────────── */
-const ENEMY_CONFIG = [
-  {
-    id: 'enemy1',
-    json: 'data/enemy1.json',
-    worldX: ENEMY_POS.enemy1,
-    frameSets: PATHS.minion,
-    scale: ENEMY_SCALE,
-    avatarSrc: PATHS.minion.idle[0],
-  },
-  {
-    id: 'enemy2',
-    json: 'data/enemy2.json',
-    worldX: ENEMY_POS.enemy2,
-    frameSets: PATHS.minion,
-    scale: ENEMY_SCALE,
-    avatarSrc: PATHS.minion.idle[0],
-  },
-  {
-    id: 'boss',
-    json: 'data/boss.json',
-    worldX: ENEMY_POS.boss,
-    frameSets: PATHS.owl,
-    scale: BOSS_SCALE,
-    avatarSrc: PATHS.owl.idle[0],
-  },
-];
-
+══════════════════════════════════════════════ */
 async function runBattle(cfg) {
   inBattle = true;
   walking  = false;
-
-  // Switch hero to idle anim
   heroAnim.play(PATHS.hero.idle, 6, true);
 
   const data = await loadEnemyJSON(cfg.id, cfg.json);
@@ -504,19 +588,23 @@ async function runBattle(cfg) {
   const enemyMax = data.enemy.maxHP;
   const eAnim    = enemyAnims[cfg.id];
   const eSlot    = $(cfg.id);
-  const fs       = cfg.frameSets;
+  const fs       = cfg.frames;
 
-  // HUD
-  hudEnemyName.textContent = data.enemy.name;
+  const battleGap = cfg.id === 'boss' ? BATTLE_GAP_BOSS : BATTLE_GAP_MINION;
+  const targetHeroX = Math.max(40, cfg.worldX - battleGap);
+  heroX = targetHeroX;
+  placeHero(heroX);
+
+  // HUD (FIX #7 — display fixed names)
+  hudEnemyName.textContent = cfg.name;
   hudEl.classList.remove('hidden');
   refreshEnemyHearts(enemyHP, enemyMax);
   refreshHeroHearts();
 
-  // Zoom camera to battle area
+  // FIX #3 — Battle zoom with exact centering
   applyBattleZoom(heroX, cfg.worldX);
-  await wait(680);
+  await wait(700);
 
-  // Prepare shuffled question queue
   let qPool = shuffle([...data.questions]);
   let qIdx  = 0;
 
@@ -525,21 +613,21 @@ async function runBattle(cfg) {
     if (qIdx >= qPool.length) { qPool = shuffle([...data.questions]); qIdx = 0; }
     const q = qPool[qIdx++];
 
-    /* 1 ── Show question */
-    showDlg({ right: cfg.avatarSrc, html: q.question });
+    /* 1 — Show question */
+    const enemyAvatar = fs.idle[0];
+    showDlg({ right: enemyAvatar, question: q.question, formula: q.formula || null });
     buildMoveButtons(q.moves);
     movePanel.classList.add('open');
 
-    /* 2 ── Wait for player choice */
+    /* 2 — Wait for choice */
     const chosen = await awaitMoveChoice(q.moves);
     movePanel.classList.remove('open');
     await wait(200);
 
-    /* 3 ── Execute effect animation */
+    /* 3 — Execute */
     const fx = chosen.effect;
 
     if (fx === 'crit') {
-      // Hero attacks → enemy hurt x2
       heroAnim.play(PATHS.hero.attack, 12, false);
       await withClass(heroEl, 'anim-attack', 380);
       await playSingleAnim(eAnim, fs.hurt, 10);
@@ -560,14 +648,12 @@ async function runBattle(cfg) {
       heroAnim.play(PATHS.hero.idle, 6, true);
 
     } else if (fx === 'dodge') {
-      // Enemy attacks, hero jumps (MISS)
       await playSingleAnim(eAnim, fs.attack, 10);
       eAnim.play(fs.idle, 6, true);
       spawnDmg(heroEl, 'MISS', 'miss');
       await withClass(heroEl, 'anim-jump', 460);
 
     } else /* fail */ {
-      // Enemy attacks, hero hurt
       await playSingleAnim(eAnim, fs.attack, 10);
       eAnim.play(fs.idle, 6, true);
       await withClass(heroEl, 'anim-hurt', 460);
@@ -578,21 +664,21 @@ async function runBattle(cfg) {
 
     if (enemyHP <= 0 || heroHP <= 0) break;
 
-    /* 4 ── Professor comment, wait click */
+    /* 4 — Professor comment (FIX #2) */
     showDlg({
-      left: data.professor.image || cfg.avatarSrc,
-      html: `<strong>${data.professor.name}：</strong>${chosen.professor}`,
+      left: PROF_AVATAR,
+      html: professorHTML(chosen.professor),
     });
     await waitClick();
   }
 
-  /* ── Battle resolution ── */
+  /* ── Battle end ── */
   movePanel.classList.remove('open');
 
   if (heroHP <= 0) {
     showDlg({
-      left: data.professor.image || cfg.avatarSrc,
-      html: `<strong>${data.professor.name}：</strong>你被无穷的力量压倒了……休息一下，重新研究判别法再来！`,
+      left: PROF_AVATAR,
+      html: `<strong>Dr. H:</strong> Infinity overwhelmed you. Rest, review the methods, and return when your intuition is ready.`,
     });
     await wait(900);
     clearBattleZoom();
@@ -605,20 +691,18 @@ async function runBattle(cfg) {
   }
 
   /* Victory */
-  // Play enemy death anim
   if (fs.die && fs.die.length) {
     await playSingleAnim(eAnim, fs.die, 8);
   }
 
   showDlg({
-    left: data.professor.image || cfg.avatarSrc,
-    html: `<strong>${data.professor.name}：</strong>精彩！「${data.enemy.name}」已被收敛！前进！`,
+    left: PROF_AVATAR,
+    html: `<strong>Dr. H:</strong> Excellent. ${cfg.name} has been conquered. Press onward!`,
   });
   await wait(1300);
   hideDlg();
   hudEl.classList.add('hidden');
 
-  // Clear zoom
   clearBattleZoom();
   heroAnim.play(PATHS.hero.idle, 6, true);
   await wait(150);
@@ -629,19 +713,20 @@ async function runBattle(cfg) {
     await wait(60);
   }
 
-  // Fade out defeated enemy slot
-  const slot = $(cfg.id);
-  slot.style.transition = 'opacity .6s';
-  slot.style.opacity    = '0';
+  // Fade enemy
+  eSlot.style.transition = 'opacity .6s';
+  eSlot.style.opacity    = '0';
   await wait(650);
-  slot.style.display    = 'none';
+  eSlot.style.display    = 'none';
 
   defeated.add(cfg.id);
   inBattle = false;
   walking  = true;
   heroAnim.play(PATHS.hero.run, 12, true);
 
-  if (defeated.size === ENEMY_CONFIG.length) {
+  // Check level complete
+  const allDefeated = currentLevel.enemies.every(e => defeated.has(e.id));
+  if (allDefeated) {
     walking = false;
     heroAnim.play(PATHS.hero.idle, 6, true);
     await wait(800);
@@ -650,7 +735,6 @@ async function runBattle(cfg) {
   }
 }
 
-/* Play a frame sequence once on an Animator, then stop */
 function playSingleAnim(anim, frames, fps) {
   return new Promise(resolve => {
     if (!frames || frames.length === 0) { resolve(); return; }
@@ -658,7 +742,6 @@ function playSingleAnim(anim, frames, fps) {
   });
 }
 
-/* Build move buttons */
 function buildMoveButtons(moves) {
   const NUMS = ['Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ'];
   moveList.innerHTML = '';
@@ -666,12 +749,15 @@ function buildMoveButtons(moves) {
     const btn = document.createElement('button');
     btn.className = 'move-btn';
     btn.dataset.effect = m.effect;
-    btn.textContent = `${NUMS[i]} ${m.name}`;
+    btn.innerHTML = `
+      <span class="move-num">${NUMS[i]}</span>
+      <span class="move-label">${formatMoveLabel(m.name)}</span>
+    `;
     moveList.appendChild(btn);
   });
+  renderMath(moveList);
 }
 
-/* Returns Promise<move> when player clicks a button */
 function awaitMoveChoice(moves) {
   return new Promise(resolve => {
     const btns = moveList.querySelectorAll('.move-btn');
@@ -684,28 +770,195 @@ function awaitMoveChoice(moves) {
   });
 }
 
-/* ─────────────────────────────────────────
+function showIntroLetter() {
+  return new Promise(resolve => {
+    if (!letterOverlay) {
+      resolve();
+      return;
+    }
+
+    letterOverlay.classList.remove('hidden', 'dismiss');
+    const closeLetter = () => {
+      letterOverlay.removeEventListener('click', closeLetter);
+      letterOverlay.classList.add('dismiss');
+      setTimeout(() => {
+        letterOverlay.classList.add('hidden');
+        letterOverlay.classList.remove('dismiss');
+        resolve();
+      }, 300);
+    };
+    setTimeout(() => letterOverlay.addEventListener('click', closeLetter), 300);
+  });
+}
+
+function toLatexSnippet(value) {
+  return String(value || '')
+    .trim()
+    .replace(/π/g, '\\pi ')
+    .replace(/∞/g, '\\infty ')
+    .replace(/∫/g, '\\int ')
+    .replace(/∑/g, '\\sum ')
+    .replace(/√\(([^)]+)\)/g, '\\sqrt{$1}')
+    .replace(/√([A-Za-z0-9]+)/g, '\\sqrt{$1}')
+    .replace(/·/g, '\\cdot ')
+    .replace(/≤|&lt;=/g, '\\le ')
+    .replace(/≥|&gt;=/g, '\\ge ')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/θ/g, '\\theta')
+    .replace(/\barctan\b/g, '\\arctan')
+    .replace(/\bsin\b/g, '\\sin')
+    .replace(/\bcos\b/g, '\\cos')
+    .replace(/\btan\b/g, '\\tan')
+    .replace(/\bsec\b/g, '\\sec')
+    .replace(/\bcsc\b/g, '\\csc')
+    .replace(/\bcot\b/g, '\\cot')
+    .replace(/\bln\b/g, '\\ln')
+    .replace(/\bdx\b/g, '\\,dx')
+    .replace(/\bdv\b/g, 'dv')
+    .replace(/\bdu\b/g, 'du')
+    .replace(/\balone\b/gi, '')
+    .replace(/\*/g, '\\cdot ')
+    .replace(/\s+/g, ' ');
+}
+
+function mathInline(value) {
+  return `$${toLatexSnippet(value)}$`;
+}
+
+function isMathLike(value) {
+  return /[=^_\/\\]|[π∫√θ]|dy\/d[xt]|dP\/dt|s'\(t\)|y'|y''|\b(sin|cos|tan|sec|csc|cot|ln|arctan|dx|du|dv)\b/.test(String(value || ''));
+}
+
+function formatMoveLabel(name) {
+  const raw = String(name || '');
+  const safe = escapeHTML(raw);
+
+  const multiplyFraction = raw.match(/^Multiply by \((.+)\)\/\((.+)\)(.*)$/);
+  if (multiplyFraction) {
+    return `Multiply by <span class="move-math">$\\frac{${toLatexSnippet(multiplyFraction[1])}}{${toLatexSnippet(multiplyFraction[2])}}$</span>${escapeHTML(multiplyFraction[3])}`;
+  }
+
+  const parenthesized = raw.match(/^(.+?)\s*\((.+)\)$/);
+  if (parenthesized && isMathLike(parenthesized[2])) {
+    return `${escapeHTML(parenthesized[1])} <span class="move-math">${mathInline(parenthesized[2])}</span>`;
+  }
+
+  const colonMath = raw.match(/^([^:]+):\s*(.+)$/);
+  if (colonMath && isMathLike(colonMath[2])) {
+    return `${escapeHTML(colonMath[1])}: <span class="move-math">${mathInline(colonMath[2])}</span>`;
+  }
+
+  if (/^[A-Za-z]('|''|\([^)]+\))?\s*=/.test(raw) || /^[A-Za-z]+\/d[xt]\s*=/.test(raw) || /^[π∫√]/.test(raw)) {
+    return `<span class="move-math">${mathInline(raw)}</span>`;
+  }
+
+  const substituted = safe
+    .replace(/\bu = ([^,]+)(?=,|$)/g, (_, expr) => mathInline(`u = ${expr}`))
+    .replace(/\bx = ([^,]+)(?=,|$)/g, (_, expr) => mathInline(`x = ${expr}`))
+    .replace(/\bdv = ([^,]+)(?=,|$)/g, (_, expr) => mathInline(`dv = ${expr}`))
+    .replace(/\bdu = ([^,]+)(?=,|$)/g, (_, expr) => mathInline(`du = ${expr}`))
+    .replace(/([A-Za-z0-9^+\\\- ]+\/[A-Za-z0-9^+\\\- ]+)/g, match => isMathLike(match) ? mathInline(match) : match)
+    .replace(/\b(ln\|[^|]+\||[a-zA-Z]+\^[0-9]+|[0-9]+π|π\s*∫|∫[^,.;]+)/g, match => mathInline(match));
+
+  return substituted;
+}
+
+/* ══════════════════════════════════════════════
+   FIX #4 — LEVEL SELECT SCREEN
+══════════════════════════════════════════════ */
+function buildLevelSelect() {
+  const map = $('level-map');
+  map.innerHTML = `
+    <svg class="map-trails" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      <path class="map-trail shadow" d="M13 68 C20 58, 22 48, 30 39 S44 52, 52 62 S64 46, 71 34 S80 45, 87 64" />
+      <path class="map-trail main" d="M13 68 C20 58, 22 48, 30 39 S44 52, 52 62 S64 46, 71 34 S80 45, 87 64" />
+    </svg>
+    <div class="map-label map-label-nw">CALCULUS LANDS</div>
+    <div class="map-label map-label-se">MAP ARCHIVE 01</div>
+  `;
+  LEVEL_DEFS.forEach(lvl => {
+    const spot = LEVEL_MAP_LAYOUT.find(item => item.id === lvl.id);
+    const node = document.createElement('button');
+    node.type = 'button';
+    node.className = `level-node size-${spot ? spot.size : 'md'} terrain-${spot ? spot.terrain : 'grove'}`;
+    node.style.left = (spot ? spot.x : 50) + '%';
+    node.style.top = (spot ? spot.y : 50) + '%';
+    node.style.setProperty('--tilt', `${spot ? spot.tilt : 0}deg`);
+    node.innerHTML = `
+      <span class="level-node-num">${lvl.id}</span>
+      <span class="level-node-title">${lvl.name}</span>
+      <span class="level-node-mark"></span>
+    `;
+    node.setAttribute('aria-label', `Map ${lvl.id}: ${lvl.name}`);
+    node.addEventListener('click', () => startLevel(lvl));
+    map.appendChild(node);
+  });
+}
+
+async function startLevel(lvl) {
+  currentLevel = lvl;
+  defeated.clear();
+  enemyData = {};
+  heroX  = HERO_START_X;
+  heroHP = HERO_MAX_HP;
+  walking  = false;
+  inBattle = false;
+  gameOver = false;
+
+  // Hide level select, show game
+  screenLevels.classList.add('hidden');
+  screenGame.classList.remove('hidden');
+
+  // Reset world
+  placeHero(heroX);
+  applyCamera(heroX);
+  refreshHeroHearts();
+
+  // Load enemy data
+  await Promise.all(lvl.enemies.map(e => loadEnemyJSON(e.id, e.json)));
+
+  // Setup enemy slots
+  lvl.enemies.forEach(e => {
+    const slot = $(e.id);
+    slot.style.display = 'flex';
+    slot.style.opacity  = '1';
+    setupEnemySlot(e.id, e.worldX, e.frames.idle, e.scale);
+  });
+
+  heroAnim.play(PATHS.hero.idle, 6, true);
+  await wait(400);
+  walking = true;
+  heroAnim.play(PATHS.hero.run, 12, true);
+}
+
+// FIX #4 — Go to level select (from win/lose)
+window.goToLevels = function() {
+  screenWin.classList.add('hidden');
+  screenLose.classList.add('hidden');
+  screenGame.classList.add('hidden');
+  screenLevels.classList.remove('hidden');
+};
+
+/* ══════════════════════════════════════════════
    MAIN GAME LOOP
-───────────────────────────────────────── */
+══════════════════════════════════════════════ */
 function gameLoop(ts) {
-  const dt = Math.min(ts - lastTs, 50); // cap dt to avoid huge jumps
+  const dt = Math.min(ts - lastTs, 50);
   lastTs = ts;
 
-  // Tick hero sprite
   heroAnim.tick(dt);
-  // Tick enemy sprites
   Object.values(enemyAnims).forEach(a => a.tick(dt));
 
-  if (!gameOver && walking && !inBattle) {
+  if (!gameOver && walking && !inBattle && currentLevel) {
     heroX = Math.min(heroX + HERO_SPEED, WORLD_W - 120);
     placeHero(heroX);
     applyCamera(heroX);
 
-    // Check enemy triggers
-    for (const cfg of ENEMY_CONFIG) {
-      if (defeated.has(cfg.id)) continue;
-      if (Math.abs(heroX - cfg.worldX) < TRIGGER_DIST) {
-        runBattle(cfg);
+    for (const e of currentLevel.enemies) {
+      if (defeated.has(e.id)) continue;
+      if (Math.abs(heroX - e.worldX) < TRIGGER_DIST) {
+        runBattle(e);
         break;
       }
     }
@@ -714,55 +967,30 @@ function gameLoop(ts) {
   requestAnimationFrame(gameLoop);
 }
 
-/* ─────────────────────────────────────────
-   INIT
-───────────────────────────────────────── */
+/* ══════════════════════════════════════════════
+   BOOT
+══════════════════════════════════════════════ */
 async function init() {
-  // Position hero
-  placeHero(heroX);
-  applyCamera(heroX);
-  refreshHeroHearts();
-
-  // Preload all hero frames
+  // Preload all frames
   await Promise.all([
     preloadGroup(PATHS.hero),
-    preloadGroup(PATHS.minion),
-    preloadGroup(PATHS.owl),
+    preloadGroup(PATHS.limitus),
+    preloadGroup(PATHS.owlculus),
+    loadImg(PROF_AVATAR),
   ]);
 
-  // Start hero idle animation
   heroAnim.play(PATHS.hero.idle, 6, true);
-
-  // Set up enemy slots with idle animations
-  setupEnemySlot('enemy1', ENEMY_POS.enemy1, PATHS.minion.idle, ENEMY_SCALE);
-  setupEnemySlot('enemy2', ENEMY_POS.enemy2, PATHS.minion.idle, ENEMY_SCALE);
-  setupEnemySlot('boss',   ENEMY_POS.boss,   PATHS.owl.idle,    BOSS_SCALE);
-
-  // Preload all JSON data
-  await Promise.all(ENEMY_CONFIG.map(c => loadEnemyJSON(c.id, c.json)));
+  buildLevelSelect();
 }
 
-/* ─────────────────────────────────────────
-   BOOT
-───────────────────────────────────────── */
 btnStart.addEventListener('click', async () => {
-  // Fade out start screen
+  btnStart.disabled = true;
   screenStart.style.transition = 'opacity .6s';
   screenStart.style.opacity    = '0';
   await wait(620);
   screenStart.classList.add('hidden');
-
-  // Show game screen
-  screenGame.classList.remove('hidden');
-
-  // Init assets & world
+  screenLevels.classList.remove('hidden');
   await init();
-
-  // Start game loop
+  await showIntroLetter();
   requestAnimationFrame(ts => { lastTs = ts; gameLoop(ts); });
-
-  // Slight delay then start walking
-  await wait(400);
-  walking = true;
-  heroAnim.play(PATHS.hero.run, 12, true);
 });

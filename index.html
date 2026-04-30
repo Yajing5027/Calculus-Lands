@@ -1,129 +1,149 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calculus Lands — 级数讨伐</title>
+  <title>Calculus Lands: The Infinite Trek</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- KaTeX -->
+  <!-- KaTeX CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
-          onload="window.__katexReady=true"></script>
+          onload="window.__katexLoaded=true"></script>
 </head>
 <body>
 
-<!-- ════════════════════════════════════════
+<!-- ═══════════════════════════════════════════
      START SCREEN
-════════════════════════════════════════ -->
+═══════════════════════════════════════════ -->
 <div id="screen-start" class="screen">
-  <div class="start-bg-deco">∑ ∫ ∞ ∂ ∏ lim</div>
-  <div class="start-content">
+  <div class="title-deco-bg">∑ ∫ ∞ ∂ ∏ lim</div>
+  <div class="start-box">
     <div class="start-eyebrow">CALCULUS LANDS</div>
-    <h1 class="start-title">级数讨伐</h1>
-    <p class="start-sub">The Infinite Trek</p>
-    <p class="start-desc">用正确的判别法击败守卫无穷的怪物<br>暴击 · 闪避 · 反击 · 三关连战</p>
-    <button id="btn-start" class="btn-primary">▶ 开始冒险</button>
+    <h1 class="title-main">Calculus Lands</h1>
+    <p class="title-sub">The Infinite Trek</p>
+    <p class="start-desc">Defeat the illusions guarding infinity</p>
+    <button id="btn-start" class="btn-gold">▶ Begin Trek</button>
   </div>
-  <div class="start-math-particles" aria-hidden="true"></div>
 </div>
 
-<!-- ════════════════════════════════════════
+<!-- ═══════════════════════════════════════════
+     LEVEL SELECT SCREEN
+═══════════════════════════════════════════ -->
+<div id="screen-levels" class="screen hidden">
+  <div class="levels-header">
+    <h2 class="levels-title">Choose Your Land</h2>
+    <p class="levels-sub">Sigma's trek through three battles in each land</p>
+  </div>
+  <div id="level-map" aria-label="Level map"></div>
+  <div id="letter-overlay" class="letter-overlay hidden" role="dialog" aria-modal="true" aria-label="Letter from Dr. H">
+    <div class="letter-paper">
+      <p>Dear Adventurer Sigma,</p>
+      <p>Our Calculus Continent is filled with many illusions. Adventurer Sigma, on the path to truth, there are illusions that look very familiar. They pretend to be convergent series, perfect elementary functions, or simple integrals. If you act without thinking, the abyss will swallow you. Try to let your collected intuition guide you. The very first second you see a series or an integral, your intuition will tell you which "move" to use. But intuition can also lie to you. Many times, you think you should use one method, but you are actually falling into a trap.</p>
+      <p>You will travel through the five theme lands of Calculus II. In each land, the Chaos Knight Limitus has set "intuition traps." After you defeat the small soldiers, the lord of the land, Owlculus, will give you the hardest puzzle. In every battle, you have many moves to choose from. Some are very powerful, some are just okay, and some do not work at all. This is a great chance to train.</p>
+      <p>Remember: There are no complex calculations here. Your weapon is your intuition, but your victory comes from seeing which "intuition" is a lie in a single moment. Choose your move and face the infinity. Do not be afraid to make mistakes. I will be with you to review every battle until your intuition is as sharp as a blade and cuts through all illusions.</p>
+      <p>At the end of the journey, you will no longer be fooled by the surface. You will become the master of your intuition. Good luck!</p>
+      <p>Dr. H</p>
+    </div>
+    <div class="letter-hint">Click anywhere to open the map</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
      GAME SCREEN
-════════════════════════════════════════ -->
+═══════════════════════════════════════════ -->
 <div id="screen-game" class="screen hidden">
 
-  <!-- HUD bar (fixed, above everything) -->
+  <!-- HUD bar (FIX #6 — hero left, enemy right) -->
   <div id="hud" class="hidden">
+    <div id="hud-hero">
+      <span id="hud-hero-name">Sigma</span>
+      <span id="hud-hero-hearts"></span>
+    </div>
     <div id="hud-enemy">
       <span id="hud-enemy-name"></span>
       <span id="hud-enemy-hearts"></span>
     </div>
-    <div id="hud-hero">
-      <span id="hud-hero-name">Red Reaper</span>
-      <span id="hud-hero-hearts"></span>
-    </div>
   </div>
 
-  <!-- Viewport that clips the scrolling world -->
+  <!-- Viewport -->
   <div id="viewport">
     <div id="world">
 
-      <!-- Background parallax layers (back→front, numbered 0=farthest) -->
+      <!-- BG layers -->
       <div class="bg-layer" id="bg0"  style="--depth:0.02"></div>
       <div class="bg-layer" id="bg1"  style="--depth:0.05"></div>
       <div class="bg-layer" id="bg2"  style="--depth:0.08"></div>
       <div class="bg-layer" id="bg3"  style="--depth:0.12"></div>
-      <div class="bg-layer" id="bg4"  style="--depth:0.12"></div><!-- lights -->
+      <div class="bg-layer" id="bg4"  style="--depth:0.12"></div>
       <div class="bg-layer" id="bg5"  style="--depth:0.18"></div>
       <div class="bg-layer" id="bg6"  style="--depth:0.25"></div>
-      <div class="bg-layer" id="bg7"  style="--depth:0.25"></div><!-- lights -->
+      <div class="bg-layer" id="bg7"  style="--depth:0.25"></div>
       <div class="bg-layer" id="bg8"  style="--depth:0.35"></div>
       <div class="bg-layer" id="bg9"  style="--depth:0.50"></div>
       <div class="bg-layer" id="bg10" style="--depth:0.68"></div>
       <div class="bg-layer" id="bg11" style="--depth:0.88"></div>
 
-      <!-- Ground strip -->
       <div id="ground"></div>
 
-      <!-- ── HERO ── -->
+      <!-- Hero: Sigma -->
       <div id="hero">
         <canvas id="hero-canvas" width="128" height="128"></canvas>
       </div>
 
-      <!-- ── ENEMIES (placed by JS) ── -->
+      <!-- Enemies -->
       <div id="enemy1" class="enemy-slot">
-        <canvas class="enemy-canvas" width="160" height="160"></canvas>
+        <canvas class="enemy-canvas" width="180" height="180"></canvas>
         <div class="enemy-shadow"></div>
       </div>
       <div id="enemy2" class="enemy-slot">
-        <canvas class="enemy-canvas" width="160" height="160"></canvas>
+        <canvas class="enemy-canvas" width="180" height="180"></canvas>
         <div class="enemy-shadow"></div>
       </div>
       <div id="boss" class="enemy-slot">
-        <canvas class="enemy-canvas" width="200" height="200"></canvas>
+        <canvas class="enemy-canvas" width="240" height="240"></canvas>
         <div class="enemy-shadow"></div>
       </div>
 
-    </div><!-- /world -->
-  </div><!-- /viewport -->
+    </div>
+  </div>
 
-  <!-- ── MOVE PANEL (slides in from left) ── -->
+  <!-- Move panel (left side) -->
   <div id="move-panel">
-    <div id="move-panel-header">⚔ 选择招式</div>
+    <div id="move-panel-header">⚔ Choose Move</div>
     <div id="move-list"></div>
   </div>
 
-  <!-- ── DIALOGUE BOX (fixed bottom) ── -->
+  <!-- Dialogue box (FIX #2 — professor avatar support) -->
   <div id="dialogue" class="hidden">
     <img id="dlg-avatar-l" class="dlg-avatar hidden" src="" alt="">
     <div id="dlg-body">
       <div id="dlg-text"></div>
     </div>
     <img id="dlg-avatar-r" class="dlg-avatar hidden" src="" alt="">
-    <div id="dlg-hint">点击任意位置继续 ▶</div>
+    <div id="dlg-hint">Click anywhere to continue ▶</div>
   </div>
 
-</div><!-- /screen-game -->
+</div>
 
-<!-- ════════════════════════════════════════
-     WIN / LOSE
-════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════
+     WIN / LOSE SCREENS
+═══════════════════════════════════════════ -->
 <div id="screen-win" class="screen hidden overlay-screen">
   <div class="overlay-box">
     <div class="overlay-icon">🏆</div>
-    <h2 class="overlay-title gold">通关！</h2>
-    <p class="overlay-sub">无穷审判官已被收敛<br>你是级数判别法的真正掌握者！</p>
-    <button class="btn-primary" onclick="location.reload()">再来一次</button>
+    <h2 class="overlay-title gold">Victory!</h2>
+    <p class="overlay-sub">Owlculus has been conquered<br>You are mastering the intuition behind Calculus II.</p>
+    <button class="btn-gold" onclick="goToLevels()">Return to Map</button>
   </div>
 </div>
 
 <div id="screen-lose" class="screen hidden overlay-screen">
   <div class="overlay-box">
     <div class="overlay-icon">💀</div>
-    <h2 class="overlay-title red">失败</h2>
-    <p class="overlay-sub">你被无穷级数耗尽了力量…<br>重新研究判别法，再战！</p>
-    <button class="btn-primary" onclick="location.reload()">重来</button>
+    <h2 class="overlay-title red">Defeat</h2>
+    <p class="overlay-sub">Infinity drained your strength...<br>Review the methods and return to battle.</p>
+    <button class="btn-gold" onclick="goToLevels()">Return to Map</button>
   </div>
 </div>
 
