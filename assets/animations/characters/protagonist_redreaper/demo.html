@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Protagonist Redreaper Demo</title>
+<style>
+  body { background: #111; color: #eee; font-family: sans-serif; padding: 20px }
+  #sprite { image-rendering: pixelated; width: auto; height: 128px; }
+  button { margin: 4px }
+</style>
+</head>
+<body>
+<h3>Protagonist Redreaper Demo</h3>
+<div id="controls"></div>
+<div style="margin-top:12px">
+  <img id="sprite" src="" alt="sprite">
+</div>
+<script>
+const manifest = {"actions": {"idle": {"frames": ["protagonist_redreaper_idle/frames/frame_000.png", "protagonist_redreaper_idle/frames/frame_001.png", "protagonist_redreaper_idle/frames/frame_002.png", "protagonist_redreaper_idle/frames/frame_003.png"], "offsets": [0, 0, 0, 0], "bottoms": [63, 63, 63, 63], "fps": 12, "loop": true, "count_detected": 4, "expected_count": 4}, "run": {"frames": ["protagonist_redreaper_run/frames/frame_000.png", "protagonist_redreaper_run/frames/frame_001.png", "protagonist_redreaper_run/frames/frame_002.png", "protagonist_redreaper_run/frames/frame_003.png", "protagonist_redreaper_run/frames/frame_004.png", "protagonist_redreaper_run/frames/frame_005.png", "protagonist_redreaper_run/frames/frame_006.png", "protagonist_redreaper_run/frames/frame_007.png", "protagonist_redreaper_run/frames/frame_008.png"], "offsets": [0, 0, 0, 0, 0, 0, 0, 0, 0], "bottoms": [63, 63, 63, 63, 63, 63, 63, 63, 63], "fps": 12, "loop": true, "count_detected": 9, "expected_count": 9}, "jump": {"frames": ["protagonist_redreaper_jump/frames/frame_000.png", "protagonist_redreaper_jump/frames/frame_001.png", "protagonist_redreaper_jump/frames/frame_002.png", "protagonist_redreaper_jump/frames/frame_003.png", "protagonist_redreaper_jump/frames/frame_004.png", "protagonist_redreaper_jump/frames/frame_005.png"], "offsets": [0, 6, 13, 13, 6, 0], "bottoms": [63, 57, 50, 50, 57, 63], "fps": 12, "loop": true, "count_detected": 6, "expected_count": 6}, "attack": {"frames": ["protagonist_redreaper_attack/frames/frame_000.png", "protagonist_redreaper_attack/frames/frame_001.png", "protagonist_redreaper_attack/frames/frame_002.png", "protagonist_redreaper_attack/frames/frame_003.png", "protagonist_redreaper_attack/frames/frame_004.png", "protagonist_redreaper_attack/frames/frame_005.png", "protagonist_redreaper_attack/frames/frame_006.png", "protagonist_redreaper_attack/frames/frame_007.png"], "offsets": [0, 0, 0, 0, 0, 0, 0, 0], "bottoms": [63, 63, 63, 63, 63, 63, 63, 63], "fps": 12, "loop": true, "count_detected": 8, "expected_count": 8}}};
+// build controls dynamically
+const _ACTION_NAMES = Object.keys(manifest.actions);
+setTimeout(()=>{
+  const cdiv = document.getElementById('controls');
+  _ACTION_NAMES.forEach(a=>{
+    const b = document.createElement('button');
+    b.textContent = a;
+    b.addEventListener('click', ()=> setAction(a));
+    cdiv.appendChild(b);
+  });
+},0);
+const base = '.'; // demo.html is in protagonist_redreaper dir
+let action = 'idle';
+let frame = 0;
+let timer = null;
+
+function setAction(a) {
+  action = a;
+  frame = 0;
+  update();
+  startLoop();
+}
+
+function update() {
+  const act = manifest.actions[action];
+  if(!act) return;
+  const frames = act.frames || [];
+  if(frames.length === 0) return;
+  const fps = act.fps || 12;
+    const imgEl = document.getElementById('sprite');
+    imgEl.src = base + '/' + frames[frame];
+    // compute vertical displacement from bottoms (baseline - current_bottom)
+    const btm = act.bottoms || [];
+    const baseline = (typeof act.baseline !== 'undefined') ? act.baseline : ((btm.length>0) ? Math.max(...btm) : 0);
+    const cur = (btm.length>frame) ? btm[frame] : baseline;
+    const dy = baseline - cur;
+    imgEl.style.transform = `translateY(${-dy}px)`;
+  frame = (frame + 1) % frames.length;
+}
+
+function startLoop() {
+  if(timer) clearInterval(timer);
+  const fps = manifest.actions[action].fps || 12;
+  // show first frame immediately, then start interval
+  update();
+  timer = setInterval(update, 1000 / fps);
+}
+
+setAction(action);
+startLoop();
+</script>
+</body>
+</html>

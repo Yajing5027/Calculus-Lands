@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculus Lands — 级数讨伐</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="window.__katexReady=true"></script>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     START SCREEN
+════════════════════════════════════════ -->
+<div id="screen-start" class="screen">
+  <div class="start-bg-deco">∑ ∫ ∞ ∂ ∏ lim</div>
+  <div class="start-content">
+    <div class="start-eyebrow">CALCULUS LANDS</div>
+    <h1 class="start-title">级数讨伐</h1>
+    <p class="start-sub">The Infinite Trek</p>
+    <p class="start-desc">用正确的判别法击败守卫无穷的怪物<br>暴击 · 闪避 · 反击 · 三关连战</p>
+    <button id="btn-start" class="btn-primary">▶ 开始冒险</button>
+  </div>
+  <div class="start-math-particles" aria-hidden="true"></div>
+</div>
+
+<!-- ════════════════════════════════════════
+     GAME SCREEN
+════════════════════════════════════════ -->
+<div id="screen-game" class="screen hidden">
+
+  <!-- HUD bar (fixed, above everything) -->
+  <div id="hud" class="hidden">
+    <div id="hud-enemy">
+      <span id="hud-enemy-name"></span>
+      <span id="hud-enemy-hearts"></span>
+    </div>
+    <div id="hud-hero">
+      <span id="hud-hero-name">Red Reaper</span>
+      <span id="hud-hero-hearts"></span>
+    </div>
+  </div>
+
+  <!-- Viewport that clips the scrolling world -->
+  <div id="viewport">
+    <div id="world">
+
+      <!-- Background parallax layers (back→front, numbered 0=farthest) -->
+      <div class="bg-layer" id="bg0"  style="--depth:0.02"></div>
+      <div class="bg-layer" id="bg1"  style="--depth:0.05"></div>
+      <div class="bg-layer" id="bg2"  style="--depth:0.08"></div>
+      <div class="bg-layer" id="bg3"  style="--depth:0.12"></div>
+      <div class="bg-layer" id="bg4"  style="--depth:0.12"></div><!-- lights -->
+      <div class="bg-layer" id="bg5"  style="--depth:0.18"></div>
+      <div class="bg-layer" id="bg6"  style="--depth:0.25"></div>
+      <div class="bg-layer" id="bg7"  style="--depth:0.25"></div><!-- lights -->
+      <div class="bg-layer" id="bg8"  style="--depth:0.35"></div>
+      <div class="bg-layer" id="bg9"  style="--depth:0.50"></div>
+      <div class="bg-layer" id="bg10" style="--depth:0.68"></div>
+      <div class="bg-layer" id="bg11" style="--depth:0.88"></div>
+
+      <!-- Ground strip -->
+      <div id="ground"></div>
+
+      <!-- ── HERO ── -->
+      <div id="hero">
+        <canvas id="hero-canvas" width="128" height="128"></canvas>
+      </div>
+
+      <!-- ── ENEMIES (placed by JS) ── -->
+      <div id="enemy1" class="enemy-slot">
+        <canvas class="enemy-canvas" width="160" height="160"></canvas>
+        <div class="enemy-shadow"></div>
+      </div>
+      <div id="enemy2" class="enemy-slot">
+        <canvas class="enemy-canvas" width="160" height="160"></canvas>
+        <div class="enemy-shadow"></div>
+      </div>
+      <div id="boss" class="enemy-slot">
+        <canvas class="enemy-canvas" width="200" height="200"></canvas>
+        <div class="enemy-shadow"></div>
+      </div>
+
+    </div><!-- /world -->
+  </div><!-- /viewport -->
+
+  <!-- ── MOVE PANEL (slides in from left) ── -->
+  <div id="move-panel">
+    <div id="move-panel-header">⚔ 选择招式</div>
+    <div id="move-list"></div>
+  </div>
+
+  <!-- ── DIALOGUE BOX (fixed bottom) ── -->
+  <div id="dialogue" class="hidden">
+    <img id="dlg-avatar-l" class="dlg-avatar hidden" src="" alt="">
+    <div id="dlg-body">
+      <div id="dlg-text"></div>
+    </div>
+    <img id="dlg-avatar-r" class="dlg-avatar hidden" src="" alt="">
+    <div id="dlg-hint">点击任意位置继续 ▶</div>
+  </div>
+
+</div><!-- /screen-game -->
+
+<!-- ════════════════════════════════════════
+     WIN / LOSE
+════════════════════════════════════════ -->
+<div id="screen-win" class="screen hidden overlay-screen">
+  <div class="overlay-box">
+    <div class="overlay-icon">🏆</div>
+    <h2 class="overlay-title gold">通关！</h2>
+    <p class="overlay-sub">无穷审判官已被收敛<br>你是级数判别法的真正掌握者！</p>
+    <button class="btn-primary" onclick="location.reload()">再来一次</button>
+  </div>
+</div>
+
+<div id="screen-lose" class="screen hidden overlay-screen">
+  <div class="overlay-box">
+    <div class="overlay-icon">💀</div>
+    <h2 class="overlay-title red">失败</h2>
+    <p class="overlay-sub">你被无穷级数耗尽了力量…<br>重新研究判别法，再战！</p>
+    <button class="btn-primary" onclick="location.reload()">重来</button>
+  </div>
+</div>
+
+<script src="main.js"></script>
+</body>
+</html>
