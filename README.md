@@ -40,29 +40,34 @@ Each land covers a major theme from Calculus II, with battles designed around th
 
 ---
 
-## Battle System
+## Battle System & Difficulty Scaling
 
-Every battle (taking Map 5: Alternating Spire as the representative model) is a **turn-based question round**:
+Every battle (taking **Map 5: Alternating Spire** as the representative model) is a **turn-based question round**. Each land consists of **three encounters** with increasing difficulty:
 
-1. **The enemy presents a series** (rendered in LaTeX)
-2. **You choose one move** from four options — each a different convergence test
-3. **The result plays out:**
+### 1. The Encounter Flow
 
-| Outcome | What Happened | Effect |
-|---|---|---|
-| 💥 **Crit** | Best test, cleanest path | Enemy takes 2 damage |
-| ⚔️ **Normal** | Valid but slower method | Enemy takes 1 damage |
-| 🌀 **Dodge** | Test gives limit = 1, inconclusive | No damage either way |
-| 💔 **Fail** | Wrong test or wrong conclusion | You take 1 damage |
+You play as Sigma, In each land, you must defeat three enemies in sequence. The question difficulty and enemy stats scale accordingly:
 
-After each move, **Dr. H** appears and explains exactly what happened and why — win or lose.
+* **Round 1:** 🗡️ **Limitus (Weak)** — HP 2. Focuses on basic recognition.
+* **Round 2:** 🗡️ **Limitus (Elite)** — HP 4. Introduces complex series forms.
+* **Round 3:** 🦉 **Owlculus (Boss)** — HP 8. Tests comprehensive mastery and edge cases.
 
-**Enemies:**
-- 🗡️ **Limitus** — the Chaos Knight minion, HP 4, appears twice per land
-- 🦉 **Owlculus** — the Boss, HP 8, one per land
+### 2. Turn Mechanics
 
-**You play as:**
-- ⚡ **Sigma** — HP 5, pixel-art protagonist with full run/idle/attack animations
+1. **The enemy presents a series** (rendered in LaTeX via KaTeX).
+2. **You choose one move** from four tactical options (Convergence Tests).
+3. **The Result Plays Out:** The combat animations reflect your mathematical accuracy:
+
+| Outcome | Animation & Narrative | Effect |
+| --- | --- | --- |
+| 💥 **Crit** | **Precision Strike:** Sigma attacks; enemy sustains heavy hit. | Enemy takes **2 damage** |
+| ⚔️ **Normal** | **Standard Hit:** Sigma attacks; enemy sustains hit. | Enemy takes **1 damage** |
+| 🌀 **Dodge** | **Evasion:** Enemy attacks; Sigma performs a jump dodge. | **No damage** (Inconclusive) |
+| 💔 **Fail** | **Counter-hit:** Enemy attacks; Sigma sustains damage. | **Sigma loses 1 Heart** |
+
+### 3. Conceptual Feedback
+
+After every move—regardless of the outcome—**Dr. H** appears to provide instant pedagogical feedback. He explains the "why" behind the result, addressing specific misconceptions associated with that particular series and the test you selected.
 
 ---
 
@@ -140,7 +145,7 @@ Calculus-Lands/
 
 ## Credits
 
-- **Concept & Game Design:** Yajing
+- **Concept & Game Design:** Yajing Ren
 - **Question Content:** Calculus II curriculum — series convergence, power series, Taylor series
 - **Art:** Pixel sprite assets ([itch.io free assets](https://itch.io))
 - **Math Rendering:** [KaTeX](https://katex.org/)
