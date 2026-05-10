@@ -1,6 +1,6 @@
 # ∑ Calculus Lands: The Infinite Trek
 
-> A pixel-art RPG where your weapon is mathematical intuition — defeat the illusions guarding infinity by choosing the right series test at the right moment.
+> This project is a 2026 Spring Calculus II course project. While coding was not a curriculum requirement, this is an innovative project built to apply and master course knowledge through interactive mechanics and real-time conceptual feedback.
 
 **🎮 [Play Now → yajing5027.github.io/Calculus-Lands](https://yajing5027.github.io/Calculus-Lands/)**
 
