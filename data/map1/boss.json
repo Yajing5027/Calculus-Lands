@@ -1,0 +1,455 @@
+{
+  "enemy": {
+    "name": "Owlculus",
+    "maxHP": 8,
+    "image": "assets/owlculus.png",
+    "attackImage": "assets/owlculus_attack.png",
+    "hurtImage": "assets/owlculus_hurt.png"
+  },
+  "professor": {
+    "name": "Dr. H",
+    "image": "assets/professor.png"
+  },
+  "questions": [
+    {
+      "id": "B1",
+      "question": "Which technique is required to solve the differential equation?",
+      "formula": "y' = (x+y)^2",
+      "moves": [
+        {
+          "name": "Substitution u = x+y, then separate",
+          "effect": "crit",
+          "professor": "The sum locks the variables together. Set u = x+y and the derivative u' = 1+y' splits the equation wide open. Flawless tactical switch."
+        },
+        {
+          "name": "Direct separation of variables",
+          "effect": "fail",
+          "professor": "You can't factor (x+y)^2 into g(x)·h(y). The variables are chained together. You swung blindly and hit your own shield."
+        },
+        {
+          "name": "Integrating factor with e^{∫ -2 dx}",
+          "effect": "dodge",
+          "professor": "The squared term makes it nonlinear. An integrating factor is built for linear equations. You brought a lance to an archery duel — wrong tool."
+        }
+      ]
+    },
+    {
+      "id": "B2",
+      "question": "To set up the area of the region enclosed by the curves below, what is the most efficient variable of integration?",
+      "formula": "y = e^x,\\quad y = -\\sin x + 1,\\quad x = \\pi",
+      "moves": [
+        {
+          "name": "Integrate with respect to y (one integral)",
+          "effect": "crit",
+          "professor": "Horizontal slices sweep the entire region without a break point. One integral, clean kill. You picked the high ground."
+        },
+        {
+          "name": "Integrate with respect to x (one integral)",
+          "effect": "fail",
+          "professor": "The upper and lower bounds swap partway through in terms of x. A single x-integral misses the structure. You walked into a crossfire."
+        },
+        {
+          "name": "Integrate with respect to x (two integrals)",
+          "effect": "normal",
+          "professor": "That maps the region correctly, but it's double the work for the same result. A longer skirmish when one decisive strike was available."
+        }
+      ]
+    },
+    {
+      "id": "B3",
+      "question": "The graphs of the two functions below intersect at three points, yet the area between them can be found with a single integral. Why?",
+      "formula": "y = x^4 - 2x^2 + 1,\\quad y = 1 - x^2",
+      "moves": [
+        {
+          "name": "One function is always above the other on the interval",
+          "effect": "crit",
+          "professor": "Inside the intersection region, the upper curve never changes. Top minus bottom holds throughout. You saw the terrain clearly."
+        },
+        {
+          "name": "Because they are symmetric about the y-axis",
+          "effect": "fail",
+          "professor": "Symmetry helps halve the integration limits, but doesn't guarantee a single upper function. You confused symmetry with ordering. The Owlculus punished that assumption."
+        },
+        {
+          "name": "You can always use one integral if the functions are polynomials",
+          "effect": "fail",
+          "professor": "The type of function has nothing to do with the number of integrals needed. It's all about whether the upper/lower relationship switches. A rookie rule."
+        }
+      ]
+    },
+    {
+      "id": "B4",
+      "question": "Which is the correct differential equation for the MnDOT brine tank when the inflow and outflow rates are both 4 gal/min?",
+      "formula": "s'(t) = 1.2 - \\frac{4s(t)}{1000}",
+      "moves": [
+        {
+          "name": "Rate in: (0.3)(4), Rate out: (s(t)/1000)(4)",
+          "effect": "crit",
+          "professor": "Concentration times flow. The volume stays constant at 1000. The equation balances perfectly. Textbook logistics win the day."
+        },
+        {
+          "name": "s'(t) = 0.3 - 4s(t)/1000",
+          "effect": "fail",
+          "professor": "You forgot to multiply the incoming concentration by the flow rate. 0.3 is concentration, not mass per minute. Incomplete intel cost you the hit."
+        },
+        {
+          "name": "s'(t) = 1.2 - s(t)/250",
+          "effect": "dodge",
+          "professor": "That simplifies to the same as the correct equation — just written differently. You got the right structure but dressed it in strange armor."
+        }
+      ]
+    },
+    {
+      "id": "B5",
+      "question": "A metal sheet 3 ft by 4 ft is submerged vertically in water, top at depth 6 ft, bottom at 10 ft. To approximate the fluid force with a Riemann sum of 4 rectangles, how should the rectangles be oriented?",
+      "formula": "",
+      "moves": [
+        {
+          "name": "Horizontal strips, because pressure varies with depth",
+          "effect": "crit",
+          "professor": "Pressure depends on depth, which is vertical. Horizontal strips keep each rectangle at nearly constant depth. The only formation that works."
+        },
+        {
+          "name": "Vertical strips, because pressure is constant vertically",
+          "effect": "fail",
+          "professor": "Vertical strips span from depth 6 to 10 — pressure changes dramatically along the strip. Your approximation falls apart. The Owlculus swept you aside."
+        },
+        {
+          "name": "Diagonal strips for better coverage",
+          "effect": "fail",
+          "professor": "Pressure varies with vertical depth, not slanted distance. Diagonal strips mix depths and produce nonsense. A completely broken strategy."
+        }
+      ]
+    },
+    {
+      "id": "B6",
+      "question": "For the solid generated by revolving the region under y = √x on [0,1] about the y-axis, which method directly uses the variable of integration x?",
+      "formula": "y = \\sqrt{x},\\quad x \\in [0,1]",
+      "moves": [
+        {
+          "name": "Cylindrical shells about the y-axis: V = 2π ∫ x√x dx",
+          "effect": "crit",
+          "professor": "Shells parallel to the y-axis integrate with respect to x. Radius = x, height = √x. A swift strike with the right weapon."
+        },
+        {
+          "name": "Disk method with x as variable: V = π ∫ (√x)^2 dx",
+          "effect": "fail",
+          "professor": "That's for rotation about the x-axis, not the y-axis. You aimed at the wrong axis entirely. The disk spun the wrong way."
+        },
+        {
+          "name": "Disk method with y as variable: V = π ∫ (y^2)^2 dy",
+          "effect": "dodge",
+          "professor": "That would work — if the question hadn't specified using x as the integration variable. You solved a different problem. Stay on target."
+        }
+      ]
+    },
+    {
+      "id": "B7",
+      "question": "What does the integral below represent in the context of the car problem?",
+      "formula": "\\int_{0}^{5} [v_1(t) - v_2(t)]\\,dt = 10",
+      "moves": [
+        {
+          "name": "Car 1 is 10 meters ahead of Car 2 at t=5 seconds",
+          "effect": "crit",
+          "professor": "The integral of velocity difference is displacement difference. Positive 10 means Car 1 leads by 10 meters. Direct read, direct victory."
+        },
+        {
+          "name": "The average velocity difference is 2 m/s over the interval",
+          "effect": "fail",
+          "professor": "The integral gives total displacement difference, not the average. You divided by time unnecessarily and answered the wrong question."
+        },
+        {
+          "name": "Car 1 traveled 10 meters farther than Car 2 between t=0 and t=5",
+          "effect": "normal",
+          "professor": "That's an equivalent statement if they start together — net displacement difference. Effectively the same kill from a different angle."
+        }
+      ]
+    },
+    {
+      "id": "B8",
+      "question": "Which modification correctly incorporates constant-rate harvesting into the logistic model?",
+      "formula": "\\frac{dP}{dt} = kP\\left(1 - \\frac{P}{N}\\right)",
+      "moves": [
+        {
+          "name": "Subtract a constant c: dP/dt = kP(1-P/N) - c",
+          "effect": "crit",
+          "professor": "Harvesting removes the same amount per unit time, independent of population. A constant subtraction is the clean strike."
+        },
+        {
+          "name": "Multiply by a factor (1 - c/P)",
+          "effect": "fail",
+          "professor": "That's the modification for a minimum viable population (Allee effect), not constant harvesting. You loaded the wrong modification."
+        },
+        {
+          "name": "Replace k with k-c",
+          "effect": "fail",
+          "professor": "Changing the growth rate doesn't represent a fixed removal rate. It scales with population, which constant harvesting does not. A complete misfire."
+        }
+      ]
+    },
+    {
+      "id": "B9",
+      "question": "Which substitution yields the simplest antiderivative for the integral?",
+      "formula": "\\int x\\sqrt{4+x}\\,dx",
+      "moves": [
+        {
+          "name": "u = 4+x",
+          "effect": "crit",
+          "professor": "Linear shift: x = u-4, the square root becomes √u. The integrand expands into a simple sum of powers. The fastest blade."
+        },
+        {
+          "name": "u^2 = 4+x",
+          "effect": "normal",
+          "professor": "That also works — produces a rational function after substitution. Heavier armor but eventually gets through."
+        },
+        {
+          "name": "u = x√(4+x)",
+          "effect": "fail",
+          "professor": "Setting u to the entire integrand creates a du tangled in product and chain rules. The weapon shattered on impact."
+        }
+      ]
+    },
+    {
+      "id": "B10",
+      "question": "The differential equation below cannot be solved by separation of variables. Why?",
+      "formula": "\\frac{dy}{dx} = y + \\sin x",
+      "moves": [
+        {
+          "name": "The right side cannot be written as a product g(x)·h(y)",
+          "effect": "crit",
+          "professor": "It's a sum, not a product. Variables remain locked together. This equation surrenders to an integrating factor instead. Correct diagnosis."
+        },
+        {
+          "name": "Because sin x is not separable from y",
+          "effect": "fail",
+          "professor": "If it were y·sin x, it would separate perfectly. The addition is the problem, not the trig function. Superficial analysis got you hit."
+        },
+        {
+          "name": "Because the derivative is dy/dx, not dy/dt",
+          "effect": "fail",
+          "professor": "The notation has nothing to do with separability. You attacked a ghost argument. The Owlculus is unimpressed."
+        }
+      ]
+    },
+    {
+      "id": "B11",
+      "question": "Which method gives the volume when the region bounded by y=x^2 and y=4 is rotated about the line y=6?",
+      "formula": "",
+      "moves": [
+        {
+          "name": "Washers: outer radius 6-x^2, inner radius 2",
+          "effect": "crit",
+          "professor": "Distance from y=6 to y=x^2 is 6-x^2, to y=4 is 2. The hollow center creates a washer. Clean geometric read."
+        },
+        {
+          "name": "Disks: radius 6-x^2",
+          "effect": "fail",
+          "professor": "The region is above y=4, not sitting on the axis. Rotating creates a hollow core. You forgot the hole — the volume leaked out."
+        },
+        {
+          "name": "Shells about x=6: 2π ∫ (6-x)(4-x^2) dx",
+          "effect": "dodge",
+          "professor": "Shells about a vertical line x=6? The axis of rotation is horizontal, y=6. You rotated around the wrong coordinate. Misdirected fire."
+        }
+      ]
+    },
+    {
+      "id": "B12",
+      "question": "For the solid whose base is bounded by y=x+1 and y=x^2-1 with square cross-sections perpendicular to the x-axis, what is the correct volume integral?",
+      "formula": "",
+      "moves": [
+        {
+          "name": "∫ [(x+1) - (x^2-1)]^2 dx from x=-1 to 2",
+          "effect": "crit",
+          "professor": "Side length = top minus bottom. Square it for area. Integrate across the base. Perfect geometry — one precise volley."
+        },
+        {
+          "name": "∫ [(x+1) - (x^2-1)] dx from x=-1 to 2",
+          "effect": "fail",
+          "professor": "That's area of the base, not volume. You missed the square that turns length into cross-sectional area. A flat attack with no depth."
+        },
+        {
+          "name": "π ∫ [(x+1)^2 - (x^2-1)^2] dx from x=-1 to 2",
+          "effect": "fail",
+          "professor": "That's the washer formula for solids of revolution. The solid has square slices, not circular. Totally wrong formation."
+        }
+      ]
+    },
+    {
+      "id": "B13",
+      "question": "Given the initial value problem, which method finds the particular solution?",
+      "formula": "\\frac{dy}{dx} = 3x^2, \\quad y(1) = \\frac{19}{4}",
+      "moves": [
+        {
+          "name": "Integrate to get y = x^3 + C, then solve for C using the condition",
+          "effect": "crit",
+          "professor": "Direct integration, then one substitution to lock C. The IVP falls in two swift moves."
+        },
+        {
+          "name": "Separate variables and integrate both sides",
+          "effect": "dodge",
+          "professor": "The equation is already separated — the right side only depends on x. Calling it separation adds a layer of jargon with no benefit. You're talking strategy while the enemy advances."
+        },
+        {
+          "name": "Guess y = Ax^3 + B and match coefficients",
+          "effect": "fail",
+          "professor": "Undetermined coefficients for a first-order equation? That's for linear constant-coefficient ODEs of higher order. The Owlculus blocked that wild swing."
+        }
+      ]
+    },
+    {
+      "id": "B14",
+      "question": "The integral below appears to give zero over a symmetric interval. Is this the correct area between the curves?",
+      "formula": "\\int_{-\\pi/3}^{\\pi/3} (2\\sin x - \\tan x)\\,dx",
+      "moves": [
+        {
+          "name": "No — the integrand changes sign, so it gives net signed area, not total area",
+          "effect": "crit",
+          "professor": "The curves cross, so top minus bottom flips. A single integral over the whole interval cancels regions. You need absolute values or split integrals. Sharp eye."
+        },
+        {
+          "name": "Yes — symmetry guarantees the integral equals the area",
+          "effect": "fail",
+          "professor": "Symmetry doesn't save you from sign changes. Negative regions subtract from positive ones. You assumed symmetry would fix it — it didn't."
+        },
+        {
+          "name": "No — the integrand is wrong; it should be tan x minus 2 sin x",
+          "effect": "fail",
+          "professor": "The subtraction order may need splitting, but the bigger issue is the sign flip. You're rearranging deck chairs on a sinking ship."
+        }
+      ]
+    },
+    {
+      "id": "B15",
+      "question": "What is the most efficient way to compute the integral?",
+      "formula": "\\int \\frac{x^2 + x + 2}{x^2 + 1}\\,dx",
+      "moves": [
+        {
+          "name": "Long division first, then integrate 1 + (x+1)/(x^2+1)",
+          "effect": "crit",
+          "professor": "Degree of numerator equals denominator. Divide, and the remainder splits into a log and an arctan piece. The cleanest path."
+        },
+        {
+          "name": "Partial fractions with irreducible quadratic",
+          "effect": "dodge",
+          "professor": "You'd set (Ax+B)/(x^2+1) right away, ignoring the degree mismatch. That works only after division. Skipping the first step makes the algebra nightmarish."
+        },
+        {
+          "name": "Substitute u = x^2+1",
+          "effect": "fail",
+          "professor": "Then du = 2x dx, which doesn't match the numerator. The x^2 term becomes a mess. The weapon shattered on the first parry."
+        }
+      ]
+    },
+    {
+      "id": "B16",
+      "question": "A tank initially holds 200 lbs of salt in 1000 gal. Brine with 0.3 lbs/gal enters at 4 gal/min and drains at 2 gal/min. What type of differential equation does y(t) satisfy?",
+      "formula": "\\frac{dy}{dt} = 1.2 - \\frac{2y}{1000+2t}",
+      "moves": [
+        {
+          "name": "Linear first-order",
+          "effect": "crit",
+          "professor": "The volume increases, making the outflow coefficient time-dependent, but the form y' + P(t)y = Q(t) holds. An integrating factor cracks it."
+        },
+        {
+          "name": "Separable",
+          "effect": "fail",
+          "professor": "The right side is a difference, not a product. y appears in the numerator of a fraction added to a constant. Variables won't split."
+        },
+        {
+          "name": "Autonomous",
+          "effect": "fail",
+          "professor": "t appears explicitly in the coefficient. Autonomous equations have no independent variable on the RHS. This one does."
+        }
+      ]
+    },
+    {
+      "id": "B17",
+      "question": "When using the shell method for rotation about the line x=5, which expression gives the radius for the region bounded by y=x, y=0, x=4?",
+      "formula": "",
+      "moves": [
+        {
+          "name": "Radius = 5 - x",
+          "effect": "crit",
+          "professor": "Distance from the vertical axis x=5 to a shell at position x. Simple, direct. The shells line up and fire."
+        },
+        {
+          "name": "Radius = x",
+          "effect": "fail",
+          "professor": "That's for rotation about the y-axis (x=0). You measured from the wrong line. The shells flew wide."
+        },
+        {
+          "name": "Radius = 5 + x",
+          "effect": "fail",
+          "professor": "That would place the axis on the far side at x=-5. Adding instead of subtracting flips the geometry. You targeted a mirror image."
+        }
+      ]
+    },
+    {
+      "id": "B18",
+      "question": "The general solution y = Ce^{-x} + x - 1 is given for the DE y' = x - y. Which value of C satisfies the initial condition?",
+      "formula": "y(0) = 2",
+      "moves": [
+        {
+          "name": "C = 3",
+          "effect": "crit",
+          "professor": "Plug in x=0: y(0) = C + 0 - 1 = C - 1 = 2, so C = 3. One substitution, one kill."
+        },
+        {
+          "name": "C = 1",
+          "effect": "fail",
+          "professor": "You set C = y(0) directly, forgetting the -1 term. Basic algebra tripped you. The Owlculus struck."
+        },
+        {
+          "name": "C = 2",
+          "effect": "fail",
+          "professor": "You confused the initial value with the constant. C is not y(0) — it needs to satisfy the whole expression."
+        }
+      ]
+    },
+    {
+      "id": "B19",
+      "question": "Verify that y = sin x is a solution of the differential equation.",
+      "formula": "y'' + y = 0",
+      "moves": [
+        {
+          "name": "Differentiate: y' = cos x, y'' = -sin x, then substitute",
+          "effect": "crit",
+          "professor": "-sin x + sin x = 0. The identity holds perfectly. Verification takes two derivatives and one substitution. Done."
+        },
+        {
+          "name": "Integrate y'' + y = 0 to check",
+          "effect": "dodge",
+          "professor": "Integrating a second-order DE to check one solution is a massive detour. You're building the weapon from scratch when the test is a simple trigger pull."
+        },
+        {
+          "name": "Only check that sin(0)=0 matches",
+          "effect": "fail",
+          "professor": "Matching at one point doesn't verify the equation holds for all x. You checked the uniform, not the soldier."
+        }
+      ]
+    },
+    {
+      "id": "B20",
+      "question": "For the integral ∫ e^{sin(ln z)} cos(ln z) / z dz, which substitution sequence is most effective?",
+      "formula": "\\int \\frac{e^{\\sin(\\ln z)} \\cos(\\ln z)}{z}\\,dz",
+      "moves": [
+        {
+          "name": "u = ln z, then v = sin u",
+          "effect": "crit",
+          "professor": "First substitution clears the log: dz/z = du. Then the cos appears, and a second substitution with v = sin u reduces it to ∫ e^v dv. A double combo, perfectly executed."
+        },
+        {
+          "name": "u = sin(ln z) in one step",
+          "effect": "normal",
+          "professor": "You spotted that du = cos(ln z)/z dz directly. That's a single sharp move — the two-step is just the same reasoning unfolded. Still a kill."
+        },
+        {
+          "name": "Integration by parts with u = e^{sin(ln z)}, dv = cos(ln z)/z dz",
+          "effect": "dodge",
+          "professor": "Parts could eventually untangle this, but it's a brutal slog against exponential and trig chains. You're winning a war of attrition when a surgical strike was available."
+        }
+      ]
+    }
+  ]
+}

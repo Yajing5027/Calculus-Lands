@@ -1,0 +1,581 @@
+{
+  "enemy": {
+    "name": "Limitus",
+    "maxHP": 2,
+    "image": "assets/limitus.png",
+    "attackImage": "assets/limitus_attack.png",
+    "hurtImage": "assets/limitus_hurt.png"
+  },
+  "professor": {
+    "name": "Dr. H",
+    "image": "assets/professor.png"
+  },
+  "questions": [
+    {
+      "id": "enemy1_q1",
+      "question": "Identify the most efficient method for evaluating the integral.",
+      "formula": "\\int x e^{x^2} \\, dx",
+      "moves": [
+        {
+          "name": "u-Substitution (u = x^2)",
+          "effect": "crit",
+          "professor": "The derivative of the exponent is sitting right there. One clean substitution, and the enemy is wide open."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "IBP against a non-linear exponent? You'll trap yourself in a loop. That's a swing at nothing."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "This isn't a rational function. Wrong weapon for this battlefield."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No square root of a quadratic in sight. You're bringing a siege tower to a duel."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q2",
+      "question": "Select the critical first move for this integral.",
+      "formula": "\\int \\frac{\\sin x}{1 + \\cos x} \\, dx",
+      "moves": [
+        {
+          "name": "u-Substitution (u = 1 + cos x)",
+          "effect": "crit",
+          "professor": "Derivative of the denominator is -sin x. With a sign adjustment, the substitution strikes true. Direct hit."
+        },
+        {
+          "name": "Multiply by (1 - cos x)/(1 - cos x) and simplify",
+          "effect": "dodge",
+          "professor": "This road eventually reaches the target, but through heavy terrain. You'll waste time and risk a misstep."
+        },
+        {
+          "name": "Integration by Parts (u = sin x, dv = 1/(1+cos x) dx)",
+          "effect": "fail",
+          "professor": "Putting sin x as u leaves you with a messier integral. This attack rebounds straight at you."
+        },
+        {
+          "name": "Trigonometric Substitution (x = 2 arctan t)",
+          "effect": "fail",
+          "professor": "Weierstrass substitution here is like using a catapult to kill a fly. Overkill, and you'll likely miss the clean strike."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q3",
+      "question": "Which approach slays this integral most cleanly?",
+      "formula": "\\int \\frac{x}{x^2 + 1} \\, dx",
+      "moves": [
+        {
+          "name": "u-Substitution (u = x^2 + 1)",
+          "effect": "crit",
+          "professor": "Numerator is exactly half the derivative of the denominator. One stroke, and the integral falls."
+        },
+        {
+          "name": "Trigonometric Substitution (x = tan θ)",
+          "effect": "normal",
+          "professor": "This will work, turning the fight into a trig dance. Slower, but you'll survive."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "Denominator is irreducible over reals. Trying to decompose this is hitting an armored shield with a stick."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "No product of different function types. IBP has no purchase here; your blade glances off."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q4",
+      "question": "Determine the fastest route to the antiderivative.",
+      "formula": "\\int \\frac{\\ln x}{x} \\, dx",
+      "moves": [
+        {
+          "name": "u-Substitution (u = ln x)",
+          "effect": "crit",
+          "professor": "Derivative of ln x is 1/x, right there. One simple substitution, enemy down."
+        },
+        {
+          "name": "Recognize as (1/2)(ln x)^2 derivative",
+          "effect": "normal",
+          "professor": "True sniper sight. You can just write the answer, but the substitution path is the reliable blade."
+        },
+        {
+          "name": "Integration by Parts (u = ln x, dv = 1/x dx)",
+          "effect": "fail",
+          "professor": "That sets up a recursive nightmare. You'll chase your own tail until you collapse."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "There's no quadratic root here. This weapon is completely wrong—you'll wound yourself."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q5",
+      "question": "What is the decisive move for this integral?",
+      "formula": "\\int e^{\\sin x} \\cos x \\, dx",
+      "moves": [
+        {
+          "name": "u-Substitution (u = sin x)",
+          "effect": "crit",
+          "professor": "cos x dx becomes du instantly. The exponential stays simple. Clean execution."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "Exponential with trig inside resists IBP. You'll get nowhere and take a counter-hit."
+        },
+        {
+          "name": "Trigonometric identity to rewrite integrand",
+          "effect": "dodge",
+          "professor": "You could try to expand, but it leads to a thorny path. Not a fatal error, but a needless detour."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "This is not a rational function. You're brandishing the wrong weapon entirely."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q6",
+      "question": "Choose the most effective opening attack.",
+      "formula": "\\int x^2 e^{x^3} \\, dx",
+      "moves": [
+        {
+          "name": "u-Substitution (u = x^3)",
+          "effect": "crit",
+          "professor": "x^2 dx is one-third of du. Perfectly aligned. One swift strike ends it."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "Exponent is cubic, not linear. IBP will bog you down in a swamp of terms."
+        },
+        {
+          "name": "Tabular Integration by Parts without substitution",
+          "effect": "fail",
+          "professor": "Without fixing the exponent first, tabular is a recipe for disaster. You'll break formation."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "Where's the square root? Swinging a heavy mace at shadows."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q7",
+      "question": "Which method dispatches this integral with the least effort?",
+      "formula": "\\int \\frac{1}{x^2 - 9} \\, dx",
+      "moves": [
+        {
+          "name": "Partial Fractions",
+          "effect": "crit",
+          "professor": "Denominator factors into (x-3)(x+3). Partial fractions slice it into two logarithms. Efficient kill."
+        },
+        {
+          "name": "Trigonometric Substitution (x = 3 sec θ)",
+          "effect": "normal",
+          "professor": "Possible, but you'll navigate a thicket of trig and end up with the same result. Time-consuming."
+        },
+        {
+          "name": "u-Substitution (u = x^2 - 9)",
+          "effect": "fail",
+          "professor": "du = 2x dx, but there's no x in the numerator. Your sword meets empty air."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "1/(x^2-9) isn't a product. IBP has no grip; you'll stumble immediately."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q8",
+      "question": "Identify the critical technique for this trigonometric integral.",
+      "formula": "\\int \\sin^3 x \\cos^2 x \\, dx",
+      "moves": [
+        {
+          "name": "Save one sin, convert sin^2 to 1 - cos^2, u = cos x",
+          "effect": "crit",
+          "professor": "An odd power of sine is a gift. Peel one off and the rest collapses into a polynomial in cos x. Perfect."
+        },
+        {
+          "name": "Use power-reduction formulas repeatedly",
+          "effect": "normal",
+          "professor": "This grindstone still sharpens the blade, but it will take many turns. You'll win, but slowly."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No root of a^2 - x^2 here. You're mistaking a trig battle for a substitution fight. Painful miss."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "Powers of trig functions resist IBP unless paired with exponentials. You'll just inflame the integral."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q9",
+      "question": "What is the fastest way to evaluate this integral?",
+      "formula": "\\int \\frac{x}{\\sqrt{x^2 - 4}} \\, dx",
+      "moves": [
+        {
+          "name": "u-Substitution (u = x^2 - 4)",
+          "effect": "crit",
+          "professor": "Numerator x is half the derivative of the inside. The square root yields to a simple power. One hit."
+        },
+        {
+          "name": "Trigonometric Substitution (x = 2 sec θ)",
+          "effect": "normal",
+          "professor": "This path also leads to victory, but you'll fight through extra trig simplification. Solid, but not optimal."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "A radical in the denominator laughs at partial fractions. Wrong battlefield tactic."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "IBP here won't simplify the root. You'll lose footing immediately."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q10",
+      "question": "Choose the decisive move for this integral.",
+      "formula": "\\int \\frac{\\sec^2 x}{\\tan x} \\, dx",
+      "moves": [
+        {
+          "name": "u-Substitution (u = tan x)",
+          "effect": "crit",
+          "professor": "The derivative of tan x is sec^2 x, perfectly placed. One blow, integral collapses."
+        },
+        {
+          "name": "Rewrite as cot x sec^2 x and integrate",
+          "effect": "dodge",
+          "professor": "That just complicates the field. You're maneuvering into rough terrain unnecessarily."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "Sec and tan as a product? IBP here is a trap. You'll get entangled."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No square root of sum/difference of squares. This weapon is useless here."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q11",
+      "question": "Identify the best opening to evaluate this integral.",
+      "formula": "\\int x^3 \\cos(x^2) \\, dx",
+      "moves": [
+        {
+          "name": "Substitute u = x^2, then Integration by Parts",
+          "effect": "crit",
+          "professor": "First, tame the inside with u-sub, then IBP on u cos u. Two clean strikes, done."
+        },
+        {
+          "name": "Integration by Parts directly (u = x^3, dv = cos(x^2) dx)",
+          "effect": "fail",
+          "professor": "dv = cos(x^2) dx is not integrable in elementary terms. You've walked right into an ambush."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "The battle is about the cosine of a square, not a square root. Wrong intel."
+        },
+        {
+          "name": "Tabular Integration by Parts on original",
+          "effect": "fail",
+          "professor": "Tabular needs a clean polynomial times exponential/trig of linear argument. Here it shatters on the x^2 inside cos."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q12",
+      "question": "Select the method that breaks this integral open.",
+      "formula": "\\int \\arctan x \\, dx",
+      "moves": [
+        {
+          "name": "Integration by Parts (u = arctan x, dv = dx)",
+          "effect": "crit",
+          "professor": "A lone inverse trig function is a classic IBP target. Set u as the function and dv=dx. Flawless."
+        },
+        {
+          "name": "Substitution x = tan u",
+          "effect": "dodge",
+          "professor": "You'll end up with ∫ u sec^2 u du, which still needs IBP. A detour, not a shortcut."
+        },
+        {
+          "name": "Recognize as derivative of something simple",
+          "effect": "fail",
+          "professor": "No elementary function has arctan x as its simple derivative. Wishful thinking won't slay this foe."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "arctan x is not a rational function. You're swinging the wrong weapon entirely."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q13",
+      "question": "What is the critical step for integrating this?",
+      "formula": "\\int \\cot x \\, dx",
+      "moves": [
+        {
+          "name": "Rewrite as cos x / sin x, u = sin x",
+          "effect": "crit",
+          "professor": "Cotangent is just cosine over sine. The derivative of sine sits on top. A textbook kill."
+        },
+        {
+          "name": "Use formula ln|sin x| directly",
+          "effect": "normal",
+          "professor": "Recognizing the standard result works, but knowing why keeps you sharp for variants."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "IBP on cot x alone gives nothing but a headache. You'll waste a turn."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "This isn't a rational function in x. Wrong tactical decision."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q14",
+      "question": "Which initial approach leads to a quick victory?",
+      "formula": "\\int \\frac{1}{x^2 + 2x + 5} \\, dx",
+      "moves": [
+        {
+          "name": "Complete the square, then use arctan formula",
+          "effect": "crit",
+          "professor": "The denominator becomes (x+1)^2 + 4. An arctan awaits. Swift and decisive."
+        },
+        {
+          "name": "Partial Fractions over complex numbers",
+          "effect": "dodge",
+          "professor": "Technically possible, but you're dragging the fight into the complex plane needlessly. Impractical."
+        },
+        {
+          "name": "u-Substitution (u = x^2 + 2x + 5)",
+          "effect": "fail",
+          "professor": "du = 2x+2, not a constant. Your sword hits air. Try again."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "No product form here. IBP is a dead end."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q15",
+      "question": "Choose the most efficient weapon for this fight.",
+      "formula": "\\int x e^{-x} \\, dx",
+      "moves": [
+        {
+          "name": "Integration by Parts (u = x, dv = e^{-x} dx)",
+          "effect": "crit",
+          "professor": "Polynomial times exponential. IBP with the polynomial as u is a clean, classic kill."
+        },
+        {
+          "name": "Tabular Integration by Parts",
+          "effect": "normal",
+          "professor": "Tabular is just IBP in formation. Works perfectly, same result."
+        },
+        {
+          "name": "u-Substitution (u = -x) alone",
+          "effect": "fail",
+          "professor": "Substitution alone leaves an x that becomes -u, giving ∫ -u e^u du, which still needs IBP. You only half-drew your blade."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "Exponential with negative x? No root. This weapon is from a different war."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q16",
+      "question": "Which method breaks the stalemate cleanly?",
+      "formula": "\\int \\frac{1}{x \\sqrt{x^2 - 1}} \\, dx",
+      "moves": [
+        {
+          "name": "Trigonometric Substitution (x = sec θ)",
+          "effect": "crit",
+          "professor": "The form sqrt(x^2 - 1) calls for secant. The whole mess collapses to ∫ dθ. Quick victory."
+        },
+        {
+          "name": "u-Substitution (u = x^2 - 1)",
+          "effect": "fail",
+          "professor": "You need an x in the numerator, but it's in the denominator. The substitution misfires."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "IBP with a radical inverse? It'll only grow thorns. Stay away."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "The root blocks any rational decomposition. You can't breach that wall."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q17",
+      "question": "What is the correct battle plan for this integral?",
+      "formula": "\\int \\cos(\\ln x) \\, dx",
+      "moves": [
+        {
+          "name": "Integration by Parts twice and solve for the integral",
+          "effect": "crit",
+          "professor": "This is the classic loop tactic. IBP returns the same integral, then you isolate it. Like a boomerang that hits the enemy."
+        },
+        {
+          "name": "Use Euler's formula to rewrite cosine",
+          "effect": "normal",
+          "professor": "Complex exponentials turn this into a power fight. Advanced technique, but it works."
+        },
+        {
+          "name": "u-Substitution (u = ln x)",
+          "effect": "fail",
+          "professor": "You get ∫ cos u * e^u du, which is back to the same form. No progress, and you've left your flank open."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "There's no quadratic root hiding here. Your weapon has no target."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q18",
+      "question": "Seek the most efficient path to the antiderivative.",
+      "formula": "\\int \\frac{x^2}{1 + x^2} \\, dx",
+      "moves": [
+        {
+          "name": "Polynomial division: x^2/(1+x^2) = 1 - 1/(1+x^2)",
+          "effect": "crit",
+          "professor": "The integrand is an improper rational function. Divide and conquer—then a simple arctan remains."
+        },
+        {
+          "name": "Trigonometric Substitution (x = tan θ)",
+          "effect": "normal",
+          "professor": "This also works, but the division method is quicker. You'll still win, just with more sweat."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "Denominator is irreducible quadratic. Partial fractions can't decompose it further. You're hitting an iron wall."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "No product here. IBP is a ghost swing."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q19",
+      "question": "Identify the opening gambit that leads to swift resolution.",
+      "formula": "\\int \\frac{x - 1}{x^2 - 2x + 5} \\, dx",
+      "moves": [
+        {
+          "name": "u-Substitution (u = x^2 - 2x + 5)",
+          "effect": "crit",
+          "professor": "The derivative of the denominator is 2x-2, exactly double the numerator. One substitution finishes it."
+        },
+        {
+          "name": "Complete the square and use trigonometric substitution",
+          "effect": "dodge",
+          "professor": "Possible, but why march through a swamp when a straight road is available? Waste of energy."
+        },
+        {
+          "name": "Partial Fractions",
+          "effect": "fail",
+          "professor": "Denominator doesn't factor over reals. This attack shatters on impact."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "Rational function not in product form. IBP is a dead draw."
+        }
+      ]
+    },
+    {
+      "id": "enemy1_q20",
+      "question": "What is the sharpest move to crack this integral?",
+      "formula": "\\int \\frac{\\sin x}{\\cos^2 x - 1} \\, dx",
+      "moves": [
+        {
+          "name": "Simplify using cos^2 x - 1 = -sin^2 x, then integrate csc x",
+          "effect": "crit",
+          "professor": "A keen eye spots the Pythagorean trap. Simplify to -csc x and the integral is standard. Decisive strike."
+        },
+        {
+          "name": "Substitute u = cos x, then use partial fractions",
+          "effect": "normal",
+          "professor": "This path works, leading to ∫ du/(u^2 - 1) and partial fractions. A bit longer, but you'll get there."
+        },
+        {
+          "name": "Integration by Parts",
+          "effect": "fail",
+          "professor": "You'll bury yourself in recursive trig integrals. A tactical blunder."
+        },
+        {
+          "name": "Trigonometric Substitution",
+          "effect": "fail",
+          "professor": "No root of a^2 - x^2. This weapon is for a different monster."
+        }
+      ]
+    }
+  ],
+  "enemies": [
+    {
+      "id": "Q20",
+      "name": "Scout Soldier",
+      "health": 50,
+      "attack": 10,
+      "speed": 2,
+      "reward": 10
+    },
+    {
+      "id": "Q21",
+      "name": "Guard Soldier",
+      "health": 60,
+      "attack": 12,
+      "speed": 2.5,
+      "reward": 15
+    },
+    {
+      "id": "Q22",
+      "name": "Elite Soldier",
+      "health": 100,
+      "attack": 20,
+      "speed": 3,
+      "reward": 30
+    }
+  ]
+}

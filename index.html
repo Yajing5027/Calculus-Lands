@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculus Lands: The Infinite Trek</title>
+  <link rel="stylesheet" href="styles.css?v=20260619-creator">
+  <!-- Math renderer used for formulas in questions and answers. -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+          onload="window.__katexLoaded=true"></script>
+</head>
+<body>
+
+<!-- Opening title screen shown before the player enters the map. -->
+<div id="screen-start" class="screen">
+  <div class="title-deco-bg">∑ ∫ ∞ ∂ ∏ lim</div>
+  <div class="start-box">
+    <div class="start-eyebrow">CALCULUS LANDS</div>
+    <h1 class="title-main">Calculus Lands</h1>
+    <p class="title-sub">The Infinite Trek</p>
+    <p class="start-desc">Defeat the illusions guarding infinity</p>
+    <div class="start-actions">
+      <button id="btn-start" class="btn-gold">▶ Begin Trek</button>
+      <button id="btn-creator" class="btn-gold btn-ghost">✦ Create / Load Quest</button>
+    </div>
+  </div>
+</div>
+
+<!-- Creator Mode turns friendly source content into a validated Learning Quest. -->
+<div id="screen-creator" class="screen hidden">
+  <header class="creator-header">
+    <div>
+      <p class="creator-kicker">Creator Mode</p>
+      <h2>Build a Learning Quest</h2>
+      <p>Paste the lesson. We’ll forge the levels, battles, and feedback.</p>
+    </div>
+    <button id="btn-creator-back" class="btn-quiet" type="button">← Back</button>
+  </header>
+
+  <main class="creator-layout">
+    <section class="creator-editor" aria-labelledby="creator-editor-title">
+      <div class="creator-section-title">
+        <span class="step-rune">1</span>
+        <div>
+          <h3 id="creator-editor-title">Quest source</h3>
+          <p>Simple Text is the easiest path. Markdown and JSON work too.</p>
+        </div>
+      </div>
+
+      <div class="creator-meta-grid">
+        <label>
+          <span>Quest title</span>
+          <input id="creator-title" type="text" placeholder="e.g. Derivatives Quest" autocomplete="off">
+        </label>
+        <label>
+          <span>Subject</span>
+          <input id="creator-subject" type="text" placeholder="e.g. Calculus I" autocomplete="off">
+        </label>
+      </div>
+
+      <div class="creator-toolbar">
+        <label>
+          <span>Input format</span>
+          <select id="creator-format">
+            <option value="auto">Auto Detect</option>
+            <option value="simple">Simple Text</option>
+            <option value="markdown">Markdown</option>
+            <option value="json">JSON</option>
+          </select>
+        </label>
+        <label class="sample-field">
+          <span>Sample quest</span>
+          <select id="creator-sample" aria-label="Choose a sample quest"></select>
+        </label>
+        <button id="btn-load-sample" class="btn-small" type="button">Load Sample</button>
+      </div>
+
+      <label class="quest-source-label" for="creator-source">Learning content</label>
+      <textarea id="creator-source" spellcheck="false" placeholder="Title: Algebra Quest&#10;Subject: Algebra I&#10;&#10;Level: Valley of Variables&#10;Enemy: Coefficient Goblin&#10;HP: 3&#10;&#10;Q: Solve 3x + 5 = 20.&#10;A: x = 5 | crit | Correct!&#10;A: x = 15 | fail | Divide by 3 after subtracting 5."></textarea>
+      <p id="creator-status" class="creator-status" role="status" aria-live="polite">Choose a sample or paste your own lesson to begin.</p>
+
+      <div class="creator-actions">
+        <button id="btn-parse" class="btn-gold btn-compact" type="button">Parse &amp; Preview</button>
+        <button id="btn-play-custom" class="btn-gold btn-compact" type="button" disabled>▶ Play This Quest</button>
+        <button id="btn-save-custom" class="btn-small" type="button" disabled>Save Locally</button>
+        <button id="btn-export-custom" class="btn-small" type="button" disabled>Export Quest</button>
+        <button id="btn-clear-custom" class="btn-text" type="button">Clear Saved Quest</button>
+      </div>
+    </section>
+
+    <aside id="creator-preview" class="creator-preview" aria-labelledby="creator-preview-title">
+      <div class="creator-section-title">
+        <span class="step-rune">2</span>
+        <div>
+          <h3 id="creator-preview-title">Quest preview</h3>
+          <p>Your playable outline appears here.</p>
+        </div>
+      </div>
+      <div id="preview-content" class="preview-empty">
+        <div class="preview-seal">?</div>
+        <p>No quest parsed yet.</p>
+        <span>Load a sample for a quick tour.</span>
+      </div>
+    </aside>
+  </main>
+</div>
+
+<!-- Map screen where the player chooses one of the five lands. -->
+<div id="screen-levels" class="screen hidden">
+  <div class="levels-header">
+    <p id="levels-mode" class="levels-mode">Built-in Campaign</p>
+    <h2 id="levels-title" class="levels-title">Choose Your Land</h2>
+    <p id="levels-sub" class="levels-sub">Sigma's trek through three battles in each land</p>
+  </div>
+  <button id="btn-levels-back" class="btn-quiet levels-back" type="button">← Title</button>
+  <div id="level-map" aria-label="Level map"></div>
+  <div id="letter-overlay" class="letter-overlay hidden" role="dialog" aria-modal="true" aria-label="Letter from Dr. H">
+    <div class="letter-paper">
+      <p>Dear Adventurer Sigma,</p>
+      <p>Our Calculus Continent is filled with many illusions. Adventurer Sigma, on the path to truth, there are illusions that look very familiar. They pretend to be convergent series, perfect elementary functions, or simple integrals. If you act without thinking, the abyss will swallow you. Try to let your collected intuition guide you. The very first second you see a series or an integral, your intuition will tell you which "move" to use. But intuition can also lie to you. Many times, you think you should use one method, but you are actually falling into a trap.</p>
+      <p>You will travel through the five theme lands of Calculus II. In each land, the Chaos Knight Limitus has set "intuition traps." After you defeat the small soldiers, the lord of the land, Owlculus, will give you the hardest puzzle. In every battle, you have many moves to choose from. Some are very powerful, some are just okay, and some do not work at all. This is a great chance to train.</p>
+      <p>Remember: There are no complex calculations here. Your weapon is your intuition, but your victory comes from seeing which "intuition" is a lie in a single moment. Choose your move and face the infinity. Do not be afraid to make mistakes. I will be with you to review every battle until your intuition is as sharp as a blade and cuts through all illusions.</p>
+      <p>At the end of the journey, you will no longer be fooled by the surface. You will become the master of your intuition. Good luck!</p>
+      <p>Dr. H</p>
+    </div>
+    <div class="letter-hint">Click anywhere to open the map</div>
+  </div>
+</div>
+
+<!-- Main play screen: background, characters, choices, and dialogue. -->
+<div id="screen-game" class="screen hidden">
+
+  <!-- Health display for Sigma and the current enemy. -->
+  <div id="hud" class="hidden">
+    <div id="hud-hero">
+      <span id="hud-hero-name">Sigma</span>
+      <span id="hud-hero-hearts"></span>
+    </div>
+    <div id="hud-enemy">
+      <span id="hud-enemy-name"></span>
+      <span id="hud-enemy-hearts"></span>
+    </div>
+  </div>
+
+  <button id="hint-toggle" class="hint-toggle" type="button" role="switch" aria-checked="true" title="Toggle answer color hints"
+          style="position:fixed;top:calc(var(--hud-h,52px) + 12px);right:14px;z-index:650;">
+    Hint: On
+  </button>
+
+  <!-- The visible part of the scrolling land. -->
+  <div id="viewport">
+    <div id="world">
+
+      <!-- Parallax background layers that move at different speeds. -->
+      <div class="bg-layer" id="bg0"  style="--depth:0.02"></div>
+      <div class="bg-layer" id="bg1"  style="--depth:0.05"></div>
+      <div class="bg-layer" id="bg2"  style="--depth:0.08"></div>
+      <div class="bg-layer" id="bg3"  style="--depth:0.12"></div>
+      <div class="bg-layer" id="bg4"  style="--depth:0.12"></div>
+      <div class="bg-layer" id="bg5"  style="--depth:0.18"></div>
+      <div class="bg-layer" id="bg6"  style="--depth:0.25"></div>
+      <div class="bg-layer" id="bg7"  style="--depth:0.25"></div>
+      <div class="bg-layer" id="bg8"  style="--depth:0.35"></div>
+      <div class="bg-layer" id="bg9"  style="--depth:0.50"></div>
+      <div class="bg-layer" id="bg10" style="--depth:0.68"></div>
+      <div class="bg-layer" id="bg11" style="--depth:0.88"></div>
+
+      <div id="ground"></div>
+
+      <!-- The player character. -->
+      <div id="hero">
+        <canvas id="hero-canvas" width="128" height="128"></canvas>
+      </div>
+
+      <!-- Enemy positions for the two minions and the boss. -->
+      <div id="enemy1" class="enemy-slot">
+        <canvas class="enemy-canvas" width="180" height="180"></canvas>
+        <div class="enemy-shadow"></div>
+      </div>
+      <div id="enemy2" class="enemy-slot">
+        <canvas class="enemy-canvas" width="180" height="180"></canvas>
+        <div class="enemy-shadow"></div>
+      </div>
+      <div id="boss" class="enemy-slot">
+        <canvas class="enemy-canvas" width="240" height="240"></canvas>
+        <div class="enemy-shadow"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Battle choices shown when a question appears. -->
+  <div id="move-panel">
+    <div id="move-panel-header">⚔ Choose Move</div>
+    <div id="move-list"></div>
+  </div>
+
+  <!-- Dialogue area for questions, formulas, and Dr. H's feedback. -->
+  <div id="dialogue" class="hidden">
+    <img id="dlg-avatar-l" class="dlg-avatar hidden" src="" alt="">
+    <div id="dlg-body">
+      <div id="dlg-text"></div>
+    </div>
+    <img id="dlg-avatar-r" class="dlg-avatar hidden" src="" alt="">
+    <div id="dlg-hint">Click anywhere to continue ▶</div>
+  </div>
+
+</div>
+
+<!-- End screens and the final letter shown after the last land. -->
+<div id="final-letter-overlay" class="letter-overlay hidden" role="dialog" aria-modal="true" aria-label="Letter from Owlculus">
+  <div id="final-letter-paper" class="letter-paper final-letter-paper"></div>
+  <div class="letter-hint">Click anywhere to continue</div>
+</div>
+
+<div id="screen-win" class="screen hidden overlay-screen">
+  <div class="overlay-box">
+    <div class="overlay-icon">🏆</div>
+    <h2 id="win-title" class="overlay-title gold">Victory!</h2>
+    <p id="win-sub" class="overlay-sub">Owlculus has been conquered<br>You are mastering the intuition behind Calculus II.</p>
+    <div id="win-report" class="learning-report hidden"></div>
+    <div class="overlay-actions">
+      <button class="btn-gold btn-compact" onclick="goToLevels()">Return to Map</button>
+      <button class="btn-small custom-end-action hidden" onclick="returnToCreator()">Creator Mode</button>
+    </div>
+  </div>
+</div>
+
+<div id="screen-lose" class="screen hidden overlay-screen">
+  <div class="overlay-box">
+    <div class="overlay-icon">💀</div>
+    <h2 id="lose-title" class="overlay-title red">Defeat</h2>
+    <p id="lose-sub" class="overlay-sub">Infinity drained your strength...<br>Review the methods and return to battle.</p>
+    <div id="lose-report" class="learning-report hidden"></div>
+    <div class="overlay-actions">
+      <button class="btn-gold btn-compact" onclick="goToLevels()">Return to Map</button>
+      <button class="btn-small custom-end-action hidden" onclick="returnToCreator()">Creator Mode</button>
+    </div>
+  </div>
+</div>
+
+<script src="content-engine.js?v=20260619-creator"></script>
+<script src="main.js?v=20260619-creator"></script>
+</body>
+</html>

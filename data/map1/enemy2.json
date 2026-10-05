@@ -1,0 +1,455 @@
+{
+  "enemy": {
+    "name": "Limitus",
+    "maxHP": 4,
+    "image": "assets/limitus.png",
+    "attackImage": "assets/limitus_attack.png",
+    "hurtImage": "assets/limitus_hurt.png"
+  },
+  "professor": {
+    "name": "Dr. H",
+    "image": "assets/professor.png"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "question": "Which substitution most effectively simplifies the definite integral?",
+      "formula": "\\int_{-4}^{-3} (x-1)\\sqrt{x+4}\\,dx",
+      "moves": [
+        {
+          "name": "u = x+4",
+          "effect": "crit",
+          "professor": "A clean linear shift. x = u-4, the root becomes √u, and the integrand turns into a simple polynomial. One precise strike fells the enemy."
+        },
+        {
+          "name": "u = x-1",
+          "effect": "fail",
+          "professor": "That leaves √(u+5) nested inside. You've traded one mess for another. The enemy saw that fumble and counterattacked."
+        },
+        {
+          "name": "u = √(x+4)",
+          "effect": "normal",
+          "professor": "That will work — u² = x+4 gives a rational function after some algebra. It's a heavier blade, but it still cuts through."
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "question": "Set up the integral using the washer method for the volume when the region bounded by the curves below is revolved about the x-axis.",
+      "formula": "y = -x^2,\\quad y = x^3",
+      "moves": [
+        {
+          "name": "V = π ∫_{-1}^{0} [(x^3)^2 - (-x^2)^2] dx",
+          "effect": "crit",
+          "professor": "On [-1,0], x^3 sits above -x^2. Outer radius is x^3, inner is -x^2. The order is everything — washer method demands outer minus inner. Dead on."
+        },
+        {
+          "name": "V = π ∫_{-1}^{0} [(-x^2)^2 - (x^3)^2] dx",
+          "effect": "fail",
+          "professor": "You reversed the radii. Outer minus inner, not the other way. That mistake turns your volume negative. The enemy exploited the opening."
+        },
+        {
+          "name": "V = 2π ∫_{-1}^{0} x[(x^3) - (-x^2)] dx",
+          "effect": "dodge",
+          "professor": "That's a shell method setup — about the y-axis, not the x-axis. Wrong axis of rotation. You swung at a phantom."
+        }
+      ]
+    },
+    {
+      "id": "Q3",
+      "question": "The graphs below intersect at three points, yet the area between them can be found by a single integral. Why?",
+      "formula": "y = x^4 - 2x^2 + 1,\\quad y = 1 - x^2",
+      "moves": [
+        {
+          "name": "One function is always above the other on the interval",
+          "effect": "crit",
+          "professor": "On [-1,1], 1-x² sits above (x²-1)² without crossing. A single top-minus-bottom integral sweeps the entire region. That's reading the battlefield correctly."
+        },
+        {
+          "name": "The functions are symmetric about the y-axis",
+          "effect": "fail",
+          "professor": "Symmetry alone doesn't guarantee a single integral — the upper and lower curves could still swap. You misjudged the terrain. The enemy struck."
+        },
+        {
+          "name": "Three intersection points always require three separate integrals",
+          "effect": "fail",
+          "professor": "Not always. Here the middle intersection is just a tangency, so the bounding curves never switch order. You abandoned the fight too early."
+        }
+      ]
+    },
+    {
+      "id": "Q4",
+      "question": "The general solution y = C₁x + C₂x³ satisfies the differential equation. Which system of equations correctly determines the particular solution satisfying y(2)=0 and y'(2)=4?",
+      "formula": "x^2 y'' - 3x y' + 3y = 0",
+      "moves": [
+        {
+          "name": "2C₁ + 8C₂ = 0,  C₁ + 12C₂ = 4",
+          "effect": "crit",
+          "professor": "y(2) = 2C₁ + 8C₂ = 0, and y' = C₁ + 3C₂x² gives y'(2) = C₁ + 12C₂ = 4. Both initial conditions hit dead center. Perfect aim."
+        },
+        {
+          "name": "2C₁ + 8C₂ = 4,  C₁ + 12C₂ = 0",
+          "effect": "fail",
+          "professor": "You swapped the right-hand sides. The initial values landed on the wrong equations. A mix-up that cost you the kill."
+        },
+        {
+          "name": "C₁ + C₂ = 0,  C₁ + 3C₂ = 4",
+          "effect": "dodge",
+          "professor": "You dropped the powers of 2 from the x terms. That's like forgetting the range on your weapon — the numbers don't match the actual solution structure."
+        }
+      ]
+    },
+    {
+      "id": "Q5",
+      "question": "What is the most efficient method to evaluate this integral?",
+      "formula": "\\int \\left( \\frac{2}{\\sqrt{x}} - 3x^2 + \\pi \\right) dx",
+      "moves": [
+        {
+          "name": "Direct integration using the power rule",
+          "effect": "crit",
+          "professor": "Three simple terms, all ready to integrate. No substitution needed. Walk up and strike."
+        },
+        {
+          "name": "u-substitution with u = √x",
+          "effect": "fail",
+          "professor": "You're overcomplicating a straight fight. The first term becomes 2/u but the others turn into a mess. The enemy gutted you while you fumbled."
+        },
+        {
+          "name": "Integration by parts",
+          "effect": "fail",
+          "professor": "There's no product of functions here. Parts is dead weight against this simple integrand. Wrong weapon, wrong fight."
+        }
+      ]
+    },
+    {
+      "id": "Q6",
+      "question": "For the solid generated by revolving the region bounded by the curves below about y = π, which expression correctly gives the outer and inner radii for the washer method?",
+      "formula": "y = -x^2,\\quad y = x^3,\\quad y = \\pi",
+      "moves": [
+        {
+          "name": "Outer: π + x²,  Inner: π - x³",
+          "effect": "crit",
+          "professor": "Distance from y=π to y=-x² is π + x²; to y=x³ is π - x³. Since x³ ≥ -x² on [-1,0], the outer radius is the larger distance. Bullseye."
+        },
+        {
+          "name": "Outer: π - x³,  Inner: π + x²",
+          "effect": "fail",
+          "professor": "You flipped inner and outer. The parabola is further from y=π than the cubic, so it's the outer radius. The enemy rolled right through that error."
+        },
+        {
+          "name": "Outer: x³,  Inner: -x²",
+          "effect": "fail",
+          "professor": "You forgot the axis is y=π, not y=0. Radii must be measured from the axis of rotation. You aimed at the wrong target entirely."
+        }
+      ]
+    },
+    {
+      "id": "Q7",
+      "question": "To minimize the number of integrals needed, which variable of integration should be used for the area of the region R?",
+      "formula": "y = e^x,\\quad y = -\\sin x + 1,\\quad x = \\pi",
+      "moves": [
+        {
+          "name": "Integrate with respect to y (one integral)",
+          "effect": "crit",
+          "professor": "Horizontal slices span the whole region in one sweep. One integral, clean and efficient. You picked the right flank."
+        },
+        {
+          "name": "Integrate with respect to x (one integral)",
+          "effect": "fail",
+          "professor": "The curves cross in the x-direction — you'd need at least two integrals. A single x-integral misses the structure. The enemy dodged and struck back."
+        },
+        {
+          "name": "Integrate with respect to x (two integrals)",
+          "effect": "normal",
+          "professor": "That works, but it's the long route. Two integrals where one suffices. You got the kill, but you took the scenic path."
+        }
+      ]
+    },
+    {
+      "id": "Q8",
+      "question": "Which first step correctly solves the differential equation?",
+      "formula": "\\frac{dy}{dx} = (3+y)^2",
+      "moves": [
+        {
+          "name": "Separate: ∫ dy/(3+y)² = ∫ dx",
+          "effect": "crit",
+          "professor": "The right side is a pure function of y. Cross-multiply and the variables split instantly. Separation is the blade for this fight."
+        },
+        {
+          "name": "Multiply by integrating factor e^{∫ -2 dx}",
+          "effect": "fail",
+          "professor": "Integrating factor is for linear equations. That squared term makes it nonlinear. You drew the wrong weapon from the arsenal."
+        },
+        {
+          "name": "Integrate both sides directly: y = (3+y)² x + C",
+          "effect": "fail",
+          "professor": "You treated (3+y)² as a constant with respect to y. It's not. That's a fundamental misunderstanding of what's being integrated."
+        }
+      ]
+    },
+    {
+      "id": "Q9",
+      "question": "What is the best first step for evaluating this integral?",
+      "formula": "\\int \\frac{x^5+7}{x}\\,dx",
+      "moves": [
+        {
+          "name": "Split into ∫ (x⁴ + 7/x) dx",
+          "effect": "crit",
+          "professor": "Divide each term by x. Turns it into basic power rule pieces. No fancy footwork needed — just algebra."
+        },
+        {
+          "name": "Let u = x⁵+7",
+          "effect": "fail",
+          "professor": "Then du = 5x⁴ dx, and you don't have an x⁴ outside to absorb. The substitution doesn't match the battlefield. You got trapped."
+        },
+        {
+          "name": "Use partial fraction decomposition",
+          "effect": "fail",
+          "professor": "Partial fractions are for rational functions with factorable denominators. This denominator is just x. Massive overkill that leads nowhere."
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "question": "Using the method of cylindrical shells, set up the integral for the volume when the region under y = √x from x=0 to x=4 is revolved about the x-axis.",
+      "formula": "y = \\sqrt{x},\\quad y=0,\\quad x=4",
+      "moves": [
+        {
+          "name": "2π ∫₀² y(4 - y²) dy",
+          "effect": "crit",
+          "professor": "Shells about the x-axis integrate with respect to y. Radius = y, height = 4 - y². The setup is flawless."
+        },
+        {
+          "name": "2π ∫₀⁴ x√x dx",
+          "effect": "fail",
+          "professor": "That's shells about the y-axis, not the x-axis. You confused the axis of rotation and attacked the wrong flank."
+        },
+        {
+          "name": "π ∫₀⁴ (√x)² dx",
+          "effect": "dodge",
+          "professor": "That's the disk method — which also gives the right volume for this axis. But the order was to use shells. You dodged the instruction but still hit the target."
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "question": "Which substitution simplifies this integral the fastest?",
+      "formula": "\\int x e^{x^2}\\,dx",
+      "moves": [
+        {
+          "name": "u = x²",
+          "effect": "crit",
+          "professor": "Then du = 2x dx, and the x in front is eaten perfectly. The exponential becomes eᵘ. Textbook kill."
+        },
+        {
+          "name": "u = e^{x²}",
+          "effect": "fail",
+          "professor": "Then du = 2x e^{x²} dx. You end up with the original integrand inside du, looping back on itself. A snake eating its own tail."
+        },
+        {
+          "name": "Integration by parts with u = x, dv = e^{x²} dx",
+          "effect": "dodge",
+          "professor": "e^{x²} has no elementary antiderivative for dv. Parts crashes against that wall. You'd be swinging a wooden sword at stone."
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "question": "To find the area enclosed by the curves below, which variable of integration is more efficient?",
+      "formula": "x = 4 - y^2,\\quad x = y - 2",
+      "moves": [
+        {
+          "name": "Integrate with respect to y",
+          "effect": "crit",
+          "professor": "Both curves are solved for x. Right minus left gives a single y-integral. The path of least resistance."
+        },
+        {
+          "name": "Integrate with respect to x (one integral)",
+          "effect": "fail",
+          "professor": "Solving for y introduces ±√ terms and the region splits. A single x-integral won't cover it. You walked into an ambush."
+        },
+        {
+          "name": "Integrate with respect to y (two integrals)",
+          "effect": "fail",
+          "professor": "The region doesn't require splitting in y. You're making extra work for no reason. The enemy punished the hesitation."
+        }
+      ]
+    },
+    {
+      "id": "Q13",
+      "question": "Set up the integral for the volume of the solid whose base is bounded by the curves below, with square cross-sections perpendicular to the x-axis.",
+      "formula": "y = x+1,\\quad y = x^2-1",
+      "moves": [
+        {
+          "name": "∫₋₁² [(x+1) - (x²-1)]² dx",
+          "effect": "crit",
+          "professor": "Side length = top minus bottom. Square it for the area. Integrate across the intersection points x=-1,2. Clean geometry."
+        },
+        {
+          "name": "∫₋₁² [(x+1) - (x²-1)] dx",
+          "effect": "fail",
+          "professor": "You forgot to square the side length. Area of a square is side². Without it, you're just integrating the base width. Half the weapon, no damage."
+        },
+        {
+          "name": "π ∫₋₁² [(x+1)² - (x²-1)²] dx",
+          "effect": "fail",
+          "professor": "That's the disk method for a solid of revolution. This solid has square cross-sections, not circular. Entirely wrong formation."
+        }
+      ]
+    },
+    {
+      "id": "Q14",
+      "question": "Which first step correctly solves the differential equation?",
+      "formula": "\\frac{dy}{dx} = x^2 e^{y}",
+      "moves": [
+        {
+          "name": "Separate: e^{-y} dy = x² dx, then integrate",
+          "effect": "crit",
+          "professor": "Bring e^{-y} to the left, x² dx to the right. The variables split cleanly. A textbook strike."
+        },
+        {
+          "name": "Use integrating factor e^{∫ x² dx}",
+          "effect": "fail",
+          "professor": "This is nonlinear because of the e^y term. Integrating factors only work for linear first-order ODEs. You brought a shield to a sword fight and got overrun."
+        },
+        {
+          "name": "Rewrite as dy/dx - x² e^y = 0 and apply exact methods",
+          "effect": "dodge",
+          "professor": "Technically it can be coerced into an exact form, but separation is far simpler. You're using a siege engine to swat a fly."
+        }
+      ]
+    },
+    {
+      "id": "Q15",
+      "question": "A tank contains 200 lbs of salt in 1000 gal. Brine with 0.3 lbs/gal enters at 4 gal/min; the well-mixed solution drains at 2 gal/min. What type of differential equation models the amount of salt y(t)?",
+      "formula": "\\frac{dy}{dt} = 1.2 - \\frac{2y}{1000+2t}",
+      "moves": [
+        {
+          "name": "Linear first-order",
+          "effect": "crit",
+          "professor": "The volume increases, making the outflow term y-dependent but the equation is dy/dt + P(t)y = Q(t). An integrating factor will crack it. Correct read."
+        },
+        {
+          "name": "Separable",
+          "effect": "fail",
+          "professor": "The right side is a sum, not a product. You can't factor it as g(t)·h(y). The variables refuse to split. You charged an unbreakable line."
+        },
+        {
+          "name": "Autonomous",
+          "effect": "fail",
+          "professor": "The independent variable t appears explicitly in the outflow rate. Autonomous equations have no t on the right. This one does. Wrong classification."
+        }
+      ]
+    },
+    {
+      "id": "Q16",
+      "question": "Using cylindrical shells, set up the integral for the volume when the region bounded by y=x, y=0, x=0, and x=4 is revolved about the line x=5.",
+      "formula": "y=x,\\quad y=0,\\quad x=0,\\quad x=4,\\quad x=5",
+      "moves": [
+        {
+          "name": "2π ∫₀⁴ (5-x)x dx",
+          "effect": "crit",
+          "professor": "Radius = 5-x, height = x. Shells parallel to x=5. All pieces in place — fire."
+        },
+        {
+          "name": "2π ∫₀⁴ (5-x) dx",
+          "effect": "fail",
+          "professor": "You left out the height. Without the x, you're just sweeping circumferences. The volume is hollow. Enemy armor held."
+        },
+        {
+          "name": "π ∫₀⁴ (5² - x²) dx",
+          "effect": "fail",
+          "professor": "That's washers about the y-axis? No — the axis is vertical at x=5, not y=0. You deployed the wrong geometry entirely."
+        }
+      ]
+    },
+    {
+      "id": "Q17",
+      "question": "Which substitution yields a simpler integral?",
+      "formula": "\\int x\\sqrt{4+x}\\,dx",
+      "moves": [
+        {
+          "name": "u = 4+x",
+          "effect": "crit",
+          "professor": "Linear shift. x = u-4 gives ∫(u-4)√u du. Expand and integrate. The fastest route to victory."
+        },
+        {
+          "name": "u² = 4+x",
+          "effect": "normal",
+          "professor": "Then x = u²-4, dx = 2u du. The integral becomes 2∫(u⁴ - 4u²) du. Heavier algebra, but the enemy still falls."
+        },
+        {
+          "name": "u = x√(4+x)",
+          "effect": "fail",
+          "professor": "Setting u to the whole integrand makes du a nightmare of product and chain rules. The weapon jammed immediately."
+        }
+      ]
+    },
+    {
+      "id": "Q18",
+      "question": "Find all equilibrium solutions of the logistic model.",
+      "formula": "\\frac{dP}{dt} = kP\\left(1 - \\frac{P}{N}\\right)",
+      "moves": [
+        {
+          "name": "P = 0 and P = N",
+          "effect": "crit",
+          "professor": "Set dP/dt = 0. The product vanishes when P=0 or 1-P/N=0. Both are the stationary points. Identified and locked."
+        },
+        {
+          "name": "P = k and P = N",
+          "effect": "fail",
+          "professor": "k is the growth rate constant, not a population level. It drops out when you set the derivative to zero. You targeted a phantom."
+        },
+        {
+          "name": "P = 0 only",
+          "effect": "fail",
+          "professor": "You missed the carrying capacity N. That's a critical equilibrium. Incomplete reconnaissance got you hit."
+        }
+      ]
+    },
+    {
+      "id": "Q19",
+      "question": "For a solid formed by rotating a region under a curve about the x-axis, cross sections perpendicular to the x-axis are circular disks. Is this statement valid?",
+      "formula": "",
+      "moves": [
+        {
+          "name": "True",
+          "effect": "crit",
+          "professor": "Every slice perpendicular to the axis of revolution inherits the circular shape of the rotation. That's the geometry behind the disk method. Solid truth."
+        },
+        {
+          "name": "False — they are washers, not disks",
+          "effect": "fail",
+          "professor": "Washers appear only when there's a gap (hollow solid). A solid region under a single curve rotated gives full disks. You overthought and tripped."
+        },
+        {
+          "name": "False — they are squares",
+          "effect": "fail",
+          "professor": "Rotation generates circles, not squares. That's cross-sections of a different type of solid entirely. The enemy laughed at that one."
+        }
+      ]
+    },
+    {
+      "id": "Q20",
+      "question": "What is the best first step for integrating this rational function?",
+      "formula": "\\int \\frac{x^2 + x + 2}{x^2 + 1}\\,dx",
+      "moves": [
+        {
+          "name": "Perform polynomial long division",
+          "effect": "crit",
+          "professor": "Degree of numerator equals denominator. Divide to get 1 + (x+1)/(x²+1). The remainder separates cleanly. Sliced through in one move."
+        },
+        {
+          "name": "Apply partial fraction decomposition directly",
+          "effect": "fail",
+          "professor": "Partial fractions require the numerator degree to be strictly less than the denominator. You didn't reduce first. The decomposition won't hold."
+        },
+        {
+          "name": "Split as (x²+1 + x+1)/(x²+1), then separate",
+          "effect": "normal",
+          "professor": "Clever: you added 1 in a smart way. That's essentially long division in disguise. Gets the job done, just a little unorthodox."
+        }
+      ]
+    }
+  ]
+}

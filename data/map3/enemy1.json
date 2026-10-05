@@ -1,0 +1,385 @@
+{
+  "enemy": {
+    "name": "Limitus",
+    "maxHP": 2,
+    "image": "assets/limitus.png",
+    "attackImage": "assets/limitus_attack.png",
+    "hurtImage": "assets/limitus_hurt.png"
+  },
+  "professor": {
+    "name": "Dr. H",
+    "image": "assets/professor.png"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "question": "For the parametric curve below, what is the most efficient way to find dy/dx?",
+      "formula": "x = \\frac{1}{2t+1}, \\quad y = \\frac{1}{t^2-2t}",
+      "moves": [
+        {
+          "name": "Use dy/dx = (dy/dt)/(dx/dt) directly",
+          "effect": "crit",
+          "professor": "Sharp strike. Parametric derivative slices through algebra that would choke a lesser approach."
+        },
+        {
+          "name": "Eliminate t to get y = f(x), then differentiate",
+          "effect": "fail",
+          "professor": "Trying to eliminate the parameter here is like disarming a trap with a toothpick. You'll drown in algebra."
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "question": "To find the second derivative d²y/dx² for a parametric curve, which move hits the mark?",
+      "formula": "x = f(t), \\; y = g(t)",
+      "moves": [
+        {
+          "name": "d/dt (dy/dx) divided by dx/dt",
+          "effect": "crit",
+          "professor": "Clean double-tap. One derivative after another, with the chain rule as your shield."
+        },
+        {
+          "name": "Take d²y/dt² divided by d²x/dt²",
+          "effect": "fail",
+          "professor": "That's not how second derivatives chain! You just handed the enemy an opening."
+        },
+        {
+          "name": "Find dy/dx in terms of t, then differentiate with respect to t",
+          "effect": "normal",
+          "professor": "Almost lethal — but you forgot to divide by dx/dt at the end. A glancing blow."
+        }
+      ]
+    },
+    {
+      "id": "Q3",
+      "question": "How do you correctly locate horizontal and vertical tangents for the curve below?",
+      "formula": "x = t^2,\\; y = t^3 - 3t",
+      "moves": [
+        {
+          "name": "Set dy/dt = 0 (dx/dt ≠ 0) for horizontal; dx/dt = 0 (dy/dt ≠ 0) for vertical",
+          "effect": "crit",
+          "professor": "Precision strike. You checked both blades — no surprise zeroes in the denominator."
+        },
+        {
+          "name": "Solve dy/dx = 0 for horizontal, and where dy/dx is undefined for vertical",
+          "effect": "fail",
+          "professor": "Sloppy. When both derivatives vanish, you're fighting blind. You'll miss the (0,0) trap."
+        }
+      ]
+    },
+    {
+      "id": "Q4",
+      "question": "Find a set of polar coordinates (r, θ) for the given rectangular point.",
+      "formula": "(-1, \\sqrt{3})",
+      "moves": [
+        {
+          "name": "r = 2, θ = 2π/3",
+          "effect": "crit",
+          "professor": "You read the quadrant correctly. That's how you land a hit on a limacon's weak spot."
+        },
+        {
+          "name": "r = 2, θ = -π/3",
+          "effect": "fail",
+          "professor": "Wrong quadrant! arctan alone doesn't tell the whole story. The enemy sidesteps your attack."
+        }
+      ]
+    },
+    {
+      "id": "Q5",
+      "question": "Which is the correct rectangular equation for the polar curve r = 3 sinθ?",
+      "formula": "r = 3\\sin\\theta",
+      "moves": [
+        {
+          "name": "x² + (y - 3/2)² = 9/4",
+          "effect": "crit",
+          "professor": "Multiply by r and convert. A perfect circular trap sprung."
+        },
+        {
+          "name": "y = 3 sin x",
+          "effect": "fail",
+          "professor": "That's a Cartesian wannabe. Polar sine doesn't work like that — you just missed completely."
+        }
+      ]
+    },
+    {
+      "id": "Q6",
+      "question": "To find the slope of the tangent line to the cardioid at θ = π/6, what's the best weapon?",
+      "formula": "r = 1 + \\sin\\theta",
+      "moves": [
+        {
+          "name": "Use dy/dx = (r' sinθ + r cosθ)/(r' cosθ - r sinθ)",
+          "effect": "crit",
+          "professor": "Blade of polar derivatives — one swift cut through the sine and cosine."
+        },
+        {
+          "name": "Convert to rectangular coordinates first, then differentiate implicitly",
+          "effect": "fail",
+          "professor": "You're dragging a siege engine through a swamp. Too slow, too messy."
+        }
+      ]
+    },
+    {
+      "id": "Q7",
+      "question": "Which integral correctly gives the arc length of the cardioid r = 1 + sinθ?",
+      "formula": "r = 1 + \\sin\\theta",
+      "moves": [
+        {
+          "name": "L = ∫₀²π √(r² + (dr/dθ)²) dθ = ∫₀²π √(2 + 2 sinθ) dθ",
+          "effect": "crit",
+          "professor": "Polar arc length formula — hits the vital spot. No need for Cartesian acrobatics."
+        },
+        {
+          "name": "L = ∫₀²π √(1 + (dr/dθ)²) dθ",
+          "effect": "fail",
+          "professor": "You forgot r² under the radical! That's like swinging a sword with no edge."
+        },
+        {
+          "name": "L = ∫₀²π √(1 + (dy/dx)²) dx, after converting to y = f(x)",
+          "effect": "dodge",
+          "professor": "In theory it works, but the Cartesian form is a nightmare. You dodged a hit, but the fight isn't over."
+        }
+      ]
+    },
+    {
+      "id": "Q8",
+      "question": "Set up the area of one petal of the polar flower r = 2 cos(2θ).",
+      "formula": "r = 2\\cos(2\\theta)",
+      "moves": [
+        {
+          "name": "A = ½ ∫_{-π/4}^{π/4} (2 cos(2θ))² dθ",
+          "effect": "crit",
+          "professor": "Clean sweep with the ½ factor. You remembered the weapon's true form."
+        },
+        {
+          "name": "A = ∫_{-π/4}^{π/4} (2 cos(2θ))² dθ",
+          "effect": "fail",
+          "professor": "Forgot the ½ in the polar area formula! Your slash cuts air."
+        },
+        {
+          "name": "A = ∫ y dx via parametric equations x = r cosθ, y = r sinθ",
+          "effect": "normal",
+          "professor": "That works, but it's a longer path. You landed a hit, just not the deadliest one."
+        }
+      ]
+    },
+    {
+      "id": "Q9",
+      "question": "You need the surface area formed by revolving r = 6 cosθ around the polar axis. Which formula is correct?",
+      "formula": "r = 6\\cos\\theta, \\; 0 \\le \\theta \\le \\pi/2",
+      "moves": [
+        {
+          "name": "S = 2π ∫ r sinθ √(r² + (dr/dθ)²) dθ",
+          "effect": "crit",
+          "professor": "Polar surface area around polar axis — the blade of radial sweep."
+        },
+        {
+          "name": "S = 2π ∫ r cosθ √(r² + (dr/dθ)²) dθ",
+          "effect": "fail",
+          "professor": "That's the formula for revolving about θ = π/2. Wrong target."
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "question": "Eliminate the parameter to find the Cartesian equation of the curve. What's the correct result and restriction?",
+      "formula": "x = \\sqrt{t},\\; y = 3 - t",
+      "moves": [
+        {
+          "name": "y = 3 - x², x ≥ 0",
+          "effect": "crit",
+          "professor": "Perfect elimination, and you spotted the domain trap. Right half of the parabola only."
+        },
+        {
+          "name": "y = 3 - x² for all real x",
+          "effect": "fail",
+          "professor": "Missed the domain restriction! √t is never negative. Your graph would extend into forbidden territory."
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "question": "To find the area under the parametric curve, which setup is the surest kill?",
+      "formula": "x = 2\\sin^2\\theta,\\; y = 2\\sin^2\\theta\\tan\\theta, \\; 0 \\le \\theta < \\pi/2",
+      "moves": [
+        {
+          "name": "A = ∫ y (dx/dθ) dθ over the interval",
+          "effect": "crit",
+          "professor": "Parametric area formula, right between the eyes."
+        },
+        {
+          "name": "Eliminate θ to get y = f(x), then integrate ∫ f(x) dx",
+          "effect": "fail",
+          "professor": "Good luck with that elimination. You'll be tangled in trig forever."
+        },
+        {
+          "name": "Use polar area formula A = ½ ∫ r² dθ after converting to polar",
+          "effect": "dodge",
+          "professor": "This isn't a polar equation — but it's already parametric. You dodged, but you're wasting time."
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "question": "Find the tangent lines at the pole for the rose curve r = 4 cos(3θ).",
+      "formula": "r = 4\\cos(3\\theta)",
+      "moves": [
+        {
+          "name": "Set r = 0, solve for θ: values are the tangent directions",
+          "effect": "crit",
+          "professor": "Exactly! When r=0, the curve passes the pole, and θ gives the tangent line. Three petals, three tangents."
+        },
+        {
+          "name": "Set dy/dx = 0 and solve for θ where r=0",
+          "effect": "fail",
+          "professor": "That gives horizontal tangents on petals, not the tangents at the pole. Wrong target."
+        }
+      ]
+    },
+    {
+      "id": "Q13",
+      "question": "Find the arc length of the parametric curve over the given interval.",
+      "formula": "x = \\cos(2t),\\; y = \\sin(2t),\\; 0 \\le t \\le 2\\pi",
+      "moves": [
+        {
+          "name": "L = ∫₀²π 2 dt = 4π",
+          "effect": "crit",
+          "professor": "You caught the double speed! The circle is traced twice, so length is doubled."
+        },
+        {
+          "name": "L = 2π, the circumference of the unit circle",
+          "effect": "fail",
+          "professor": "You forgot the parameter travels the circle twice. The enemy gets an extra swing at you."
+        }
+      ]
+    },
+    {
+      "id": "Q14",
+      "question": "Determine where the parametric curve is concave upward.",
+      "formula": "x = t^2,\\; y = t^3 - 3t",
+      "moves": [
+        {
+          "name": "Compute d²y/dx² and find where it > 0 (t > 0)",
+          "effect": "crit",
+          "professor": "Second derivative test, parametric style. Clean upward arc."
+        },
+        {
+          "name": "Check the sign of d²y/dt²; if positive, curve is concave up",
+          "effect": "fail",
+          "professor": "Concavity in x-y plane isn't decided by t-derivatives alone. That's a rookie mistake."
+        }
+      ]
+    },
+    {
+      "id": "Q15",
+      "question": "Set up the arc length integral for the curve y = (2/3)(x²+1)^{3/2} from x=0 to x=3.",
+      "formula": "y = \\frac{2}{3}(x^2+1)^{3/2}",
+      "moves": [
+        {
+          "name": "L = ∫₀³ √(1 + 4x²(x²+1)) dx",
+          "effect": "crit",
+          "professor": "Arc length of a function — straight from the formula. You're on target."
+        },
+        {
+          "name": "L = ∫₀³ √( (dx/dt)² + (dy/dt)² ) dt after inventing a parameter",
+          "effect": "fail",
+          "professor": "Why introduce a parameter when you already have y = f(x)? A wasted move."
+        },
+        {
+          "name": "L = ∫₀³ √(1 + (dx/dy)²) dy",
+          "effect": "dodge",
+          "professor": "That would require x as a function of y — nasty inversion. A dodge, but you'll exhaust yourself."
+        }
+      ]
+    },
+    {
+      "id": "Q16",
+      "question": "Convert the polar equation r = θ to rectangular form.",
+      "formula": "r = \\theta",
+      "moves": [
+        {
+          "name": "√(x²+y²) = arctan(y/x)",
+          "effect": "crit",
+          "professor": "Direct substitution — the spiral's identity laid bare. Well struck."
+        },
+        {
+          "name": "y = x tan(√(x²+y²))",
+          "effect": "fail",
+          "professor": "That's twisting the conversion into nonsense. You missed the mark completely."
+        }
+      ]
+    },
+    {
+      "id": "Q17",
+      "question": "Find all points of vertical tangency for the curve.",
+      "formula": "x = 4 - t,\\; y = t^2",
+      "moves": [
+        {
+          "name": "Check dx/dt = -1 ≠ 0, so there are no vertical tangents",
+          "effect": "crit",
+          "professor": "dx/dt never zero — no vertical tangent exists. You saw through the disguise."
+        },
+        {
+          "name": "Set denominator of dy/dx (i.e. dx/dt) equal to 0, giving t = 4",
+          "effect": "fail",
+          "professor": "dx/dt = -1 always! You tried to solve 0 = -1. That's a ghost solution."
+        }
+      ]
+    },
+    {
+      "id": "Q18",
+      "question": "To quickly sketch the cardioid r = 1 + sinθ, which symmetry should you exploit?",
+      "formula": "r = 1 + \\sin\\theta",
+      "moves": [
+        {
+          "name": "Symmetry about the vertical line θ = π/2",
+          "effect": "crit",
+          "professor": "Sine gives vertical symmetry — the heart points up. You scouted the enemy's shape instantly."
+        },
+        {
+          "name": "Symmetry about the polar axis (θ = 0)",
+          "effect": "fail",
+          "professor": "That's cosine's domain. Your sketch would be flipped. Wrong symmetry, wrong stance."
+        }
+      ]
+    },
+    {
+      "id": "Q19",
+      "question": "Which integral represents the arc length of the given parametric curve?",
+      "formula": "x = e^t + 2,\\; y = 2t + 1,\\; -2 \\le t \\le 2",
+      "moves": [
+        {
+          "name": "∫₋₂² √(e^{2t} + 4) dt",
+          "effect": "crit",
+          "professor": "Perfect parametric arc length setup. The enemy's defense is broken."
+        },
+        {
+          "name": "∫₋₂² √( (e^t + 2)² + (2t + 1)² ) dt",
+          "effect": "fail",
+          "professor": "You plugged x and y directly, not their derivatives! That's a basic rule breach."
+        },
+        {
+          "name": "∫₋₂² √(1 + 4e^{-2t}) dt via dy/dx = 2/e^t",
+          "effect": "normal",
+          "professor": "Works, but you walked the long Cartesian path. A hit, not a kill."
+        }
+      ]
+    },
+    {
+      "id": "Q20",
+      "question": "Set up the area enclosed by the limacon r = 5 + 2 sinθ.",
+      "formula": "r = 5 + 2\\sin\\theta",
+      "moves": [
+        {
+          "name": "A = ½ ∫₀²π (5 + 2 sinθ)² dθ",
+          "effect": "crit",
+          "professor": "Area in one clean sweep. You respected the ½ and the full rotation."
+        },
+        {
+          "name": "A = ∫₀²π (5 + 2 sinθ) dθ",
+          "effect": "fail",
+          "professor": "Missing the square and the ½ factor — a double miss. The enemy laughs at your blunt swing."
+        }
+      ]
+    }
+  ]
+}

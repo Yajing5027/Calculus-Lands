@@ -1,0 +1,355 @@
+{
+  "enemy": {
+    "name": "Owlculus",
+    "maxHP": 8,
+    "image": "assets/owlculus.png",
+    "attackImage": "assets/owlculus_attack.png",
+    "hurtImage": "assets/owlculus_hurt.png"
+  },
+  "professor": {
+    "name": "Dr. H",
+    "image": "assets/professor.png"
+  },
+  "questions": [
+    {
+      "id": "Q41",
+      "question": "To find the arc length of a parametric curve, which integrand is correct?",
+      "formula": "x = f(t),\\; y = g(t), \\; \\alpha \\le t \\le \\beta",
+      "moves": [
+        {
+          "name": "∫ √( (dx/dt)² + (dy/dt)² ) dt",
+          "effect": "crit",
+          "professor": "The classic strike. Parametric arc length formula hits the core."
+        },
+        {
+          "name": "∫ √( 1 + (dy/dx)² ) dx directly without changing variable",
+          "effect": "fail",
+          "professor": "That's for y=f(x). You're in parametric territory — this blade is too short."
+        }
+      ]
+    },
+    {
+      "id": "Q42",
+      "question": "Given the polar curve r = 3 + 3cosθ, how would you find its arc length efficiently?",
+      "formula": "r = 3 + 3\\cos\\theta",
+      "moves": [
+        {
+          "name": "L = ∫₀²π √(r² + (dr/dθ)²) dθ, simplify integrand using trig identity",
+          "effect": "crit",
+          "professor": "Direct polar arc length with a cosine identity — one clean sweep."
+        },
+        {
+          "name": "Convert to Cartesian, then use ∫ √(1+(dy/dx)²) dx",
+          "effect": "fail",
+          "professor": "That conversion will bury you in radicals. Longer path, more traps."
+        }
+      ]
+    },
+    {
+      "id": "Q43",
+      "question": "Which test would you use to quickly determine if ∫₁∞ (sin²x)/x² dx converges?",
+      "formula": "\\int_1^\\infty \\frac{\\sin^2 x}{x^2} dx",
+      "moves": [
+        {
+          "name": "Comparison Test: 0 ≤ sin²x/x² ≤ 1/x², and ∫₁∞ 1/x² dx converges",
+          "effect": "crit",
+          "professor": "Squeeze it between zero and a known p-series. Flawless logic."
+        },
+        {
+          "name": "Integral Test on f(x)=sin²x/x²",
+          "effect": "fail",
+          "professor": "Integral Test needs positive, decreasing function — f(x) oscillates, not monotone. Trap sprung."
+        }
+      ]
+    },
+    {
+      "id": "Q44",
+      "question": "To find the area of one petal of r = sin(2θ), you should integrate over which interval?",
+      "formula": "r = \\sin(2\\theta)",
+      "moves": [
+        {
+          "name": "[0, π/2]",
+          "effect": "crit",
+          "professor": "One petal traced in half the period. Clean angle slice."
+        },
+        {
+          "name": "[0, 2π]",
+          "effect": "fail",
+          "professor": "That sweeps everything twice, double-counting petals. You over-rotated."
+        }
+      ]
+    },
+    {
+      "id": "Q45",
+      "question": "What is the main advantage of using parametric representation for a curve like a cycloid?",
+      "formula": "x = r(\\theta - \\sin\\theta),\\; y = r(1 - \\cos\\theta)",
+      "moves": [
+        {
+          "name": "Impossible to express as y = f(x) neatly; parametrics handle multi-valuedness and vertical tangents",
+          "effect": "crit",
+          "professor": "Cycloids break Cartesian form. Parametrics are the only weapon that fits."
+        },
+        {
+          "name": "Parametric form simplifies integration of area",
+          "effect": "normal",
+          "professor": "It does, but that's not the main reason. Partial credit, soldier."
+        }
+      ]
+    },
+    {
+      "id": "Q46",
+      "question": "To determine where the cardioid r = 1 + sinθ has horizontal tangents, what must you solve?",
+      "formula": "r = 1 + \\sin\\theta",
+      "moves": [
+        {
+          "name": "Set dy/dθ = 0, ensuring dx/dθ ≠ 0",
+          "effect": "crit",
+          "professor": "Horizontal tangent in polar — the derivative combo strike."
+        },
+        {
+          "name": "Set dr/dθ = 0",
+          "effect": "fail",
+          "professor": "That gives maximum r, not horizontal tangents. You missed the target."
+        }
+      ]
+    },
+    {
+      "id": "Q47",
+      "question": "Which surface area formula is correct when revolving r = f(θ) about the polar axis?",
+      "formula": "r = f(\\theta)",
+      "moves": [
+        {
+          "name": "S = 2π ∫ f(θ) sinθ √(f² + (f')²) dθ",
+          "effect": "crit",
+          "professor": "Correct radial arm and arc length element. Sharp."
+        },
+        {
+          "name": "S = 2π ∫ f(θ) √(f² + (f')²) dθ",
+          "effect": "fail",
+          "professor": "Missing the sinθ — the radius of the circular path. You forgot the lever."
+        }
+      ]
+    },
+    {
+      "id": "Q48",
+      "question": "What is the best first step to compute the area inside r = 4 cosθ and outside r = 2?",
+      "formula": "r = 4\\cos\\theta,\\; r = 2",
+      "moves": [
+        {
+          "name": "Solve 4 cosθ = 2 to find intersection angles, then integrate (½)(outer² - inner²)",
+          "effect": "crit",
+          "professor": "Intersection points divide the zone. Classic wipe-out."
+        },
+        {
+          "name": "Integrate (½)(4 cosθ - 2)² dθ from 0 to 2π",
+          "effect": "fail",
+          "professor": "You subtracted then squared — it's outer² - inner², not (outer-inner)². Fatal algebraic error."
+        }
+      ]
+    },
+    {
+      "id": "Q49",
+      "question": "How would you verify that the parametric curve x = t², y = t³ - 3t passes through (3,0) twice?",
+      "formula": "x = t^2,\\; y = t^3 - 3t",
+      "moves": [
+        {
+          "name": "Solve x=3 → t=±√3; check y=0 for both, both work",
+          "effect": "crit",
+          "professor": "Two different t-values give the same point — that's the double-cross."
+        },
+        {
+          "name": "Solve y=0 → t=0, ±√3; check x correspondingly",
+          "effect": "normal",
+          "professor": "Works, but you have to filter x=3 from the t=0 case. Still a solid hit."
+        }
+      ]
+    },
+    {
+      "id": "Q50",
+      "question": "Given the polar curve r = 2 + 2 sinθ, how many petals does it have?",
+      "formula": "r = 2 + 2\\sin\\theta",
+      "moves": [
+        {
+          "name": "It's a cardioid, so no separate petals — one heart shape",
+          "effect": "crit",
+          "professor": "Recognized the limacon family member. r=a + a sinθ is a cardioid, not a rose."
+        },
+        {
+          "name": "Since coefficient of sinθ is 1, it has 1 petal",
+          "effect": "fail",
+          "professor": "That rule is for roses r = a sin(nθ). Different weapon for a different beast."
+        }
+      ]
+    },
+    {
+      "id": "Q51",
+      "question": "What do you need to check before using the Comparison Test on an improper integral?",
+      "formula": "\\int_a^\\infty f(x) dx",
+      "moves": [
+        {
+          "name": "f(x) must be nonnegative and integrable on finite intervals; choose g(x) with known convergence",
+          "effect": "crit",
+          "professor": "Every box ticked: positivity, local integrability, comparison anchor. Solid foundation."
+        },
+        {
+          "name": "Only that the limit of f(x) as x→∞ is zero",
+          "effect": "fail",
+          "professor": "Limit zero doesn't guarantee convergence for integrals, just like for series. A common illusion."
+        }
+      ]
+    },
+    {
+      "id": "Q52",
+      "question": "Which integral gives the area of the surface when the curve x = 2t, y = t² (0 ≤ t ≤ 1) is revolved around the x-axis?",
+      "formula": "x = 2t,\\; y = t^2,\\; 0 \\le t \\le 1",
+      "moves": [
+        {
+          "name": "2π ∫₀¹ t² √(4 + 4t²) dt",
+          "effect": "crit",
+          "professor": "Radius is |y| = t², ds = √((2)²+(2t)²) dt. Perfect parametric sweep."
+        },
+        {
+          "name": "2π ∫₀¹ 2t √(1 + 4t²) dt",
+          "effect": "fail",
+          "professor": "You used x as the radius, not y. Axis confusion — deadly."
+        }
+      ]
+    },
+    {
+      "id": "Q53",
+      "question": "Which statement is true about the polar coordinate system compared to Cartesian?",
+      "formula": "",
+      "moves": [
+        {
+          "name": "A point has infinitely many polar representations",
+          "effect": "crit",
+          "professor": "Multiple (r,θ) pairs map to the same point. That's the signature of polar."
+        },
+        {
+          "name": "Each (r,θ) pair corresponds to a unique point, just like (x,y)",
+          "effect": "fail",
+          "professor": "Nope — add 2π to θ or flip r sign, same point. You missed the multiplicity."
+        }
+      ]
+    },
+    {
+      "id": "Q54",
+      "question": "What is the most efficient way to find the area between two polar curves r₁(θ) and r₂(θ) on a sector?",
+      "formula": "r = r_1(\\theta),\\; r = r_2(\\theta)",
+      "moves": [
+        {
+          "name": "½ ∫ (r₁² - r₂²) dθ, where r₁ is the outer curve",
+          "effect": "crit",
+          "professor": "Difference of squares, integrated sector by sector. The signature move."
+        },
+        {
+          "name": "∫ (r₁ - r₂) dθ",
+          "effect": "fail",
+          "professor": "Neglecting the square and the ½ is a double miss. That's like fighting barehanded."
+        }
+      ]
+    },
+    {
+      "id": "Q55",
+      "question": "For the limacon r = 1 + 2 cosθ, which interval traces the inner loop?",
+      "formula": "r = 1 + 2\\cos\\theta",
+      "moves": [
+        {
+          "name": "[2π/3, 4π/3] (where r < 0)",
+          "effect": "crit",
+          "professor": "Inner loop lives in negative r. You hunted it down precisely."
+        },
+        {
+          "name": "[0, 2π] — the whole curve includes the loop",
+          "effect": "fail",
+          "professor": "You gave the whole domain, but the question asked specifically for the inner loop sector."
+        }
+      ]
+    },
+    {
+      "id": "Q56",
+      "question": "What is the safest prior check when using the Integral Test on a series Σ a_n?",
+      "formula": "\\sum_{n=1}^\\infty a_n",
+      "moves": [
+        {
+          "name": "f(n)=a_n must be continuous, positive, and decreasing for x ≥ N",
+          "effect": "crit",
+          "professor": "Three conditions checked: you pass the gate safely."
+        },
+        {
+          "name": "Just confirm that lim a_n = 0",
+          "effect": "fail",
+          "professor": "That only checks divergence if false, not convergence. Incomplete armor."
+        }
+      ]
+    },
+    {
+      "id": "Q57",
+      "question": "Which integral correctly computes the length of the polar curve r = 2 cos(3θ) on one petal?",
+      "formula": "r = 2\\cos(3\\theta)",
+      "moves": [
+        {
+          "name": "L = ∫_{-π/6}^{π/6} √(4cos²(3θ) + 36sin²(3θ)) dθ",
+          "effect": "crit",
+          "professor": "Correct ds = √(r² + (dr/dθ)²) with the right petal limits. Blades aligned."
+        },
+        {
+          "name": "L = ∫_{0}^{2π} √(2cos(3θ))² + ( -6sin(3θ) )² dθ",
+          "effect": "fail",
+          "professor": "Full 2π traces the rose multiple times, inflating length. Overreach."
+        }
+      ]
+    },
+    {
+      "id": "Q58",
+      "question": "How can you be certain that the parametric curve x = e^{-t} cos t, y = e^{-t} sin t (0 ≤ t ≤ π/2) is a spiral?",
+      "formula": "x = e^{-t}\\cos t,\\; y = e^{-t}\\sin t",
+      "moves": [
+        {
+          "name": "Distance from origin is r = e^{-t}, decreasing as θ = t increases — logarithmic spiral",
+          "effect": "crit",
+          "professor": "You spotted the decaying radius. That's a textbook spiral."
+        },
+        {
+          "name": "Plot a few points to see pattern",
+          "effect": "dodge",
+          "professor": "Brute force yields the shape, but you miss the elegant analytical kill."
+        }
+      ]
+    },
+    {
+      "id": "Q59",
+      "question": "Why does the polar area formula contain a factor of 1/2?",
+      "formula": "A = \\frac{1}{2} \\int_\\alpha^\\beta r^2 d\\theta",
+      "moves": [
+        {
+          "name": "Derived from area of circular sector with angle dθ: dA = ½ r² dθ",
+          "effect": "crit",
+          "professor": "Sector area slice — the geometric root of the formula."
+        },
+        {
+          "name": "From integration by substitution when converting from Cartesian",
+          "effect": "fail",
+          "professor": "It's not a byproduct of substitution; it's built into polar geometry."
+        }
+      ]
+    },
+    {
+      "id": "Q60",
+      "question": "Which strategy is correct for finding points of vertical tangency on a parametric curve?",
+      "formula": "x = f(t),\\; y = g(t)",
+      "moves": [
+        {
+          "name": "Solve dx/dt = 0, then ensure dy/dt ≠ 0 at those t",
+          "effect": "crit",
+          "professor": "Vertical tangent when horizontal motion stops, but not both. Clean rule."
+        },
+        {
+          "name": "Solve dy/dx = ∞ by setting denominator of dy/dx to 0, ignoring dy/dt condition",
+          "effect": "fail",
+          "professor": "If both dx/dt and dy/dt are zero, you get an indeterminate, not a tangent. Careless."
+        }
+      ]
+    }
+  ]
+}

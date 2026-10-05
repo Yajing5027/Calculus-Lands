@@ -1,0 +1,445 @@
+{
+  "enemy": {
+    "name": "Limitus",
+    "maxHP": 2,
+    "image": "assets/enemies/limitus.png",
+    "attackImage": "assets/enemies/limitus_attack.png",
+    "hurtImage": "assets/enemies/limitus_hurt.png"
+  },
+  "professor": {
+    "name": "Dr. H",
+    "image": "assets/professor.png"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "question": "What is the limit of the sequence below as n→∞?",
+      "formula": "a_n = \\left(1 + \\frac{1}{n}\\right)^n",
+      "moves": [
+        {
+          "name": "Recognize the definition of e",
+          "effect": "crit",
+          "professor": "That's the engine of continuous growth—e itself. Perfect form recognition."
+        },
+        {
+          "name": "Take the logarithm and use L'Hôpital's Rule",
+          "effect": "normal",
+          "professor": "That'll get you there, but it's a siege when a single strike would do."
+        },
+        {
+          "name": "Plug in n=∞ directly: 1^∞ = 1",
+          "effect": "fail",
+          "professor": "1^∞ is a mask for an indeterminate form. Don't be fooled by appearances."
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "question": "Determine the best first step to test convergence of the series below.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{1}{n^2 + 3n}",
+      "moves": [
+        {
+          "name": "Compare with 1/n^2",
+          "effect": "crit",
+          "professor": "1/n^2 is the dominant force; comparison cuts straight to convergence."
+        },
+        {
+          "name": "Compare with 1/n",
+          "effect": "fail",
+          "professor": "Your comparison points the wrong way—1/n diverges but the series is smaller. No conclusion."
+        },
+        {
+          "name": "Apply the Integral Test",
+          "effect": "normal",
+          "professor": "Works, but it's heavy armor for a skirmish. Direct comparison is swifter."
+        }
+      ]
+    },
+    {
+      "id": "Q3",
+      "question": "Does the improper integral converge or diverge?",
+      "formula": "\\int_0^1 \\frac{1}{\\sqrt{x}} \\,dx",
+      "moves": [
+        {
+          "name": "Converges by p-integral (p=1/2 < 1)",
+          "effect": "crit",
+          "professor": "Finite endpoint with p<1 means safe landing. The singularity is tame."
+        },
+        {
+          "name": "Diverges because of the vertical asymptote at 0",
+          "effect": "fail",
+          "professor": "An asymptote doesn't guarantee divergence—check the exponent. p<1 converges near zero."
+        },
+        {
+          "name": "Use limit comparison with 1/x",
+          "effect": "normal",
+          "professor": "Acceptable, but the p-test is the sharper arrow."
+        }
+      ]
+    },
+    {
+      "id": "Q4",
+      "question": "Can the Integral Test be applied directly to the series below?",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{\\cos^2 n}{n}",
+      "moves": [
+        {
+          "name": "No, the function is not eventually decreasing",
+          "effect": "crit",
+          "professor": "Integral Test demands a steady downward slope; cos² oscillates too wildly."
+        },
+        {
+          "name": "Yes, compare the integral to 1/x",
+          "effect": "fail",
+          "professor": "You can't just force a non-monotone function into the Integral Test mold. Wrong weapon."
+        },
+        {
+          "name": "Apply the Ratio Test instead",
+          "effect": "normal",
+          "professor": "Ratio Test is also ineffective here, but at least you're reaching for a valid tool. Still a struggle."
+        }
+      ]
+    },
+    {
+      "id": "Q5",
+      "question": "What is the most efficient test for the series below?",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{2^n}{3^n}",
+      "moves": [
+        {
+          "name": "Geometric series test, r=2/3 < 1",
+          "effect": "crit",
+          "professor": "One glance at the common ratio and victory is yours. Clean geometric strike."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "normal",
+          "professor": "Ratio Test works, but it's like using a siege engine on an open gate."
+        },
+        {
+          "name": "Divergence Test: terms go to 0, so series diverges",
+          "effect": "fail",
+          "professor": "Terms going to 0 is the starting line, not the finish. Divergence Test can't prove convergence."
+        }
+      ]
+    },
+    {
+      "id": "Q6",
+      "question": "Identify the quickest valid argument that the series below diverges.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{1}{n}",
+      "moves": [
+        {
+          "name": "p-series with p=1 diverges",
+          "effect": "crit",
+          "professor": "The harmonic series is the classic p=1 trap. One word: diverges."
+        },
+        {
+          "name": "Integral Test with ∫1/x dx",
+          "effect": "normal",
+          "professor": "Solid, though slower than invoking the p-series rule directly."
+        },
+        {
+          "name": "Limit comparison with 1/n^2 gives limit ∞, so diverges",
+          "effect": "fail",
+          "professor": "Limit ∞ means the comparison is inconclusive—you can't force divergence from a convergent series."
+        }
+      ]
+    },
+    {
+      "id": "Q7",
+      "question": "Determine if the sequence converges or diverges.",
+      "formula": "a_n = \\sin\\left(\\frac{n\\pi}{2}\\right)",
+      "moves": [
+        {
+          "name": "Diverges; terms oscillate among 1, 0, -1",
+          "effect": "crit",
+          "professor": "No settling down—three values cycle forever. Divergent and proud of it."
+        },
+        {
+          "name": "Converges to 0 because sine is bounded",
+          "effect": "fail",
+          "professor": "Boundedness isn't enough; the sequence must approach a single value. It bounces instead."
+        },
+        {
+          "name": "Squeeze Theorem with -1 ≤ sin ≤ 1",
+          "effect": "dodge",
+          "professor": "Squeeze only works if the outer bounds converge to the same limit. They don't here—dodged, but not a solution."
+        }
+      ]
+    },
+    {
+      "id": "Q8",
+      "question": "Choose the best comparison to determine convergence of the improper integral.",
+      "formula": "\\int_2^{\\infty} \\frac{1}{x\\sqrt{x^2-1}} \\,dx",
+      "moves": [
+        {
+          "name": "Compare with 1/x^2",
+          "effect": "crit",
+          "professor": "For large x, √(x²-1) ~ x, so integrand ~ 1/x². That's the kill shot."
+        },
+        {
+          "name": "Compare with 1/x",
+          "effect": "fail",
+          "professor": "1/x is too big and diverges, but your target is smaller—no conclusion. Wrong target."
+        },
+        {
+          "name": "Trig substitution x = sec θ",
+          "effect": "normal",
+          "professor": "It works, but why unsheathe a heavy blade when a simple comparison ends it?"
+        }
+      ]
+    },
+    {
+      "id": "Q9",
+      "question": "True or False: If lim_{n→∞} a_n = 0, then Σ a_n converges.",
+      "formula": "",
+      "moves": [
+        {
+          "name": "False; the harmonic series is a counterexample",
+          "effect": "crit",
+          "professor": "Necessary but not sufficient. The harmonic series is the classic ambush."
+        },
+        {
+          "name": "True; vanishing terms guarantee convergence",
+          "effect": "fail",
+          "professor": "That's the most common pitfall in all of series. Terms must vanish, but not fast enough sometimes."
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "question": "Find the sum of the convergent series.",
+      "formula": "\\sum_{n=1}^{\\infty} (0.9)^n",
+      "moves": [
+        {
+          "name": "Sum = 9, first term 0.9, ratio 0.9",
+          "effect": "crit",
+          "professor": "Sharp eye—starting at n=1 shifts the sum. The formula yields 9."
+        },
+        {
+          "name": "Sum = 10, using 1/(1-0.9)",
+          "effect": "fail",
+          "professor": "You forgot the index starts at 1, not 0. That slip costs the battle."
+        },
+        {
+          "name": "Sum = 1/(1-0.9) - 1 = 9",
+          "effect": "normal",
+          "professor": "Correct adjustment, but you took the longer path. Direct a/(1-r) with a=0.9 is faster."
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "question": "Why does the Integral Test fail for the series below?",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{(-1)^n}{n}",
+      "moves": [
+        {
+          "name": "The terms are not positive",
+          "effect": "crit",
+          "professor": "Integral Test requires a nonnegative function. Alternating signs break the contract."
+        },
+        {
+          "name": "The function is not continuous",
+          "effect": "dodge",
+          "professor": "Continuous extension exists, but that's not the real issue. The positivity condition is the first line."
+        },
+        {
+          "name": "The absolute values decrease; test applies",
+          "effect": "fail",
+          "professor": "Decreasing absolute value doesn't rescue positivity. The test is strictly for nonnegative terms."
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "question": "Explain why the integral below is not zero despite the integrand being odd.",
+      "formula": "\\int_{-1}^1 \\frac{1}{x^3} \\,dx",
+      "moves": [
+        {
+          "name": "The improper integral diverges due to a non-integrable singularity at 0",
+          "effect": "crit",
+          "professor": "Symmetry doesn't save you when the function blows up in the middle. Divergence wins."
+        },
+        {
+          "name": "By odd symmetry, the integral must be zero",
+          "effect": "fail",
+          "professor": "Odd symmetry only applies if the integral converges. Here it diverges—a classic pitfall."
+        },
+        {
+          "name": "Use Cauchy principal value to assign 0",
+          "effect": "dodge",
+          "professor": "CPV gives 0 but the improper integral itself diverges. You sidestep the issue without solving it."
+        }
+      ]
+    },
+    {
+      "id": "Q13",
+      "question": "A sequence is increasing and bounded above. What can be concluded?",
+      "formula": "",
+      "moves": [
+        {
+          "name": "It converges, by the Monotone Convergence Theorem",
+          "effect": "crit",
+          "professor": "Monotone bounded sequences are guaranteed to converge. Solid foundation."
+        },
+        {
+          "name": "It necessarily diverges to infinity",
+          "effect": "fail",
+          "professor": "Bounded above means it can't escape to infinity. It must settle somewhere finite."
+        },
+        {
+          "name": "More information is needed",
+          "effect": "dodge",
+          "professor": "The theorem gives you certainty—no extra info required. Trust the axioms."
+        }
+      ]
+    },
+    {
+      "id": "Q14",
+      "question": "Determine convergence/divergence of the series by the quickest method.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{n}{n+1}",
+      "moves": [
+        {
+          "name": "Diverges by Divergence Test; limit is 1 ≠ 0",
+          "effect": "crit",
+          "professor": "The terms walk stubbornly toward 1. Divergence Test ends it instantly."
+        },
+        {
+          "name": "Compare with harmonic series, n/(n+1) ≥ 1/2",
+          "effect": "normal",
+          "professor": "Valid, but why wield a comparison when the limit not zero already condemns it?"
+        },
+        {
+          "name": "Integral Test",
+          "effect": "fail",
+          "professor": "The Integral Test here is like drawing a map when the destination is right in front of you."
+        }
+      ]
+    },
+    {
+      "id": "Q15",
+      "question": "True or False: Σ 1/n^p converges for any p > 1, no matter how close p is to 1.",
+      "formula": "",
+      "moves": [
+        {
+          "name": "True; p > 1 guarantees convergence",
+          "effect": "crit",
+          "professor": "Even p=1.0001 brings convergence. The p=1 boundary is a razor's edge."
+        },
+        {
+          "name": "False; p must be significantly larger than 1, like p≥2",
+          "effect": "fail",
+          "professor": "Any p>1, no matter how tiny the margin, tips the scale. Remember that."
+        }
+      ]
+    },
+    {
+      "id": "Q16",
+      "question": "If 0 ≤ a_n ≤ b_n and Σ b_n converges, what can be said about Σ a_n?",
+      "formula": "",
+      "moves": [
+        {
+          "name": "Σ a_n converges by Comparison Test",
+          "effect": "crit",
+          "professor": "Smaller than a convergent series? Safe and sound. Comparison Test seals it."
+        },
+        {
+          "name": "Σ a_n diverges because it is smaller",
+          "effect": "fail",
+          "professor": "Being smaller than a convergent series is a haven, not a hazard. Direction matters."
+        },
+        {
+          "name": "No conclusion without more information",
+          "effect": "dodge",
+          "professor": "The Comparison Test directly gives convergence. Hesitation here costs momentum."
+        }
+      ]
+    },
+    {
+      "id": "Q17",
+      "question": "Which approach best determines convergence of the improper integral?",
+      "formula": "\\int_1^{\\infty} \\frac{\\ln x}{x^2} \\, dx",
+      "moves": [
+        {
+          "name": "Compare with 1/x^{3/2} for large x",
+          "effect": "crit",
+          "professor": "ln x grows slower than any power, so 1/x^{2-ε} dominates. Sharp comparison."
+        },
+        {
+          "name": "Use integration by parts",
+          "effect": "normal",
+          "professor": "You'll reach an answer, but it's a grind. Comparison breaks through faster."
+        },
+        {
+          "name": "Apply the p-integral rule directly",
+          "effect": "fail",
+          "professor": "ln x in the numerator breaks the pure p-integral form. Can't apply blindly."
+        }
+      ]
+    },
+    {
+      "id": "Q18",
+      "question": "For which x does the geometric series Σ x^n converge?",
+      "formula": "",
+      "moves": [
+        {
+          "name": "|x| < 1",
+          "effect": "crit",
+          "professor": "The golden interval. Outside, it's chaos. Geometric series has no mercy for |x|≥1."
+        },
+        {
+          "name": "x < 1",
+          "effect": "fail",
+          "professor": "What about x=-2? Negative values matter. Absolute value is the key."
+        },
+        {
+          "name": "All real x",
+          "effect": "fail",
+          "professor": "If only. The series explodes outside the unit interval."
+        }
+      ]
+    },
+    {
+      "id": "Q19",
+      "question": "Find the limit of the sequence.",
+      "formula": "a_n = \\frac{\\ln n}{n}",
+      "moves": [
+        {
+          "name": "0; log grows slower than any positive power",
+          "effect": "crit",
+          "professor": "Growth hierarchy: powers beat logs every time. Zero it is."
+        },
+        {
+          "name": "1; because ln n and n both go to infinity",
+          "effect": "fail",
+          "professor": "n crushes ln n. Tendency to infinity doesn't mean ratio one. Watch the speeds."
+        },
+        {
+          "name": "Use L'Hôpital's Rule on (ln n)/n",
+          "effect": "normal",
+          "professor": "Elegant, and confirms the limit 0. Growth intuition is faster, but the rule backs it up."
+        }
+      ]
+    },
+    {
+      "id": "Q20",
+      "question": "Determine whether the series converges or diverges.",
+      "formula": "\\sum_{n=2}^{\\infty} \\frac{1}{n \\ln n}",
+      "moves": [
+        {
+          "name": "Diverges by Integral Test; ∫ dx/(x ln x) = ln(ln x) → ∞",
+          "effect": "crit",
+          "professor": "Integral Test exposes the subtle divergence. The double logarithm grows unbounded."
+        },
+        {
+          "name": "Converges by Comparison Test with 1/n^2",
+          "effect": "fail",
+          "professor": "1/(n ln n) is larger than 1/n^2 for large n—comparison goes the wrong way. Misstep."
+        },
+        {
+          "name": "Converges because terms go to 0",
+          "effect": "fail",
+          "professor": "Vanishing terms deceived you again. This series diverges slowly but surely."
+        }
+      ]
+    }
+  ]
+}

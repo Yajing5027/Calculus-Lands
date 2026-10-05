@@ -1,0 +1,455 @@
+{
+  "enemy": {
+    "name": "Limitus",
+    "maxHP": 2,
+    "image": "assets/limitus.png",
+    "attackImage": "assets/limitus_attack.png",
+    "hurtImage": "assets/limitus_hurt.png"
+  },
+  "professor": {
+    "name": "Dr. H",
+    "image": "assets/professor.png"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "question": "Identify the order of the differential equation below.",
+      "formula": "(y'')^3 + \\sin(x)\\, y' = e^x",
+      "moves": [
+        {
+          "name": "Third-order",
+          "effect": "fail",
+          "professor": "That cube is on the derivative, not the derivative itself. It's a power, not an order increase. You just let the enemy land a hit."
+        },
+        {
+          "name": "Second-order",
+          "effect": "crit",
+          "professor": "Highest derivative is y''. The power on the outside is a distraction. Clean kill."
+        },
+        {
+          "name": "First-order",
+          "effect": "fail",
+          "professor": "You missed y'' entirely. That's the highest derivative on the field. Enemy counterattacks."
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "question": "Verify if the function below is a solution to the differential equation.",
+      "formula": "y' = 3x^2, \\quad y = x^3 + 5",
+      "moves": [
+        {
+          "name": "Differentiate and substitute",
+          "effect": "crit",
+          "professor": "One clean derivative. y' = 3x^2 matches the equation perfectly. The constant 5 vanishes like a ghost. Target eliminated."
+        },
+        {
+          "name": "Integrate both sides",
+          "effect": "dodge",
+          "professor": "You're solving from scratch instead of verifying. That's like building a new sword when you just needed to check if the one in your hand is sharp. Technically possible but wastes time."
+        },
+        {
+          "name": "Substitute without differentiating",
+          "effect": "fail",
+          "professor": "You plugged y without finding y'? That's walking into battle blind. The enemy saw that coming."
+        }
+      ]
+    },
+    {
+      "id": "Q3",
+      "question": "Which substitution correctly simplifies the integral below?",
+      "formula": "\\int x\\sqrt{x-1}\\,dx",
+      "moves": [
+        {
+          "name": "u = x-1, then x = u+1",
+          "effect": "crit",
+          "professor": "Linear translation is the straight sword here. u = x-1 rewrites the whole integrand cleanly. One stroke."
+        },
+        {
+          "name": "u = \\sqrt{x-1}",
+          "effect": "normal",
+          "professor": "That works too — u^2 = x-1 leads to a rational function. A curved blade, but it still cuts. Just takes an extra swing."
+        },
+        {
+          "name": "u = x\\sqrt{x-1}",
+          "effect": "fail",
+          "professor": "Setting u to the entire integrand? The derivative becomes a tangled mess. You just handed the enemy your weapon."
+        }
+      ]
+    },
+    {
+      "id": "Q4",
+      "question": "Determine whether the differential equation below is autonomous.",
+      "formula": "\\frac{dy}{dx} = y^2 - y + 1",
+      "moves": [
+        {
+          "name": "Yes, autonomous",
+          "effect": "crit",
+          "professor": "The independent variable x is absent from the right side. Only y appears. That's the definition. Direct hit."
+        },
+        {
+          "name": "No, because it contains y^2",
+          "effect": "fail",
+          "professor": "Nonlinear does not mean non-autonomous. The power of y is irrelevant to the classification. You swung at the wrong target."
+        },
+        {
+          "name": "No, because the derivative is dy/dx",
+          "effect": "fail",
+          "professor": "The notation dy/dx doesn't make it non-autonomous. It's about whether x appears explicitly on the RHS. Enemy punished that mistake."
+        }
+      ]
+    },
+    {
+      "id": "Q5",
+      "question": "Which method solves the differential equation below?",
+      "formula": "\\frac{dy}{dx} = \\frac{x}{y}",
+      "moves": [
+        {
+          "name": "Separation of variables",
+          "effect": "crit",
+          "professor": "y dy = x dx. Clean separation. Cross-multiply and integrate. The enemy had no chance."
+        },
+        {
+          "name": "Integrating factor",
+          "effect": "dodge",
+          "professor": "Integrating factor targets linear first-order equations. This one is nonlinear. You're wearing plate armor to swim — technically equipment, but wrong for this terrain."
+        },
+        {
+          "name": "Characteristic equation",
+          "effect": "fail",
+          "professor": "That's for constant-coefficient linear ODEs. This is first-order and separable. Completely wrong battlefield."
+        }
+      ]
+    },
+    {
+      "id": "Q6",
+      "question": "A tank initially contains 60 kg of salt in 100 L of water. A solution with 0.03 kg/L enters at 8 L/min and drains at the same rate. What is the rate of change of salt?",
+      "formula": "\\frac{dy}{dt} = 0.24 - \\frac{8y}{100}",
+      "moves": [
+        {
+          "name": "dy/dt = (rate in) - (rate out)",
+          "effect": "crit",
+          "professor": "Rate in is concentration times flow. Rate out is y/volume times flow. The formula matches perfectly. Textbook strike."
+        },
+        {
+          "name": "dy/dt = 0.03 - 8y/100",
+          "effect": "fail",
+          "professor": "You forgot to multiply concentration by the flow rate for the incoming stream. 0.03 kg/L times 8 L/min is 0.24. Sloppy arithmetic cost you."
+        },
+        {
+          "name": "dy/dt = 0.24 - y/100",
+          "effect": "fail",
+          "professor": "Right idea on rate in, but the outflow needs the flow rate multiplier. Without it, the units don't even match. Enemy spotted that gap."
+        }
+      ]
+    },
+    {
+      "id": "Q7",
+      "question": "Evaluate the integral.",
+      "formula": "\\int \\frac{\\ln(y^2)}{y}\\,dy",
+      "moves": [
+        {
+          "name": "Substitute u = \\ln y",
+          "effect": "crit",
+          "professor": "ln(y^2) = 2 ln y. Then ∫ (2 ln y)/y dy = ∫ 2u du = u^2 + C. Recognize the hidden simplicity. One precise strike."
+        },
+        {
+          "name": "Substitute u = \\ln(y^2)",
+          "effect": "normal",
+          "professor": "That works. du = 2/y dy, so the integral becomes ∫ u/2 du. A longer path but the enemy still falls."
+        },
+        {
+          "name": "Integration by parts",
+          "effect": "dodge",
+          "professor": "Parts can handle this, but it's overkill. You're bringing a siege weapon to a duel. The u-sub is faster and cleaner."
+        }
+      ]
+    },
+    {
+      "id": "Q8",
+      "question": "Which substitution is most efficient for the integral below?",
+      "formula": "\\int w e^{-6w^2+2}\\,dw",
+      "moves": [
+        {
+          "name": "u = -6w^2 + 2",
+          "effect": "crit",
+          "professor": "du = -12w dw gives you exactly w dw = -du/12. The linear w matches the derivative perfectly. Surgical."
+        },
+        {
+          "name": "u = e^{-6w^2+2}",
+          "effect": "fail",
+          "professor": "If u is the exponential, du brings down a chain rule mess with w and the exponential. The w outside doesn't cancel cleanly. Weapon jammed."
+        },
+        {
+          "name": "u = w^2",
+          "effect": "fail",
+          "professor": "That only handles part of the exponent. You still have the exponential of a linear function in u. Incomplete substitution leaves the enemy standing."
+        }
+      ]
+    },
+    {
+      "id": "Q9",
+      "question": "Identify the type of differential equation.",
+      "formula": "y' = \\frac{3x^2+4x-4}{2y-4}",
+      "moves": [
+        {
+          "name": "Separable",
+          "effect": "crit",
+          "professor": "Right side is g(x)/h(y). Multiply both sides by (2y-4) and the variables split cleanly. Identified and countered perfectly."
+        },
+        {
+          "name": "Exact",
+          "effect": "fail",
+          "professor": "Exact equations require the form M dx + N dy = 0 with equal mixed partials. This isn't in that form. Wrong classification gets you hit."
+        },
+        {
+          "name": "Homogeneous",
+          "effect": "dodge",
+          "professor": "The numerator and denominator have different degrees if you check. It's not homogeneous in the Euler sense. Right idea checking structure, but wrong label."
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "question": "Solve the differential equation.",
+      "formula": "\\frac{dy}{dt} = ky",
+      "moves": [
+        {
+          "name": "y = Ce^{kt}",
+          "effect": "crit",
+          "professor": "The classic exponential growth solution. Separate, integrate, exponentiate. The enemy never stood a chance against this fundamental form."
+        },
+        {
+          "name": "y = C + kt",
+          "effect": "fail",
+          "professor": "That's the solution to dy/dt = k, not ky. You confused proportional growth with constant growth. The enemy exploited that basic error."
+        },
+        {
+          "name": "y = k\\ln|t| + C",
+          "effect": "fail",
+          "professor": "That's what you get solving dy/dt = k/t. The equation has y on the right, not t. Completely wrong battlefield intelligence."
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "question": "Find the area of the region bounded by y = x^2 and y = 4.",
+      "formula": "\\int_{-2}^{2} (4 - x^2)\\,dx",
+      "moves": [
+        {
+          "name": "Integrate top minus bottom with respect to x",
+          "effect": "crit",
+          "professor": "y=4 is above y=x^2 on [-2,2]. Top minus bottom, integrate across the intersection points. Textbook execution."
+        },
+        {
+          "name": "Integrate with respect to y from 0 to 4",
+          "effect": "normal",
+          "professor": "x = ±√y gives right minus left. Equally valid — just a horizontal slice approach. Different angle, same kill."
+        },
+        {
+          "name": "Integrate x^2 - 4 from -2 to 2",
+          "effect": "fail",
+          "professor": "You flipped top and bottom. That gives negative area unless you take absolute value. The enemy dodged your inverted strike."
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "question": "Set up the integral for the volume when the region under y = √x on [0,1] is rotated about the x-axis.",
+      "formula": "\\pi \\int_{0}^{1} x\\,dx",
+      "moves": [
+        {
+          "name": "Disk method, V = π ∫ (√x)^2 dx",
+          "effect": "crit",
+          "professor": "(√x)^2 = x. The radius squared eliminates the root. Volume is π∫x dx = π/2. Clean disk method. Perfect."
+        },
+        {
+          "name": "Shell method with respect to y",
+          "effect": "dodge",
+          "professor": "Shells around the x-axis? Shells are for rotation about an axis perpendicular to the variable of integration. You're holding the weapon sideways."
+        },
+        {
+          "name": "V = 2π ∫ x√x dx",
+          "effect": "fail",
+          "professor": "That's the shell method for rotation about the y-axis. Different axis, different formula. You deployed the wrong formation."
+        }
+      ]
+    },
+    {
+      "id": "Q13",
+      "question": "What is the geometric meaning of the integral below?",
+      "formula": "\\int_{a}^{b} [f(x) - g(x)]\\,dx \\quad (f(x) \\ge g(x))",
+      "moves": [
+        {
+          "name": "Area between two curves",
+          "effect": "crit",
+          "professor": "That's exactly the definition. Top minus bottom, integrated over the interval. The area between f and g. Direct hit."
+        },
+        {
+          "name": "Volume of a solid of revolution",
+          "effect": "fail",
+          "professor": "Volume needs π[r(x)]^2 or 2π(shell). This is a plain area integral. The enemy punished your confusion of dimensions."
+        },
+        {
+          "name": "Arc length of f minus arc length of g",
+          "effect": "fail",
+          "professor": "Arc length involves sqrt(1+(f')^2). Nothing like that here. You're mixing up entirely different formulas."
+        }
+      ]
+    },
+    {
+      "id": "Q14",
+      "question": "For the region bounded by y = x^3, y = 8, and x = 0 rotated about the y-axis, which method is most efficient?",
+      "formula": "x = \\sqrt[3]{y}",
+      "moves": [
+        {
+          "name": "Disk method with respect to y",
+          "effect": "crit",
+          "professor": "x = y^{1/3} gives the radius. Volume = π∫(y^{1/3})^2 dy from 0 to 8. Natural variable. The disk method slices through."
+        },
+        {
+          "name": "Shell method with respect to x",
+          "effect": "normal",
+          "professor": "Radius is x, height is 8 - x^3. Equally valid. A different grip on the same weapon — both get the kill."
+        },
+        {
+          "name": "Washer method with respect to x",
+          "effect": "dodge",
+          "professor": "Washers need an inner and outer radius. This is a solid region up to x=0 boundary. One radius is zero, so it degenerates to the disk method. You're naming a special case of what you already have."
+        }
+      ]
+    },
+    {
+      "id": "Q15",
+      "question": "Which statement correctly defines an equilibrium solution of an autonomous ODE?",
+      "formula": "\\frac{dy}{dx} = f(y)",
+      "moves": [
+        {
+          "name": "A constant solution y=c where f(c)=0",
+          "effect": "crit",
+          "professor": "Equilibrium means dy/dx = 0, so f(c)=0. The solution doesn't move. Pinpoint definition. Enemy neutralized."
+        },
+        {
+          "name": "Any solution where the derivative is constant",
+          "effect": "fail",
+          "professor": "Constant derivative means linear growth, not equilibrium. dy/dx = 5 is constant but the solution keeps changing. You missed the point."
+        },
+        {
+          "name": "The solution obtained by separation of variables",
+          "effect": "fail",
+          "professor": "Separation gives the general solution. Equilibrium is a specific constant solution. Conflating method with definition cost you."
+        }
+      ]
+    },
+    {
+      "id": "Q16",
+      "question": "Solve the separable differential equation.",
+      "formula": "\\frac{dy}{dx} = -2y^2 x, \\quad y(0)=7",
+      "moves": [
+        {
+          "name": "Separate and integrate: -1/y = -x^2 + C, then apply IC",
+          "effect": "crit",
+          "professor": "∫ dy/y^2 = ∫ -2x dx gives -1/y = -x^2 + C. Then y(0)=7 means -1/7 = C, so y = 1/(x^2 + 1/7). Clean execution."
+        },
+        {
+          "name": "Use integrating factor",
+          "effect": "fail",
+          "professor": "This is nonlinear (y^2 term). Integrating factor only works for linear first-order ODEs. You brought the wrong weapon to this fight."
+        },
+        {
+          "name": "Guess y = Ax^2 + B",
+          "effect": "fail",
+          "professor": "Undetermined coefficients? That's for linear ODEs with constant coefficients. This is nonlinear and separable. Total misfire."
+        }
+      ]
+    },
+    {
+      "id": "Q17",
+      "question": "Find the volume of the solid whose base is the region bounded by y=x^2 and y=4, with square cross-sections perpendicular to the y-axis.",
+      "formula": "\\int_{0}^{4} (2\\sqrt{y})^2\\,dy",
+      "moves": [
+        {
+          "name": "Side length = 2√y, area = 4y, integrate A(y) dy",
+          "effect": "crit",
+          "professor": "The width at height y is 2√y. Square cross-section means area = (2√y)^2 = 4y. ∫4y dy from 0 to 4. Clean."
+        },
+        {
+          "name": "Side length = √y, area = y, integrate",
+          "effect": "fail",
+          "professor": "The base extends from x=-√y to x=√y, so the side length is 2√y, not √y. You halved the distance. Enemy exploited that measurement error."
+        },
+        {
+          "name": "Use disk method",
+          "effect": "fail",
+          "professor": "Disk method is for solids of revolution. This solid has square cross-sections. Completely different geometry. Wrong playbook."
+        }
+      ]
+    },
+    {
+      "id": "Q18",
+      "question": "Which of the following is a particular solution to the IVP?",
+      "formula": "y' = 2x, \\quad y(1) = 4",
+      "moves": [
+        {
+          "name": "y = x^2 + 3",
+          "effect": "crit",
+          "professor": "General solution is y = x^2 + C. y(1) = 1 + C = 4 means C = 3. Direct integration, direct evaluation. Flawless."
+        },
+        {
+          "name": "y = x^2 + 4",
+          "effect": "fail",
+          "professor": "You plugged the initial value directly into C instead of solving for it. y(1) = 1+4 = 5, not 4. Careless."
+        },
+        {
+          "name": "y = 2x + 2",
+          "effect": "fail",
+          "professor": "That's the solution to y' = 2, not y' = 2x. You integrated incorrectly. The enemy doesn't forgive basic antiderivative errors."
+        }
+      ]
+    },
+    {
+      "id": "Q19",
+      "question": "Set up the volume when the region between y=x and y=x^2 is rotated about the line y=2.",
+      "formula": "\\pi \\int_{0}^{1} [(2-x^2)^2 - (2-x)^2]\\,dx",
+      "moves": [
+        {
+          "name": "Washer method: outer radius 2-x^2, inner radius 2-x",
+          "effect": "crit",
+          "professor": "Distance from axis y=2 to y=x^2 is 2-x^2. To y=x is 2-x. Since x^2 ≤ x on [0,1], x^2 is further from y=2. Outer minus inner. Masterful."
+        },
+        {
+          "name": "Washer method: outer radius 2-x, inner radius 2-x^2",
+          "effect": "fail",
+          "professor": "You flipped the radii. On [0,1], x^2 < x, so the parabola is farther from y=2. The larger distance is the outer radius. Enemy spotted the inversion."
+        },
+        {
+          "name": "Shell method with radius = 2-y",
+          "effect": "normal",
+          "professor": "Shells about y=2 using horizontal slices? That works too, with careful handling. Takes more algebra but the enemy still falls. A longer path."
+        }
+      ]
+    },
+    {
+      "id": "Q20",
+      "question": "Why is the differential equation below not solvable by separation of variables?",
+      "formula": "y' = y + \\sin x",
+      "moves": [
+        {
+          "name": "The right side cannot be factored as g(x)·h(y)",
+          "effect": "crit",
+          "professor": "y + sin x is a sum, not a product. You can't split the variables. This is linear, not separable — use an integrating factor instead. Sharp analysis."
+        },
+        {
+          "name": "Because it contains sin x",
+          "effect": "fail",
+          "professor": "sin x is just a function of x. If it were y' = y·sin x, that's separable. The issue is the addition, not the trig function. Superficial diagnosis."
+        },
+        {
+          "name": "Because it is nonlinear",
+          "effect": "fail",
+          "professor": "It is actually linear: y' - y = sin x. First-order linear in standard form. You misidentified the structure entirely."
+        }
+      ]
+    }
+  ]
+}

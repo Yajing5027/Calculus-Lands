@@ -1,0 +1,475 @@
+{
+  "enemy": {
+    "name": "Owlculus",
+    "maxHP": 8,
+    "image": "assets/enemies/owlculus.png",
+    "attackImage": "assets/enemies/owlculus_attack.png",
+    "hurtImage": "assets/enemies/owlculus_hurt.png"
+  },
+  "professor": {
+    "name": "Dr. H",
+    "image": "assets/professor.png"
+  },
+  "questions": [
+    {
+      "id": "Q1",
+      "question": "Determine the convergence of the improper integral below with the best method.",
+      "formula": "\\int_1^{\\infty} \\frac{\\ln x}{x^2} \\, dx",
+      "moves": [
+        {
+          "name": "Compare with 1/x^{3/2} for large x",
+          "effect": "crit",
+          "professor": "ln x is a slow creature; x^{3/2} in the denominator breaks its spine. Clean convergence."
+        },
+        {
+          "name": "Integration by parts",
+          "effect": "normal",
+          "professor": "Valid, you'll dig up the exact value. But the comparison dagger is faster in open combat."
+        },
+        {
+          "name": "Apply the p-test directly: p=2 > 1, converges",
+          "effect": "fail",
+          "professor": "The p-test demands a pure power; ln x poisons that argument. Watch the battlefield."
+        },
+        {
+          "name": "No conclusion; the integral conditionally converges",
+          "effect": "dodge",
+          "professor": "Conditional convergence doesn't apply to positive integrands. You're parrying shadows."
+        }
+      ]
+    },
+    {
+      "id": "Q2",
+      "question": "Which test gives the swiftest, definitive verdict for the series below?",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{2^n}{n!}",
+      "moves": [
+        {
+          "name": "Ratio Test; limit = 0 < 1",
+          "effect": "crit",
+          "professor": "Factorial vs exponential? Ratio Test slices it in a single stroke. Done."
+        },
+        {
+          "name": "Divergence Test; terms go to 0 so it diverges",
+          "effect": "fail",
+          "professor": "Going to 0 is the ticket to the game, not the red card. Divergence Test is silent here."
+        },
+        {
+          "name": "Integral Test",
+          "effect": "fail",
+          "professor": "You'd have to replace n! with the Gamma function. That's siege equipment for a field skirmish."
+        },
+        {
+          "name": "Limit Comparison with 1/n^2",
+          "effect": "dodge",
+          "professor": "Limit Comparison: limit is 0, which is inconclusive against a convergent series. Wasted move."
+        }
+      ]
+    },
+    {
+      "id": "Q3",
+      "question": "Find the limit of the sequence.",
+      "formula": "a_n = \\left( \\frac{n+1}{n} \\right)^n",
+      "moves": [
+        {
+          "name": "e, by the definition (1+1/n)^n",
+          "effect": "crit",
+          "professor": "The classic limit that births e. Your pattern recognition is razor-sharp."
+        },
+        {
+          "name": "1, because (n+1)/n → 1 and 1^n = 1",
+          "effect": "fail",
+          "professor": "1^∞ is the oldest trick in the book. The mask hides e. Don't fall for it."
+        },
+        {
+          "name": "Apply L'Hôpital's Rule after taking the log",
+          "effect": "normal",
+          "professor": "Logarithm then L'Hôpital gets you there, but that's bringing a ladder when you can just walk through the door."
+        }
+      ]
+    },
+    {
+      "id": "Q4",
+      "question": "Classify the convergence of the series.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{(-1)^n}{\\sqrt[3]{n^2}}",
+      "moves": [
+        {
+          "name": "Conditionally convergent; AST applies but p=2/3 < 1 so absolute diverges",
+          "effect": "crit",
+          "professor": "Alternating signs salvage the slow decay. Conditional convergence, perfect diagnosis."
+        },
+        {
+          "name": "Absolutely convergent; the absolute series is a p-series with p=2/3",
+          "effect": "fail",
+          "professor": "p=2/3 < 1 spells divergence for the absolute series. No absolute shield exists."
+        },
+        {
+          "name": "Diverges; terms do not approach 0",
+          "effect": "fail",
+          "professor": "1/n^(2/3) does vanish, slowly but surely. Divergence Test won't fire."
+        },
+        {
+          "name": "Use Ratio Test, limit = 1 so diverges",
+          "effect": "dodge",
+          "professor": "Ratio Test gives 1—inconclusive. You dodged a trap but left the field without a kill."
+        }
+      ]
+    },
+    {
+      "id": "Q5",
+      "question": "Determine the best method to evaluate the improper integral.",
+      "formula": "\\int_0^4 \\frac{dx}{\\sqrt{x}}",
+      "moves": [
+        {
+          "name": "Recognize the p-integral with p=1/2, converges to 4",
+          "effect": "crit",
+          "professor": "p=1/2 < 1? Convergent on a finite interval with a singularity at 0. Nailed it."
+        },
+        {
+          "name": "Diverges because the integrand blows up at 0",
+          "effect": "fail",
+          "professor": "Blowing up isn't a death sentence. The exponent decides the winner, and it spares this one."
+        },
+        {
+          "name": "Use the substitution u = √x",
+          "effect": "normal",
+          "professor": "Gets the job done, cleanly too. But p-test is the faster blade."
+        }
+      ]
+    },
+    {
+      "id": "Q6",
+      "question": "Identify the flaw in applying the Integral Test to the series below.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{\\sin^2 n}{n}",
+      "moves": [
+        {
+          "name": "The function is not decreasing; sin² n oscillates",
+          "effect": "crit",
+          "professor": "Integral Test demands a downward slope. sin² n is too chaotic to grant that."
+        },
+        {
+          "name": "It does not apply because the terms are not all positive",
+          "effect": "dodge",
+          "professor": "sin² n ≥ 0, so the positivity condition holds. Your aim was off, but you didn't crash."
+        },
+        {
+          "name": "The integral ∫ sin² x / x dx does not exist",
+          "effect": "fail",
+          "professor": "The integral actually converges, but the test requires monotonicity, which is the real killer."
+        }
+      ]
+    },
+    {
+      "id": "Q7",
+      "question": "Find the sum of the convergent series.",
+      "formula": "\\sum_{n=0}^{\\infty} \\left( \\frac{2}{3^n} - \\frac{1}{2^n} \\right)",
+      "moves": [
+        {
+          "name": "Sum = 3 - 2 = 1",
+          "effect": "crit",
+          "professor": "Split it into two geometric series. 2/(1-1/3) = 3, 1/(1-1/2) = 2. Result 1. Perfect."
+        },
+        {
+          "name": "Sum = 2/(1-1/3) + 1/(1-1/2) = 3+2 = 5",
+          "effect": "fail",
+          "professor": "Sign error! The second series is subtracted. You marched right into the negative sign."
+        },
+        {
+          "name": "Diverges because 2/3^n diverges",
+          "effect": "fail",
+          "professor": "2/3^n is a geometric series with r=1/3, completely convergent. Missing the forest for the trees."
+        }
+      ]
+    },
+    {
+      "id": "Q8",
+      "question": "Select the sharpest reasoning for the divergence below.",
+      "formula": "\\int_0^1 \\frac{dx}{x^2}",
+      "moves": [
+        {
+          "name": "p-integral with p=2 ≥ 1 on (0,1] diverges",
+          "effect": "crit",
+          "professor": "At a finite singularity, p≥1 is the lethal zone. Direct hit."
+        },
+        {
+          "name": "The antiderivative -1/x is finite from 0 to 1",
+          "effect": "fail",
+          "professor": "-1/x blows to -∞ at x=0. That's infinite area, not finite. Misplayed."
+        },
+        {
+          "name": "Comparison with 1/x shows divergence",
+          "effect": "normal",
+          "professor": "Works, but it's a slower path. The p-test is the immediate executioner."
+        }
+      ]
+    },
+    {
+      "id": "Q9",
+      "question": "Determine the best first move for the series.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{n^2}{2^n}",
+      "moves": [
+        {
+          "name": "Ratio Test",
+          "effect": "crit",
+          "professor": "Polynomial over exponential? Ratio Test cuts its life short."
+        },
+        {
+          "name": "Root Test yields n^2/n → 1, so inconclusive",
+          "effect": "dodge",
+          "professor": "Root Test actually gives (n^2)^{1/n} / 2 → 1/2 < 1. It would work, but you misapplied it. Dodge only."
+        },
+        {
+          "name": "Integral Test by integrating x^2/2^x",
+          "effect": "fail",
+          "professor": "Integrating x^2/2^x is doable but a slog—wrong weapon for a quick kill."
+        }
+      ]
+    },
+    {
+      "id": "Q10",
+      "question": "What is the radius of convergence of the power series?",
+      "formula": "\\sum_{n=1}^{\\infty} n x^n",
+      "moves": [
+        {
+          "name": "Radius = 1, by Ratio Test",
+          "effect": "crit",
+          "professor": "Ratio Test gives |x|. The edge is exactly 1. Swift and precise."
+        },
+        {
+          "name": "Radius = ∞, because n grows slowly",
+          "effect": "fail",
+          "professor": "Slow growth doesn't grant infinite radius. The geometric core x^n dictates the boundary."
+        },
+        {
+          "name": "Radius = 0",
+          "effect": "fail",
+          "professor": "The series plainly converges for |x| < 1. Your radius is too pessimistic."
+        }
+      ]
+    },
+    {
+      "id": "Q11",
+      "question": "Choose the best comparison to prove convergence of the improper integral.",
+      "formula": "\\int_3^{\\infty} \\frac{dx}{x\\sqrt{x^2-9}}",
+      "moves": [
+        {
+          "name": "Compare with 1/x^2",
+          "effect": "crit",
+          "professor": "For huge x, √(x²-9) ~ x, so the integrand is ~ 1/x². The convergent p-test dominates."
+        },
+        {
+          "name": "Compare with 1/x; diverges so the integral diverges",
+          "effect": "fail",
+          "professor": "Your target is smaller than 1/x. Being smaller than a divergent giant proves nothing."
+        },
+        {
+          "name": "Trig substitution x = 3 sec θ",
+          "effect": "normal",
+          "professor": "Will evaluate it exactly, but you're drawing a two-hander for a shoving match."
+        }
+      ]
+    },
+    {
+      "id": "Q12",
+      "question": "Why does the series diverge?",
+      "formula": "\\sum_{n=1}^{\\infty} \\left(1 + \\frac{1}{n}\\right)^n",
+      "moves": [
+        {
+          "name": "Divergence Test; limit is e ≠ 0",
+          "effect": "crit",
+          "professor": "The terms march towards e, not zero. Divergence Test strikes the fatal blow."
+        },
+        {
+          "name": "Compare with the harmonic series",
+          "effect": "fail",
+          "professor": "Each term is near e > 1, much larger than 1/n. The harmonic series isn't the point here."
+        },
+        {
+          "name": "Apply the Integral Test after taking log",
+          "effect": "fail",
+          "professor": "Overcomplication. The limit of the terms isn't zero; that's the first and last word."
+        }
+      ]
+    },
+    {
+      "id": "Q13",
+      "question": "Identify the sum of the telescoping series.",
+      "formula": "\\sum_{n=2}^{\\infty} \\left( \\frac{1}{\\ln n} - \\frac{1}{\\ln(n+1)} \\right)",
+      "moves": [
+        {
+          "name": "Sum = 1/ln 2, because all later terms cancel",
+          "effect": "crit",
+          "professor": "Telescope collapse: only the first term survives. 1/ln 2 is the spoils."
+        },
+        {
+          "name": "Sum = 0 because everything cancels",
+          "effect": "fail",
+          "professor": "The first term has no predecessor to cancel it. You lost 1/ln 2 in the fray."
+        },
+        {
+          "name": "Diverges because 1/ln n is too large",
+          "effect": "dodge",
+          "professor": "The telescoping structure forces convergence regardless of individual term size. You dodged but drew the wrong conclusion."
+        }
+      ]
+    },
+    {
+      "id": "Q14",
+      "question": "Determine the convergence of the series with the optimal test.",
+      "formula": "\\sum_{n=2}^{\\infty} \\frac{1}{n \\ln(n^2)}",
+      "moves": [
+        {
+          "name": "Diverges by Integral Test; note ln(n^2) = 2 ln n",
+          "effect": "crit",
+          "professor": "Simplify the log first; the double logarithm still yields divergence. Integral Test is your friend."
+        },
+        {
+          "name": "Converges because it behaves like 1/(n^2)",
+          "effect": "fail",
+          "professor": "1/(n ln n) is larger than 1/n^2 for most n. Your behavior guess was miles off."
+        },
+        {
+          "name": "Converges by Limit Comparison with 1/n^2",
+          "effect": "fail",
+          "professor": "Limit = 0, which against the convergent 1/n^2 is inconclusive. That arrow misses."
+        }
+      ]
+    },
+    {
+      "id": "Q15",
+      "question": "Which statement is true for a sequence that is bounded and increasing?",
+      "formula": "",
+      "moves": [
+        {
+          "name": "It converges, by the Monotone Convergence Theorem",
+          "effect": "crit",
+          "professor": "Monotone + bounded = convergence. A foundational guarantee."
+        },
+        {
+          "name": "It must be a geometric sequence",
+          "effect": "fail",
+          "professor": "Increasing and bounded describes an army, not a single species. Not just geometric."
+        },
+        {
+          "name": "It converges only if it is also Cauchy",
+          "effect": "dodge",
+          "professor": "True on the real line, but Monotone Convergence is the more direct banner. Overthinking it."
+        }
+      ]
+    },
+    {
+      "id": "Q16",
+      "question": "What does the series below reveal about its convergence?",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{\\arctan n}{n^2+1}",
+      "moves": [
+        {
+          "name": "Converges; bounded by π/(2n^2)",
+          "effect": "crit",
+          "professor": "arctan n ≤ π/2, so the series is dominated by a convergent p-series. Flawless."
+        },
+        {
+          "name": "Diverges by Integral Test since ∫ arctan x/(1+x^2) dx diverges",
+          "effect": "fail",
+          "professor": "That integral actually converges with a simple u-sub. You didn't check your weapon."
+        },
+        {
+          "name": "Inconclusive; behavior is unknown",
+          "effect": "dodge",
+          "professor": "The bound is clear as day. Hesitation when the path is lit is a missed opportunity."
+        }
+      ]
+    },
+    {
+      "id": "Q17",
+      "question": "Evaluate the limit of the sequence.",
+      "formula": "a_n = \\frac{\\sin\\sqrt{n}}{\\sqrt{n}}",
+      "moves": [
+        {
+          "name": "0; Squeeze Theorem: |sin √n| ≤ 1",
+          "effect": "crit",
+          "professor": "Bounded numerator over a growing denominator—Squeeze Theorem crushes it to zero."
+        },
+        {
+          "name": "Limit does not exist because sin √n oscillates",
+          "effect": "fail",
+          "professor": "The oscillations shrink to nothing. The denominator silences the noise."
+        },
+        {
+          "name": "Apply L'Hôpital's Rule after continuous extension",
+          "effect": "normal",
+          "professor": "Not strictly valid for sequences, but the spirit leads to 0. Squeeze is cleaner."
+        }
+      ]
+    },
+    {
+      "id": "Q18",
+      "question": "Identify why the improper integral diverges.",
+      "formula": "\\int_1^{\\infty} \\frac{x+1}{x^2} \\, dx",
+      "moves": [
+        {
+          "name": "Split: ∫ 1/x dx diverges, and the constant part also diverges",
+          "effect": "crit",
+          "professor": "Split into ∫1/x + ∫1/x^2. The ∫1/x part is the harmonic killer."
+        },
+        {
+          "name": "p-test with p=2, so it converges",
+          "effect": "fail",
+          "professor": "The numerator x+1 ruins the pure power. The first term is 1/x, not 1/x^2."
+        },
+        {
+          "name": "Compare with 1/x^2; it converges",
+          "effect": "fail",
+          "professor": "Comparisons must respect inequality. (x+1)/x^2 > 1/x, which leads straight to divergence."
+        }
+      ]
+    },
+    {
+      "id": "Q19",
+      "question": "What is the nature of the series?",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{(-1)^n \\arctan n}{n}",
+      "moves": [
+        {
+          "name": "Conditionally convergent; AST satisfied, absolute series diverges by Comparison to 1/n",
+          "effect": "crit",
+          "professor": "Alternating signs and arctan's π/2 bound save it. Absolute ship sinks, conditional sails."
+        },
+        {
+          "name": "Absolutely convergent by comparison with 1/n^2",
+          "effect": "fail",
+          "professor": "Absolute terms are near constant/n, not 1/n^2. Divergence is assured."
+        },
+        {
+          "name": "Diverges because cosine would oscillate",
+          "effect": "fail",
+          "professor": "There's no cosine. Your eyes slipped. Even if there were, the logic is wrong."
+        }
+      ]
+    },
+    {
+      "id": "Q20",
+      "question": "Choose the best method to find the sum.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{3}{n(n+3)}",
+      "moves": [
+        {
+          "name": "Partial fractions into telescoping form",
+          "effect": "crit",
+          "professor": "Split and watch the terms cancel. Telescoping series is the cleanest finisher."
+        },
+        {
+          "name": "Use the geometric series formula",
+          "effect": "fail",
+          "professor": "No common ratio here. Geometric is the wrong formation for this enemy."
+        },
+        {
+          "name": "Integral Test, then sum the result",
+          "effect": "normal",
+          "professor": "You can integrate and partial-fraction the integral, but direct telescoping is faster."
+        },
+        {
+          "name": "Diverges by Limit Comparison with 1/n",
+          "effect": "fail",
+          "professor": "The series is actually convergent—terms behave like 1/n^2. Misidentification of the target."
+        }
+      ]
+    }
+  ]
+}

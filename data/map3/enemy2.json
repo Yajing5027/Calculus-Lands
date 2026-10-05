@@ -1,0 +1,395 @@
+{
+  "enemy": {
+    "name": "Limitus",
+    "maxHP": 4,
+    "image": "assets/limitus.png",
+    "attackImage": "assets/limitus_attack.png",
+    "hurtImage": "assets/limitus_hurt.png"
+  },
+  "professor": {
+    "name": "Dr. H",
+    "image": "assets/professor.png"
+  },
+  "questions": [
+    {
+      "id": "Q21",
+      "question": "Find the slope of the tangent line to the parametric curve at t = -1.",
+      "formula": "x = t + 1,\\; y = t^2 + 3t",
+      "moves": [
+        {
+          "name": "dy/dx = (2t+3)/1, plug t = -1 → slope = 1",
+          "effect": "crit",
+          "professor": "Clean derivative shot. Parametric slope falls in one step."
+        },
+        {
+          "name": "Eliminate t to get y = (x-1)^2 + 3(x-1), then differentiate at x=0",
+          "effect": "fail",
+          "professor": "You took the long road and walked into a trap — when t=-1, x=0 but you misread the point. Self-sabotage."
+        },
+        {
+          "name": "Compute dx/dy instead and take reciprocal",
+          "effect": "normal",
+          "professor": "Backwards but works. A hit, though you wasted a move."
+        }
+      ]
+    },
+    {
+      "id": "Q22",
+      "question": "Determine the concavity of the parametric curve at θ = π/4.",
+      "formula": "x = 4\\cos\\theta,\\; y = 4\\sin\\theta",
+      "moves": [
+        {
+          "name": "Find d²y/dx² = -√2/8 → concave down",
+          "effect": "crit",
+          "professor": "Second derivative check — you spotted the downward bend like a hawk."
+        },
+        {
+          "name": "Since d²y/dt² = -4 sinθ < 0, curve is concave down",
+          "effect": "fail",
+          "professor": "Concavity is about d²y/dx², not d²y/dt²! You aimed at the wrong target."
+        }
+      ]
+    },
+    {
+      "id": "Q23",
+      "question": "Set up the area enclosed by one loop of the Lemniscate.",
+      "formula": "r^2 = 4\\cos(2\\theta)",
+      "moves": [
+        {
+          "name": "A = 2 × (1/2) ∫_{-π/4}^{π/4} 4 cos(2θ) dθ",
+          "effect": "crit",
+          "professor": "Symmetric strike with the correct ½ factor. Area sliced clean."
+        },
+        {
+          "name": "A = (1/2) ∫_0^{2π} 4 cos(2θ) dθ",
+          "effect": "fail",
+          "professor": "That integral crosses regions where r² is negative — you hit a mirage."
+        },
+        {
+          "name": "A = ∫_{-π/4}^{π/4} √(4 cos(2θ)) dθ",
+          "effect": "dodge",
+          "professor": "You forgot to square r in the area formula. A dodge that does zero damage."
+        }
+      ]
+    },
+    {
+      "id": "Q24",
+      "question": "Convert the polar equation to rectangular form.",
+      "formula": "r = 3\\sec\\theta",
+      "moves": [
+        {
+          "name": "r cosθ = 3 → x = 3",
+          "effect": "crit",
+          "professor": "One move: multiply by cosθ. The vertical line stands bare."
+        },
+        {
+          "name": "x² + y² = 9 and x/y = ?",
+          "effect": "fail",
+          "professor": "That's a circle, not a line. You mistook secθ for something else."
+        }
+      ]
+    },
+    {
+      "id": "Q25",
+      "question": "Where does the parametric curve have a horizontal tangent?",
+      "formula": "x = t + 4,\\; y = t^3 - 3t",
+      "moves": [
+        {
+          "name": "Set dy/dt = 0 and dx/dt ≠ 0 → t = ±1, points (5,-2) and (3,2)",
+          "effect": "crit",
+          "professor": "Flawless check. Both t-values survived the dx/dt test."
+        },
+        {
+          "name": "Set dx/dt = 0 → t = 0, point (4,0)",
+          "effect": "fail",
+          "professor": "That's vertical tangent hunting, not horizontal. Wrong prey."
+        }
+      ]
+    },
+    {
+      "id": "Q26",
+      "question": "Which integral correctly gives the arc length of the polar curve?",
+      "formula": "r = 4\\sin\\theta, \\; 0 \\le \\theta \\le \\pi",
+      "moves": [
+        {
+          "name": "L = ∫_0^π √(16 sin²θ + 16 cos²θ) dθ = 4π",
+          "effect": "crit",
+          "professor": "√(r² + (dr/dθ)²) collapses to a constant. Lightning strike."
+        },
+        {
+          "name": "L = ∫_0^π 4 sinθ dθ = 8",
+          "effect": "fail",
+          "professor": "That's the area integrand, not arc length. You grabbed the wrong weapon."
+        },
+        {
+          "name": "L = ∫_0^π √(1 + 16 cos²θ) dθ",
+          "effect": "normal",
+          "professor": "You used the Cartesian arc length formula on polar — messy but if you simplify it works. A graze."
+        }
+      ]
+    },
+    {
+      "id": "Q27",
+      "question": "Find the area of the region inside the circle r = 2 cosθ and outside r = 1.",
+      "formula": "r = 2\\cos\\theta,\\; r = 1",
+      "moves": [
+        {
+          "name": "A = 2 × (1/2) ∫_0^{π/3} ((2 cosθ)² - 1²) dθ",
+          "effect": "crit",
+          "professor": "Intersection at θ=π/3, symmetry cuts work in half. Double strike."
+        },
+        {
+          "name": "A = ∫_0^{2π} (2 cosθ - 1) dθ",
+          "effect": "fail",
+          "professor": "You forgot to square the radii and missed the ½ factor. That swing hits nothing."
+        },
+        {
+          "name": "A = ∫_{-π/3}^{π/3} (2 cosθ - 1)² dθ",
+          "effect": "dodge",
+          "professor": "Difference of r’s, not r²'s. A clever feint but no damage."
+        }
+      ]
+    },
+    {
+      "id": "Q28",
+      "question": "To compute the surface area made by revolving the curve r = e^{aθ} around the line θ = π/2, which formula is correct?",
+      "formula": "r = e^{a\\theta}, \\; 0 \\le \\theta \\le \\pi/2",
+      "moves": [
+        {
+          "name": "S = 2π ∫ r cosθ √(r² + (dr/dθ)²) dθ",
+          "effect": "crit",
+          "professor": "Rotation about θ=π/2 uses cosθ. You chose the right blade for the right axis."
+        },
+        {
+          "name": "S = 2π ∫ r sinθ √(r² + (dr/dθ)²) dθ",
+          "effect": "fail",
+          "professor": "That's for polar axis rotation. You spun the curve the wrong way."
+        }
+      ]
+    },
+    {
+      "id": "Q29",
+      "question": "What is the correct setup for the arc length of the curve y = ln(sin x) on [π/4, 3π/4]?",
+      "formula": "y = \\ln(\\sin x)",
+      "moves": [
+        {
+          "name": "L = ∫_{π/4}^{3π/4} csc x dx",
+          "effect": "crit",
+          "professor": "sqrt(1 + (cot x)²) = csc x. Simplification before integration — deadly efficient."
+        },
+        {
+          "name": "L = ∫_{π/4}^{3π/4} √(1 + cot² x) dx and stop",
+          "effect": "normal",
+          "professor": "Correct integrand, but you left points on the field by not simplifying to csc x."
+        },
+        {
+          "name": "L = ∫_{π/4}^{3π/4} √(1 + (ln(sin x))²) dx",
+          "effect": "fail",
+          "professor": "You forgot to differentiate first. That's the original function, not its derivative."
+        }
+      ]
+    },
+    {
+      "id": "Q30",
+      "question": "Which test easily verifies the equality of these two arc length integrals without evaluation?",
+      "formula": "\\int_1^e \\sqrt{1+\\frac{1}{x^2}} dx = \\int_0^1 \\sqrt{1+e^{2x}} dx",
+      "moves": [
+        {
+          "name": "Substitution x = e^t in the first integral transforms it into the second",
+          "effect": "crit",
+          "professor": "A single substitution merges the two paths. Elegant kill."
+        },
+        {
+          "name": "Use Integration by Parts on both and compare results",
+          "effect": "fail",
+          "professor": "Too much brute force. The enemy will overrun you before you finish."
+        },
+        {
+          "name": "Recognize both as arc lengths of inverse functions",
+          "effect": "normal",
+          "professor": "Geometric insight — valid, but substitution is the quicker draw."
+        }
+      ]
+    },
+    {
+      "id": "Q31",
+      "question": "Find the horizontal tangents to the polar curve r = 3 + 2 cosθ.",
+      "formula": "r = 3 + 2\\cos\\theta",
+      "moves": [
+        {
+          "name": "Set dy/dθ = 0 and solve, checking r ≠ 0",
+          "effect": "crit",
+          "professor": "Use dy/dθ = r' sinθ + r cosθ = 0. Clean angle cut."
+        },
+        {
+          "name": "Set dr/dθ = 0 → θ = 0, π",
+          "effect": "fail",
+          "professor": "That targets radial maxima, not horizontal tangents. You aimed at shadows."
+        }
+      ]
+    },
+    {
+      "id": "Q32",
+      "question": "Set up the area inside the cardioid r = 1 - sinθ but outside the circle r = 1.",
+      "formula": "r = 1 - \\sin\\theta,\\; r = 1",
+      "moves": [
+        {
+          "name": "A = (1/2) ∫_π^{2π} ((1 - sinθ)² - 1²) dθ",
+          "effect": "crit",
+          "professor": "Intersection at θ = 0, π. The cardioid is inside the circle for a limited sector — you lasered in on π to 2π."
+        },
+        {
+          "name": "A = (1/2) ∫_0^{2π} ((1 - sinθ)² - 1) dθ",
+          "effect": "fail",
+          "professor": "Full circle integration includes regions where the cardioid is outside. You hit yourself in the confusion."
+        },
+        {
+          "name": "A = ∫_π^{2π} ((1 - sinθ) - 1) dθ",
+          "effect": "dodge",
+          "professor": "Missing squares and the ½ factor. You dodged but didn't even scratch the surface."
+        }
+      ]
+    },
+    {
+      "id": "Q33",
+      "question": "Determine the points of vertical tangency for the parametric curve.",
+      "formula": "x = 3\\cos\\theta,\\; y = 3\\sin\\theta, \\; 0 \\le \\theta < 2\\pi",
+      "moves": [
+        {
+          "name": "dx/dθ = 0 → θ = 0, π; points (3,0) and (-3,0)",
+          "effect": "crit",
+          "professor": "Vertical tangents where cosine hits extreme. Textbook circle strike."
+        },
+        {
+          "name": "dy/dθ = 0 → θ = π/2, 3π/2; points (0,3), (0,-3)",
+          "effect": "fail",
+          "professor": "Those are horizontal tangents. You confused your axes."
+        }
+      ]
+    },
+    {
+      "id": "Q34",
+      "question": "Which polar curve is traced by r = sinθ + cosθ?",
+      "formula": "r = \\sin\\theta + \\cos\\theta",
+      "moves": [
+        {
+          "name": "Multiply by r: x²+y² = y + x → a circle through the pole",
+          "effect": "crit",
+          "professor": "Recognized the circle shifted from the pole. Radius 1/√2, center (1/2,1/2)."
+        },
+        {
+          "name": "A rose curve with two petals",
+          "effect": "fail",
+          "professor": "Sum of sine and cosine doesn't give petals — that's a product. You misread the curve."
+        }
+      ]
+    },
+    {
+      "id": "Q35",
+      "question": "To find the area of the surface generated by revolving y = x³ from x=0 to x=1 about the y-axis, which setup is optimal?",
+      "formula": "y = x^3,\\; 0 \\le x \\le 1",
+      "moves": [
+        {
+          "name": "S = 2π ∫_0^1 x √(1 + 9x^4) dx",
+          "effect": "crit",
+          "professor": "Formula 2π ∫ x ds around y-axis. Direct and clean."
+        },
+        {
+          "name": "S = 2π ∫_0^1 y √(1 + (dy/dx)²) dy — express x in terms of y",
+          "effect": "fail",
+          "professor": "Around y-axis, the radius is x, not y. Wrong lever arm."
+        },
+        {
+          "name": "S = ∫_0^1 2π x³ √(1 + 9x^4) dx",
+          "effect": "dodge",
+          "professor": "Radius should be x, not x³. You dodged with a mis-aim."
+        }
+      ]
+    },
+    {
+      "id": "Q36",
+      "question": "Find the area enclosed by the parametric curve x = t - t², y = t + t³ for 0 ≤ t ≤ 1. What's the best opening move?",
+      "formula": "x = t - t^2,\\; y = t + t^3",
+      "moves": [
+        {
+          "name": "A = ∫ y dx = ∫ (t+t³)(1-2t) dt from t=0 to t=1",
+          "effect": "crit",
+          "professor": "Parametric area formula, straight through. No parameter elimination needed."
+        },
+        {
+          "name": "Eliminate t to get y = f(x), then integrate ∫ f(x) dx",
+          "effect": "fail",
+          "professor": "Eliminate t from a cubic and quadratic? That's a siege on a fortress with a spoon."
+        }
+      ]
+    },
+    {
+      "id": "Q37",
+      "question": "Identify the correct interval that traces the polar curve exactly once.",
+      "formula": "r = 2\\cos(5\\theta)",
+      "moves": [
+        {
+          "name": "0 ≤ θ < π",
+          "effect": "crit",
+          "professor": "Odd petal count: period π, all petals in one sweep. Maximum efficiency."
+        },
+        {
+          "name": "0 ≤ θ < 2π",
+          "effect": "fail",
+          "professor": "That traces everything twice. Wasted energy, no extra damage."
+        }
+      ]
+    },
+    {
+      "id": "Q38",
+      "question": "Set up the arc length for one arch of the cycloid.",
+      "formula": "x = r(\\theta - \\sin\\theta),\\; y = r(1 - \\cos\\theta), \\; 0 \\le \\theta \\le 2\\pi",
+      "moves": [
+        {
+          "name": "L = ∫_0^{2π} r√(2 - 2 cosθ) dθ = 8r",
+          "effect": "crit",
+          "professor": "Used the trig identity underneath. You cut through the radical like butter."
+        },
+        {
+          "name": "L = ∫_0^{2π} √( (r(1-cosθ))² + (r sinθ)² ) dθ (unsimplified)",
+          "effect": "normal",
+          "professor": "Correct setup, but you left the integral mine unexploded. The enemy is still standing."
+        }
+      ]
+    },
+    {
+      "id": "Q39",
+      "question": "Which step correctly finds the second derivative d²y/dx² for the parametric curve?",
+      "formula": "x = t^2,\\; y = t^3 - 3t",
+      "moves": [
+        {
+          "name": "d/dt(dy/dx) / (dx/dt) = (3/2)(1+1/t²) / (2t)",
+          "effect": "crit",
+          "professor": "Chain rule applied to dy/dx. Perfect execution."
+        },
+        {
+          "name": "d²y/dt² / d²x/dt² = (6t) / 2 = 3t",
+          "effect": "fail",
+          "professor": "Second derivative ratio is a classic trap. You fell right in."
+        }
+      ]
+    },
+    {
+      "id": "Q40",
+      "question": "To compute the area of the inner loop of the limacon r = 1 - 2 sinθ, what limits are correct?",
+      "formula": "r = 1 - 2\\sin\\theta",
+      "moves": [
+        {
+          "name": "θ from π/6 to 5π/6 (where r ≤ 0)",
+          "effect": "crit",
+          "professor": "The inner loop lies under negative r. You marked the enemy's weak point exactly."
+        },
+        {
+          "name": "θ from 7π/6 to 11π/6 (where r > 0)",
+          "effect": "fail",
+          "professor": "That's the outer loop region. You targeted the armor, not the flesh."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,465 @@
+{
+  "enemy": {
+    "name": "Limitus",
+    "maxHP": 4,
+    "image": "assets/enemies/limitus.png",
+    "attackImage": "assets/enemies/limitus_attack.png",
+    "hurtImage": "assets/enemies/limitus_hurt.png"
+  },
+  "professor": {
+    "name": "Dr. H",
+    "image": "assets/professor.png"
+  },
+  "questions": [
+    {
+      "id": "Q21",
+      "question": "Choose the most efficient test for the series below.",
+      "formula": "\\sum_{n=2}^{\\infty} \\frac{n^2+1}{n^3+2}",
+      "moves": [
+        {
+          "name": "Limit Comparison Test with 1/n",
+          "effect": "crit",
+          "professor": "The dominant term ratio is 1/n. One Limit Comparison and you've cornered the divergence."
+        },
+        {
+          "name": "Direct Comparison with 1/n^2",
+          "effect": "fail",
+          "professor": "That inequality points the wrong direction—1/n^2 is smaller, you proved nothing."
+        },
+        {
+          "name": "Integral Test",
+          "effect": "normal",
+          "professor": "It's doable, but you're bringing heavy machinery to a duel. Limit comparison is the rapier."
+        },
+        {
+          "name": "Divergence Test, limit is 1 ≠ 0",
+          "effect": "fail",
+          "professor": "Check again—the terms approach 0. The Divergence Test is silent here."
+        }
+      ]
+    },
+    {
+      "id": "Q22",
+      "question": "What is the best way to determine convergence of the improper integral below?",
+      "formula": "\\int_0^{\\infty} \\frac{1}{x^2+4}\\,dx",
+      "moves": [
+        {
+          "name": "Recognize it as a convergent arctan integral",
+          "effect": "crit",
+          "professor": "Classic arctan form. Converges to π/4—elegant, no splitting needed."
+        },
+        {
+          "name": "Split at 0 because the integrand is undefined at 0",
+          "effect": "fail",
+          "professor": "The integrand is 1/4 at x=0, perfectly well-behaved. Don't create imaginary wounds."
+        },
+        {
+          "name": "Compare with 1/x^2",
+          "effect": "normal",
+          "professor": "Comparison works, but it's the long way round. Recognize the arctan and finish in one stroke."
+        }
+      ]
+    },
+    {
+      "id": "Q23",
+      "question": "Find the limit of the sequence.",
+      "formula": "a_n = \\left(1+\\frac{3}{n}\\right)^n",
+      "moves": [
+        {
+          "name": "e^3, by recognizing the exponential form",
+          "effect": "crit",
+          "professor": "A direct hit on the definition of e^c. The pattern is unmistakable."
+        },
+        {
+          "name": "1, because 1+3/n approaches 1 and 1^n = 1",
+          "effect": "fail",
+          "professor": "1^∞ is a decoy. You walked right into the indeterminate form ambush."
+        },
+        {
+          "name": "Take logarithm and apply L'Hôpital's Rule",
+          "effect": "normal",
+          "professor": "Solid backup tactic. It confirms e^3, but recognition would have been faster."
+        }
+      ]
+    },
+    {
+      "id": "Q24",
+      "question": "Classify the convergence type of the alternating series below.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{(-1)^n}{\\sqrt{n}}",
+      "moves": [
+        {
+          "name": "Conditionally convergent; AST applies, p=1/2 diverges",
+          "effect": "crit",
+          "professor": "Alternating signs tame the slow decay. Conditional convergence—exactly right."
+        },
+        {
+          "name": "Absolutely convergent by p-series",
+          "effect": "fail",
+          "professor": "Absolute value gives the harmonic p=1/2 series—that diverges. No absolute shield here."
+        },
+        {
+          "name": "Diverges because terms do not approach 0",
+          "effect": "fail",
+          "professor": "1/√n vanishes, so the divergence test is useless. The series does converge, conditionally."
+        },
+        {
+          "name": "Ratio Test shows absolute convergence",
+          "effect": "dodge",
+          "professor": "Ratio Test here yields 1—inconclusive. You dodged a wrong answer, but didn't strike."
+        }
+      ]
+    },
+    {
+      "id": "Q25",
+      "question": "Decide the best method for the series below.",
+      "formula": "\\sum_{n=2}^{\\infty} \\frac{1}{n(\\ln n)^2}",
+      "moves": [
+        {
+          "name": "Integral Test; ∫ dx/(x(ln x)^2) converges",
+          "effect": "crit",
+          "professor": "The Integral Test was born for this form. Converges cleanly."
+        },
+        {
+          "name": "Comparison with 1/n, series diverges",
+          "effect": "fail",
+          "professor": "The series is smaller than the harmonic series—you can't conclude divergence from that."
+        },
+        {
+          "name": "Limit Comparison with 1/n^2",
+          "effect": "normal",
+          "professor": "Limit goes to 0, which doesn't directly tell you convergence. Integral Test is the sharper weapon."
+        }
+      ]
+    },
+    {
+      "id": "Q26",
+      "question": "Evaluate the limit of the sequence.",
+      "formula": "a_n = \\sqrt{n^2+2n} - n",
+      "moves": [
+        {
+          "name": "Multiply by conjugate; limit is 1",
+          "effect": "crit",
+          "professor": "Conjugate attack clears the radical. The hidden 1 emerges."
+        },
+        {
+          "name": "Limit is 0 because the two terms cancel at infinity",
+          "effect": "fail",
+          "professor": "∞−∞ is not zero. It's a trap you must dismantle with algebra."
+        },
+        {
+          "name": "Factor out n and use Taylor expansion",
+          "effect": "normal",
+          "professor": "Works, but the conjugate move is cleaner. Still, you landed the correct limit."
+        }
+      ]
+    },
+    {
+      "id": "Q27",
+      "question": "Choose a comparison to establish convergence of the improper integral.",
+      "formula": "\\int_2^{\\infty} \\frac{1}{x\\sqrt{x^2-4}}\\,dx",
+      "moves": [
+        {
+          "name": "Compare with 1/x^2 for large x",
+          "effect": "crit",
+          "professor": "For large x, √(x²-4) ~ x, so the integrand behaves like 1/x². That seals it."
+        },
+        {
+          "name": "Compare with 1/x; the integral diverges",
+          "effect": "fail",
+          "professor": "1/x is too big; the actual function is smaller so the comparison is inconclusive."
+        },
+        {
+          "name": "Use trig substitution x=2 sec θ",
+          "effect": "normal",
+          "professor": "Leads to an answer, but why unsheathe a greatsword when a comparison dagger finishes the job?"
+        }
+      ]
+    },
+    {
+      "id": "Q28",
+      "question": "Determine the convergence of the series using optimal test.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{n!}{n^n}",
+      "moves": [
+        {
+          "name": "Ratio Test; limit is 1/e < 1, converges",
+          "effect": "crit",
+          "professor": "Factorial vs power? Ratio Test slices through it instantly."
+        },
+        {
+          "name": "Divergence Test; terms do not go to 0",
+          "effect": "fail",
+          "professor": "The terms approach 0. You misjudged their decay. Divergence Test won't fire."
+        },
+        {
+          "name": "Root Test",
+          "effect": "normal",
+          "professor": "Also effective, but Ratio Test is usually the first blade drawn for factorials."
+        }
+      ]
+    },
+    {
+      "id": "Q29",
+      "question": "Find the limit of the sequence.",
+      "formula": "a_n = n^{1/n}",
+      "moves": [
+        {
+          "name": "1; use logarithm, limit is 0",
+          "effect": "crit",
+          "professor": "The nth root of n creeps toward 1. Logarithm reveals the truth."
+        },
+        {
+          "name": "0 because the exponent 1/n drives it to 0",
+          "effect": "fail",
+          "professor": "Base n grows while exponent shrinks—0 is not their compromise. Wrong instinct."
+        },
+        {
+          "name": "Infinity; n dominates any root",
+          "effect": "fail",
+          "professor": "Even the mighty n is humbled by its own nth root. It tends to 1."
+        }
+      ]
+    },
+    {
+      "id": "Q30",
+      "question": "Identify the quickest convergence test for the series.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{n}{2^n}",
+      "moves": [
+        {
+          "name": "Ratio Test; limit = 1/2 < 1",
+          "effect": "crit",
+          "professor": "Ratio Test dispatches geometric-exponential mixes in one move."
+        },
+        {
+          "name": "Integral Test with integration by parts",
+          "effect": "fail",
+          "professor": "You're hacking through the jungle when a trail is clearly marked. Too cumbersome."
+        },
+        {
+          "name": "Direct Comparison with 1/2^n",
+          "effect": "normal",
+          "professor": "You can compare, but setting up the inequality takes more effort than Ratio Test."
+        }
+      ]
+    },
+    {
+      "id": "Q31",
+      "question": "Determine the convergence type of the series.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{\\cos n}{n^2}",
+      "moves": [
+        {
+          "name": "Absolutely convergent by comparison with 1/n^2",
+          "effect": "crit",
+          "professor": "|cos n| ≤ 1, so the series is dominated by a convergent p-series. Absolute victory."
+        },
+        {
+          "name": "Diverges because cosine oscillates",
+          "effect": "fail",
+          "professor": "Oscillation doesn't imply divergence if the amplitude shrinks fast enough. Here it's tamed."
+        },
+        {
+          "name": "Conditionally convergent by Alternating Series Test",
+          "effect": "dodge",
+          "professor": "The signs aren't strictly alternating. AST doesn't apply; the series is actually absolutely convergent."
+        }
+      ]
+    },
+    {
+      "id": "Q32",
+      "question": "Determine if the series converges and, if so, find its sum.",
+      "formula": "\\sum_{n=1}^{\\infty} \\left( \\frac{1}{n+1} - \\frac{1}{n+2} \\right)",
+      "moves": [
+        {
+          "name": "Telescoping series; sum = 1/2",
+          "effect": "crit",
+          "professor": "Telescope collapses instantly—first minus last remaining term. Sum is 1/2."
+        },
+        {
+          "name": "Diverges by Integral Test",
+          "effect": "fail",
+          "professor": "The terms telescope, not diverge. You applied the wrong strategy entirely."
+        },
+        {
+          "name": "Converges to 1 by geometric series formula",
+          "effect": "fail",
+          "professor": "This isn't geometric. Missing the telescoping nature cost you."
+        }
+      ]
+    },
+    {
+      "id": "Q33",
+      "question": "Which method best confirms convergence of the improper integral?",
+      "formula": "\\int_1^{\\infty} \\frac{\\ln x}{x^3}\\,dx",
+      "moves": [
+        {
+          "name": "Compare with 1/x^{5/2} for large x",
+          "effect": "crit",
+          "professor": "ln x grows slower than any power, so x^{5/2} in denominator dominates. Converges."
+        },
+        {
+          "name": "Integration by parts",
+          "effect": "normal",
+          "professor": "You'll get the exact value, but comparison is a faster kill."
+        },
+        {
+          "name": "The integral diverges because ln x → ∞",
+          "effect": "fail",
+          "professor": "x^3 in the denominator crushes ln x. Divergence is a false alarm."
+        }
+      ]
+    },
+    {
+      "id": "Q34",
+      "question": "Find the radius of convergence of the power series.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{x^n}{n}",
+      "moves": [
+        {
+          "name": "Radius = 1 by Ratio Test",
+          "effect": "crit",
+          "professor": "The boundary is at |x|=1. Ratio Test yields the radius cleanly."
+        },
+        {
+          "name": "Radius = ∞; the terms decay factorially",
+          "effect": "fail",
+          "professor": "No factorial here, and the n in the denominator doesn't grant infinite radius."
+        },
+        {
+          "name": "Radius = 0",
+          "effect": "fail",
+          "professor": "The series certainly converges for x=0, but the radius is positive. Check again."
+        }
+      ]
+    },
+    {
+      "id": "Q35",
+      "question": "Evaluate the limit.",
+      "formula": "\\lim_{x\\to 0} \\frac{e^x - \\cos x}{x}",
+      "moves": [
+        {
+          "name": "L'Hôpital's Rule; limit is 1",
+          "effect": "crit",
+          "professor": "0/0 form. One round of L'Hôpital fells it—derivative of numerator at 0 is 1."
+        },
+        {
+          "name": "Plug in x=0 directly; limit is 0/0 undefined so DNE",
+          "effect": "fail",
+          "professor": "0/0 is an invitation to fight, not an excuse to retreat. Apply L'Hôpital or series."
+        },
+        {
+          "name": "Use series expansions up to x",
+          "effect": "normal",
+          "professor": "Series also leads to 1; thorough, though L'Hôpital is quicker here."
+        }
+      ]
+    },
+    {
+      "id": "Q36",
+      "question": "Determine why the series diverges.",
+      "formula": "\\sum_{n=1}^{\\infty} (-1)^n \\frac{n}{n+1}",
+      "moves": [
+        {
+          "name": "Divergence Test; terms oscillate and limit ≠ 0",
+          "effect": "crit",
+          "professor": "The terms swing between values near 1 and -1. No approach to 0 means instant divergence."
+        },
+        {
+          "name": "Use Alternating Series Test; it diverges by AST",
+          "effect": "fail",
+          "professor": "AST requires terms to go to 0. They don't. The test doesn't even apply."
+        },
+        {
+          "name": "Use Ratio Test; limit = 1 so diverges",
+          "effect": "dodge",
+          "professor": "Ratio Test gives 1—inconclusive, not divergence. You're left empty-handed."
+        }
+      ]
+    },
+    {
+      "id": "Q37",
+      "question": "Select the most appropriate test for the series.",
+      "formula": "\\sum_{n=1}^{\\infty} n e^{-n^2}",
+      "moves": [
+        {
+          "name": "Integral Test with u = x^2; converges",
+          "effect": "crit",
+          "professor": "The continuous version yields an easy u-sub. Converges rapidly."
+        },
+        {
+          "name": "Diverges because the terms do not approach 0",
+          "effect": "fail",
+          "professor": "n e^{-n^2} plummets to 0 faster than you think. Divergence Test is useless here."
+        },
+        {
+          "name": "Ratio Test",
+          "effect": "normal",
+          "professor": "Ratio Test works (limit 0) but is slightly more involved. Integral Test is more direct."
+        }
+      ]
+    },
+    {
+      "id": "Q38",
+      "question": "Find the limit of the sequence.",
+      "formula": "a_n = n \\sin\\left(\\frac{1}{n}\\right)",
+      "moves": [
+        {
+          "name": "1, using lim_{x→0} sin x / x = 1",
+          "effect": "crit",
+          "professor": "Substitute x = 1/n and the fundamental limit does all the work. Clean."
+        },
+        {
+          "name": "0, because sin(1/n) → 0",
+          "effect": "fail",
+          "professor": "n battles the small sine—the product tends to 1, not 0. Classic growth-rate trap."
+        },
+        {
+          "name": "Apply L'Hôpital's Rule after rewriting",
+          "effect": "normal",
+          "professor": "Valid but heavier. Recognition of the sin x / x limit is the faster blade."
+        }
+      ]
+    },
+    {
+      "id": "Q39",
+      "question": "Determine convergence or divergence of the improper integral.",
+      "formula": "\\int_0^1 \\ln x\\,dx",
+      "moves": [
+        {
+          "name": "Converges to -1; limit comparison or direct evaluation",
+          "effect": "crit",
+          "professor": "Despite the vertical asymptote, the area is finite. -1 is the calm result."
+        },
+        {
+          "name": "Diverges because ln x → -∞ as x→0+",
+          "effect": "fail",
+          "professor": "A blow-up doesn't guarantee infinite area—the spike is integrable. Common overreaction."
+        },
+        {
+          "name": "Use the p-integral rule with p=0",
+          "effect": "dodge",
+          "professor": "ln x is not a power function. The p-test rules don't apply here. You sidestepped, but didn't solve."
+        }
+      ]
+    },
+    {
+      "id": "Q40",
+      "question": "Choose the best test for the series.",
+      "formula": "\\sum_{n=1}^{\\infty} \\frac{1}{n^2+1}",
+      "moves": [
+        {
+          "name": "Integral Test; ∫ 1/(x^2+1) dx converges",
+          "effect": "crit",
+          "professor": "Positive, continuous, decreasing—Integral Test grants a quick convergence verdict."
+        },
+        {
+          "name": "Divergence Test; terms go to 0 so diverges",
+          "effect": "fail",
+          "professor": "Vanishing terms are the minimum requirement, not a sign of divergence. Check your logic."
+        },
+        {
+          "name": "Comparison with 1/n^2",
+          "effect": "normal",
+          "professor": "Also works perfectly. Either route leads to convergence. Take your pick."
+        }
+      ]
+    }
+  ]
+}
