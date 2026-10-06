@@ -4,7 +4,11 @@
 
 **[Play Calculus Lands →](https://yajing5027.github.io/Calculus-Lands/)**
 
-Calculus Lands is a side-scrolling learning RPG. The original campaign takes you through five lands of Calculus II; Creator Mode lets you bring another lesson and turn it into a quest. You can play in your browser without installing anything.
+## What is this?
+
+Calculus Lands is a browser-based side-scrolling RPG built to make Calculus II *feel* like something. Instead of drilling series tests through repetition, the original campaign puts you in battles where each move is a mathematical choice—and your job is to decide which idea applies.
+
+Your weapon is intuition. Your opponent is the illusion that every test works every time. Creator Mode also lets you bring another lesson and turn it into a quest. You can play in your browser without installing anything.
 
 ## The story
 
@@ -12,7 +16,7 @@ A letter arrives from Dr. H:
 
 > “Our Calculus Continent is filled with illusions. They pretend to be convergent series, perfect elementary functions, or simple integrals. If you act without thinking, the abyss will swallow you.”
 
-You play as Sigma, a wandering adventurer. In each land, the Chaos Knight Limitus sets traps for your mathematical intuition. Owlculus, Guardian of the Five Lands, waits at the end of each land. The final encounter reveals why Dr. H sent you on this journey.
+You play as Sigma, a wandering adventurer traveling through five mathematical lands. In each land, the Chaos Knight Limitus sets traps for your intuition. Owlculus, Guardian of the Five Lands, waits as the final boss. When the journey ends, Owlculus reveals that he was your final examiner, placed there by Dr. H.
 
 ## Play the built-in campaign
 
@@ -26,9 +30,30 @@ Choose **Begin Trek** to travel through the five lands. Each land has two Limitu
 | Infinite Chasm | Sequences, Series, and Convergence Tests |
 | Alternating Spire | Alternating, Power, and Taylor Series |
 
-Every turn presents a mathematical question and a choice of moves. A **Crit** deals two damage, a **Normal** move deals one, a **Dodge** leaves both sides unharmed, and a **Fail** costs Sigma a heart. Dr. H explains the reasoning after each move, including why a tempting answer does not work. A hint toggle can show the quality of the moves before you choose.
+## Battle system
 
-The campaign includes series and convergence ideas such as the alternating, ratio, root, comparison, integral, and divergence tests; p-series and geometric series; absolute versus conditional convergence; and power and Taylor series. The other lands bring in integration and parametric or polar topics.
+The three encounters in a land grow from introductory recognition through more demanding questions to an Owlculus boss fight. In the original fifth land, the two Limitus opponents have four health points each and Owlculus has eight.
+
+Every turn presents a mathematical question and a choice of moves. The result plays out in the battle animation:
+
+| Outcome | What happens |
+| --- | --- |
+| **Crit** | Sigma lands a precision strike; the enemy loses two health points. |
+| **Normal** | Sigma lands a standard hit; the enemy loses one health point. |
+| **Dodge** | Sigma avoids a counterattack; neither side loses health. |
+| **Fail** | The enemy counterattacks; Sigma loses one heart. |
+
+Dr. H explains the reasoning after each move, including why a tempting answer does not work. A hint toggle can show the quality of the moves before you choose.
+
+The campaign includes series and convergence ideas such as:
+
+- alternating, ratio, root, direct and limit comparison, integral, and nth-term divergence tests;
+- p-series and geometric series;
+- absolute versus conditional convergence;
+- radius and interval of convergence; and
+- Taylor and Maclaurin series.
+
+The other lands bring in integration and parametric or polar topics.
 
 ## Create your own quest
 
@@ -71,6 +96,22 @@ Creator Mode checks that your quest has playable levels, enemies, questions, and
 ## Your progress and current limits
 
 Creator drafts are stored in the current browser. There are no accounts, cloud sync, classroom assignments, or shared progress. Export a quest if you want a portable copy. The learning report describes the current play session; it is not a long-term grade record.
+
+## Play online or locally
+
+**Online:** [Open Calculus Lands](https://yajing5027.github.io/Calculus-Lands/).
+
+**Local copy of the playable release:**
+
+```bash
+git clone https://github.com/Yajing5027/Calculus-Lands.git
+cd Calculus-Lands
+python3 -m http.server 8080
+```
+
+Open <http://localhost:8080>. A local server is needed because the built-in campaign loads its question files from JSON. The public repository contains the playable release; the original development source and history live separately.
+
+The game uses canvas sprite animation, layered scrolling backgrounds, and KaTeX for mathematical expressions. The published question data can be inspected under `data/map1` through `data/map5`.
 
 ## Credits
 
