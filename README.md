@@ -1,16 +1,84 @@
 # ∑ Calculus Lands: The Infinite Trek
 
-**Calculus Lands** is an interactive learning RPG exploring Calculus II concepts through tactical intuition battles.
+> A 2026 Spring Calculus II course project that turns mathematical intuition into a playable adventure.
 
-🎮 **[Play Now Online](https://yajing5027.github.io/Calculus-Lands/)**
+**[Play Calculus Lands →](https://yajing5027.github.io/Calculus-Lands/)**
 
----
+Calculus Lands is a side-scrolling learning RPG. The original campaign takes you through five lands of Calculus II; Creator Mode lets you bring another lesson and turn it into a quest. You can play in your browser without installing anything.
 
-## Game Overview
+## The story
 
-- **Built-in Campaign**: Journey through five thematic realms (Silicon Depths, Substitution Labyrinth, Parametric Veil, Infinite Chasm, Alternating Spire). Test intuition against guardians Limitus and Owlculus with real-time feedback from Dr. H.
-- **Creator Mode**: Build custom learning quests from simple text or markdown lessons.
+A letter arrives from Dr. H:
 
-## Deployment
+> “Our Calculus Continent is filled with illusions. They pretend to be convergent series, perfect elementary functions, or simple integrals. If you act without thinking, the abyss will swallow you.”
 
-This repository serves the production release via GitHub Pages.
+You play as Sigma, a wandering adventurer. In each land, the Chaos Knight Limitus sets traps for your mathematical intuition. Owlculus, Guardian of the Five Lands, waits at the end of each land. The final encounter reveals why Dr. H sent you on this journey.
+
+## Play the built-in campaign
+
+Choose **Begin Trek** to travel through the five lands. Each land has two Limitus encounters followed by an Owlculus battle.
+
+| Land | What you explore |
+| --- | --- |
+| Silicon Depths | Applications of Integration |
+| Substitution Labyrinth | Integration Techniques |
+| Parametric Veil | Parametric and Polar Coordinates |
+| Infinite Chasm | Sequences, Series, and Convergence Tests |
+| Alternating Spire | Alternating, Power, and Taylor Series |
+
+Every turn presents a mathematical question and a choice of moves. A **Crit** deals two damage, a **Normal** move deals one, a **Dodge** leaves both sides unharmed, and a **Fail** costs Sigma a heart. Dr. H explains the reasoning after each move, including why a tempting answer does not work. A hint toggle can show the quality of the moves before you choose.
+
+The campaign includes series and convergence ideas such as the alternating, ratio, root, comparison, integral, and divergence tests; p-series and geometric series; absolute versus conditional convergence; and power and Taylor series. The other lands bring in integration and parametric or polar topics.
+
+## Create your own quest
+
+Choose **Create / Load Quest** to turn a lesson into a playable journey. Creator Mode accepts **Simple Text, Markdown, or JSON**; Auto Detect can choose the format for you. You can also load the included Algebra and Physics Motion samples.
+
+The builder lets you name the quest, paste learning content, and preview its levels, enemies, questions, and any validation warnings before play. Then you can play through the same battle system and see a learning report with attempts, feedback, and ideas to revisit. You can save the current draft in this browser and export a normalized JSON quest to share or keep.
+
+### Start with Simple Text
+
+```text
+Title: Derivatives Quest
+Subject: Calculus I
+Description: Practice derivative rules through RPG battles.
+
+Level: Chain Rule Forest
+Theme: Derivatives
+
+Enemy: Product Goblin
+HP: 3
+
+Q: Differentiate f(x)=x^2 sin(x).
+Formula: f'(x)=?
+Tags: derivatives, product rule
+Difficulty: medium
+A: 2x sin(x) + x^2 cos(x) | crit | Correct. Use the product rule.
+A: 2x cos(x) | fail | This ignores the product structure.
+A: x^2 cos(x) | normal | This differentiates only the sine part.
+```
+
+Add more `Level:`, `Enemy:`, `Q:`, and `A:` blocks as your lesson grows. An answer line has the form `A: answer | effect | feedback`; the effects are `crit`, `normal`, `dodge`, and `fail`.
+
+### Markdown and JSON
+
+In Markdown, use a `#` heading for the quest, `##` for a level, `###` for an enemy, and bullets for answer moves. Labels such as `Subject:`, `Theme:`, `Formula:`, and `Tags:` work in the content too.
+
+JSON can load an exported quest or compatible level, enemy, and question objects. **Export Quest** produces the normalized format, which is the safest choice when moving a finished quest between browsers.
+
+Creator Mode checks that your quest has playable levels, enemies, questions, and answer moves. If something is missing, it shows a readable warning instead of starting a broken battle. Custom quests can use up to five playable levels and reuse the existing art and battle scene; additional enemies in a level are combined into the boss encounter.
+
+## Your progress and current limits
+
+Creator drafts are stored in the current browser. There are no accounts, cloud sync, classroom assignments, or shared progress. Export a quest if you want a portable copy. The learning report describes the current play session; it is not a long-term grade record.
+
+## Credits
+
+- **Concept and game design:** Yajing Ren
+- **Learning content:** Calculus II curriculum
+- **Art:** Pixel sprite assets from itch.io creators
+- **Math rendering:** [KaTeX](https://katex.org/)
+
+## License
+
+This project is for educational and personal use.
