@@ -93,6 +93,28 @@ JSON can load an exported quest or compatible level, enemy, and question objects
 
 Creator Mode checks that your quest has playable levels, enemies, questions, and answer moves. If something is missing, it shows a readable warning instead of starting a broken battle. Custom quests can use up to five playable levels and reuse the existing art and battle scene; additional enemies in a level are combined into the boss encounter.
 
+## How the game is built
+
+Calculus Lands is a client-side web game hosted on GitHub Pages. The built-in campaign and Creator Mode share the same battle interface, but receive their questions from different sources.
+
+| Part | Responsibility |
+| --- | --- |
+| `index.html` and `styles.css` | Game screens, creator interface, and responsive presentation. |
+| `main.js` | Screen transitions, battle interactions, visual effects, and end-of-session feedback. |
+| `content-engine.js` | Detects and parses Simple Text, Markdown, or JSON quests; normalizes question data; validates playable content; and converts quests into the battle format. |
+| `data/map1`–`data/map5` | The five built-in Calculus II lands, with separate JSON question sets for each encounter. |
+| `assets/animations/` | Character sprites, enemy animations, and scrolling background layers. |
+| `.github/workflows/deploy.yml` | Publishes the playable static site through GitHub Pages. |
+
+### From lesson content to a playable quest
+
+1. **Parse:** Creator Mode reads lesson text or JSON and identifies levels, enemies, questions, and answer moves.
+2. **Validate:** The content engine checks for playable questions and answer choices, then reports errors or warnings in the preview.
+3. **Normalize:** Valid content is converted into the same level-and-encounter structure used by the game.
+4. **Play and reflect:** The battle system interprets each move as a critical hit, normal hit, dodge, or failed answer, and presents feedback and a session-level learning report.
+
+This structure lets an imported lesson reuse the existing combat system without creating a separate game for every topic. The public repository is the playable release; the original development source and history are maintained separately.
+
 ## Your progress and current limits
 
 Creator drafts are stored in the current browser. There are no accounts, cloud sync, classroom assignments, or shared progress. Export a quest if you want a portable copy. The learning report describes the current play session; it is not a long-term grade record.
@@ -109,7 +131,7 @@ cd Calculus-Lands
 python3 -m http.server 8080
 ```
 
-Open <http://localhost:8080>. A local server is needed because the built-in campaign loads its question files from JSON. The public repository contains the playable release; the original development source and history live separately.
+Open <http://localhost:8080>. A local server is needed because the built-in campaign loads its question files from JSON. The public repository contains the playable release.
 
 The game uses canvas sprite animation, layered scrolling backgrounds, and KaTeX for mathematical expressions. The published question data can be inspected under `data/map1` through `data/map5`.
 
