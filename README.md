@@ -1,107 +1,114 @@
 # ∑ Calculus Lands: The Infinite Trek
 
-> A 2026 Spring Calculus II course project that turns mathematical intuition into a playable adventure.
+**A browser-based RPG that turns Calculus II into an adventure where mathematical reasoning becomes your weapon.**
 
-**[Play Calculus Lands →](https://yajing5027.github.io/Calculus-Lands/)**
+Individual Project · Spring 2026 · JavaScript, HTML, CSS, KaTeX
 
-## What is this?
+[**Play the Game →**](https://yajing5027.github.io/Calculus-Lands/) · [Gameplay](#the-adventure) · [Creator Mode](#create-your-own-quest) · [Implementation](#design--implementation)
 
-Calculus Lands is a browser-based side-scrolling RPG built to make Calculus II *feel* like something. Instead of drilling series tests through repetition, the original campaign puts you in battles where each move is a mathematical choice—and your job is to decide which idea applies.
+---
 
-Your weapon is intuition. Your opponent is the illusion that every test works every time. Creator Mode also lets you bring another lesson and turn it into a quest. You can play in your browser without installing anything.
+## Why I Built It
 
-## The story
+Calculus Lands began as my final project for Calculus II. Instead of preparing a traditional presentation, I wanted to build something interactive—something where mathematical concepts could become part of an experience rather than simply appear on slides.
 
-A letter arrives from Dr. H:
+That idea became a browser-based RPG in which every battle is driven by a mathematical decision. Players must recognize which method applies, distinguish between convincing and misleading approaches, and discover the consequences of their choices through combat and feedback.
 
-> “Our Calculus Continent is filled with illusions. They pretend to be convergent series, perfect elementary functions, or simple integrals. If you act without thinking, the abyss will swallow you.”
+As the project developed, I also wanted to explore whether the game could support subjects beyond Calculus II. This led to Creator Mode, which lets users transform their own learning materials into playable adventures using the same battle system.
 
-You play as Sigma, a wandering adventurer traveling through five mathematical lands. In each land, the Chaos Knight Limitus sets traps for your intuition. Owlculus, Guardian of the Five Lands, waits as the final boss. When the journey ends, Owlculus reveals that he was your final examiner, placed there by Dr. H.
+## Project Highlights
 
-## Play the built-in campaign
+- **Five Mathematical Lands:** An original Calculus II campaign with themed environments, enemies, and increasingly challenging encounters.
+- **Reasoning-Driven Combat:** Mathematical choices determine attacks, dodges, damage, and feedback.
+- **Creator Mode:** Transform Simple Text, Markdown, or JSON learning materials into custom RPG quests.
+- **Content-Driven Design:** Separate mathematical content from combat logic so the same game mechanics support different subjects.
+- **Animated Experience:** Pixel-art characters, sprite-based combat, parallax backgrounds, and KaTeX-rendered mathematics.
 
-Choose **Begin Trek** to travel through the five lands. Each land has two Limitus encounters followed by an Owlculus battle.
+## The Adventure
 
-| Land | What you explore |
-| --- | --- |
-| Silicon Depths | Applications of Integration |
-| Substitution Labyrinth | Integration Techniques |
-| Parametric Veil | Parametric and Polar Coordinates |
-| Infinite Chasm | Sequences, Series, and Convergence Tests |
-| Alternating Spire | Alternating, Power, and Taylor Series |
+### Enter the Calculus Continent
 
-## Battle system
+A mysterious letter arrives from Dr. H. The Calculus Continent is filled with illusions—mathematical expressions that appear simple but hide dangerous traps for anyone who acts without thinking.
 
-The three encounters in a land grow from introductory recognition through more demanding questions to an Owlculus boss fight. In the original fifth land, the two Limitus opponents have four health points each and Owlculus has eight.
+You play as **Sigma**, a wandering adventurer traveling through five mathematical lands.
 
-Every turn presents a mathematical question and a choice of moves. The result plays out in the battle animation:
+Along the way, **Chaos Knight Limitus** challenges your mathematical intuition. Some enemies disguise divergent series as convergent ones. Others tempt you into choosing a familiar method even when it cannot solve the problem.
 
-| Outcome | What happens |
-| --- | --- |
-| **Crit** | Sigma lands a precision strike; the enemy loses two health points. |
-| **Normal** | Sigma lands a standard hit; the enemy loses one health point. |
-| **Dodge** | Sigma avoids a counterattack; neither side loses health. |
-| **Fail** | The enemy counterattacks; Sigma loses one heart. |
+Your weapon is mathematical reasoning. Choosing the right approach can deliver a powerful strike; choosing carelessly may cost you a heart.
 
-Dr. H explains the reasoning after each move, including why a tempting answer does not work. A hint toggle can show the quality of the moves before you choose.
+At the end of each land stands **Owlculus**, the Guardian of the Five Lands. And when the final battle ends, Owlculus reveals his true role: the final examiner placed there by Dr. H.
 
-The campaign includes series and convergence ideas such as:
+### Explore the Five Lands
 
-- alternating, ratio, root, direct and limit comparison, integral, and nth-term divergence tests;
-- p-series and geometric series;
-- absolute versus conditional convergence;
-- radius and interval of convergence; and
-- Taylor and Maclaurin series.
+| Land                       | Mathematical Challenge                   |
+| -------------------------- | ---------------------------------------- |
+| **Silicon Depths**         | Applications of Integration              |
+| **Substitution Labyrinth** | Integration Techniques                   |
+| **Parametric Veil**        | Parametric and Polar Coordinates         |
+| **Infinite Chasm**         | Sequences, Series, and Convergence Tests |
+| **Alternating Spire**      | Alternating, Power, and Taylor Series    |
 
-The other lands bring in integration and parametric or polar topics.
+Each land contains two Limitus encounters followed by an Owlculus boss battle, moving from introductory recognition toward more challenging mathematical decisions.
 
-## Create your own quest
+### Battle With Mathematics
 
-Choose **Create / Load Quest** to turn a lesson into a playable journey. Creator Mode accepts **Simple Text, Markdown, or JSON**; Auto Detect can choose the format for you. You can also load the included Algebra and Physics Motion samples.
+Every turn presents a mathematical question and several possible moves. But not every reasonable-looking answer is equally effective.
 
-The builder lets you name the quest, paste learning content, and preview its levels, enemies, questions, and any validation warnings before play. Then you can play through the same battle system and see a learning report with attempts, feedback, and ideas to revisit. You can save the current draft in this browser and export a normalized JSON quest to share or keep.
+| Outcome          | What Happens                                       |
+| ---------------- | -------------------------------------------------- |
+| **Critical Hit** | A precise mathematical choice strikes for 2 damage |
+| **Normal Hit**   | A useful but incomplete choice deals 1 damage      |
+| **Dodge**        | Sigma avoids danger without dealing damage         |
+| **Fail**         | The enemy counterattacks and Sigma loses a heart   |
 
-### Start with Simple Text
+Dr. H explains the mathematical reasoning after each move, including why tempting alternatives do not work. Players can also enable hints that reveal the quality of their available moves.
 
-```text
-Title: Derivatives Quest
-Subject: Calculus I
-Description: Practice derivative rules through RPG battles.
+The goal is not simply to remember a formula, but to recognize when—and why—a mathematical method works.
 
-Level: Chain Rule Forest
-Theme: Derivatives
+## Create Your Own Quest
 
-Enemy: Product Goblin
-HP: 3
+The original campaign takes place in Calculus II, but the battle system is designed to work with other learning content.
 
-Q: Differentiate f(x)=x^2 sin(x).
-Formula: f'(x)=?
-Tags: derivatives, product rule
-Difficulty: medium
-A: 2x sin(x) + x^2 cos(x) | crit | Correct. Use the product rule.
-A: 2x cos(x) | fail | This ignores the product structure.
-A: x^2 cos(x) | normal | This differentiates only the sine part.
-```
+With **Creator Mode**, users can turn a lesson into a playable RPG without changing the underlying game code.
 
-Add more `Level:`, `Enemy:`, `Q:`, and `A:` blocks as your lesson grows. An answer line has the form `A: answer | effect | feedback`; the effects are `crit`, `normal`, `dodge`, and `fail`.
+Creator Mode supports:
 
-### Markdown and JSON
+- **Simple Text, Markdown, and JSON** input
+- Custom levels, enemies, questions, and answer feedback
+- Automatic parsing and content validation
+- Quest previews before gameplay
+- Session-level learning reports
+- Local draft saving and JSON export
 
-In Markdown, use a `#` heading for the quest, `##` for a level, `###` for an enemy, and bullets for answer moves. Labels such as `Subject:`, `Theme:`, `Formula:`, and `Tags:` work in the content too.
+For example, a player can create an Algebra Quest where solving equations defeats enemies, or a Physics Quest where choosing the right formula determines an attack.
 
-JSON can load an exported quest or compatible level, enemy, and question objects. **Export Quest** produces the normalized format, which is the safest choice when moving a finished quest between browsers.
+The game includes sample Algebra and Physics Motion quests to demonstrate these possibilities.
 
-Creator Mode checks that your quest has playable levels, enemies, questions, and answer moves. If something is missing, it shows a readable warning instead of starting a broken battle. Custom quests can use up to five playable levels and reuse the existing art and battle scene; additional enemies in a level are combined into the boss encounter.
+## Design & Implementation
 
-## Your progress and current limits
+Calculus Lands runs entirely in the browser using JavaScript, HTML, and CSS, with KaTeX for mathematical rendering.
 
-Creator drafts are stored in the current browser. There are no accounts, cloud sync, classroom assignments, or shared progress. Export a quest if you want a portable copy. The learning report describes the current play session; it is not a long-term grade record.
+A key design decision was to separate learning content from the game's interaction mechanics.
 
-## Play online or locally
+| Component              | Purpose                                                   |
+| ---------------------- | --------------------------------------------------------- |
+| **Game System**        | Battle logic, animations, navigation, and player feedback |
+| **Content Engine**     | Parsing, validation, and normalization of custom quests   |
+| **JSON Question Sets** | Mathematical content for the five original lands          |
+| **Visual System**      | Canvas sprite animation and layered scrolling backgrounds |
+| **KaTeX**              | Rendering mathematical expressions                        |
 
-**Online:** [Open Calculus Lands](https://yajing5027.github.io/Calculus-Lands/).
+The original campaign loads questions from JSON files, while Creator Mode converts user-written materials into the same playable structure.
 
-**Local copy of the playable release:**
+This allows different educational topics to share the game's combat mechanics and visual presentation without rebuilding the game for each subject.
+
+## Play Online or Run Locally
+
+[**Launch Calculus Lands →**](https://yajing5027.github.io/Calculus-Lands/)
+
+Play directly in your browser. No account or installation is required.
+
+To run the published version locally:
 
 ```bash
 git clone https://github.com/Yajing5027/Calculus-Lands.git
@@ -109,17 +116,21 @@ cd Calculus-Lands
 python3 -m http.server 8080
 ```
 
-Open <http://localhost:8080>. A local server is needed because the built-in campaign loads its question files from JSON. The public repository contains the playable release; the original development source and history live separately.
+Open `http://localhost:8080`.
 
-The game uses canvas sprite animation, layered scrolling backgrounds, and KaTeX for mathematical expressions. The published question data can be inspected under `data/map1` through `data/map5`.
+A local server is needed to load the campaign's JSON question files.
 
-## Credits
+## Project Scope & Credits
 
-- **Concept and game design:** Yajing Ren
-- **Learning content:** Calculus II curriculum
-- **Art:** Pixel sprite assets from itch.io creators
-- **Math rendering:** [KaTeX](https://katex.org/)
+Calculus Lands was developed as an individual Spring 2026 Calculus II final project.
 
-## License
+The current version includes the five-land campaign and Creator Mode, supporting up to five playable levels per custom quest. Custom drafts are saved in the current browser, and learning reports cover individual sessions rather than long-term academic progress.
 
-This project is for educational and personal use.
+The public repository contains the playable release. Original development source and history are maintained separately.
+
+**Concept, game design, and development:** Yajing Ren  
+**Educational content:** Calculus II curriculum  
+**Visual assets:** Third-party pixel-art assets from itch.io creators  
+**Math rendering:** [KaTeX](https://katex.org/)
+
+This project is presented for educational and personal use. Third-party assets remain subject to their respective licenses.
